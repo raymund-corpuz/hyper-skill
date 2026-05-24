@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/03_ErrorsDebuggingBasics/03_ErrorsDebuggingBasics.iml" filepath="$PROJECT_DIR$/03_ErrorsDebuggingBasics/03_ErrorsDebuggingBasics.iml" />
       <module fileurl="file://$PROJECT_DIR$/04_ControlFlow/03_TernaryOperator/03_TernaryOperator.iml" filepath="$PROJECT_DIR$/04_ControlFlow/03_TernaryOperator/03_TernaryOperator.iml" />
       <module fileurl="file://$PROJECT_DIR$/04_ControlFlow/04_ControlFlow.iml" filepath="$PROJECT_DIR$/04_ControlFlow/04_ControlFlow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/04_ControlFlow/04_ForLoop/04_ForLoop.iml" filepath="$PROJECT_DIR$/04_ControlFlow/04_ForLoop/04_ForLoop.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/hyper-skill.iml" filepath="$PROJECT_DIR$/.idea/hyper-skill.iml" />
     </modules>
   </component>
