@@ -81,6 +81,8 @@ public class Ex2_ATMTransactionMenu {
                     System.out.println("Select transaction: " + choice);
                     System.out.println("Exiting the Program...");
                     break;
+                default:
+                    System.out.println("Invalid Option!");
             }
             System.out.println();
         } while (choice != 5);
