@@ -4,12 +4,15 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/04_ControlFlow/01_ComparingValues_RationalOperators/01_ComparingValues_RationalOperators.iml" filepath="$PROJECT_DIR$/04_ControlFlow/01_ComparingValues_RationalOperators/01_ComparingValues_RationalOperators.iml" />
       <module fileurl="file://$PROJECT_DIR$/01_DataVariables/01_DataVariables.iml" filepath="$PROJECT_DIR$/01_DataVariables/01_DataVariables.iml" />
+      <module fileurl="file://$PROJECT_DIR$/05_Methods/01_DeclaringMethod/01_DeclaringMethod.iml" filepath="$PROJECT_DIR$/05_Methods/01_DeclaringMethod/01_DeclaringMethod.iml" />
+      <module fileurl="file://$PROJECT_DIR$/04_ControlFlow/08_Methods/01_DeclaringMethods/01_DeclaringMethods.iml" filepath="$PROJECT_DIR$/04_ControlFlow/08_Methods/01_DeclaringMethods/01_DeclaringMethods.iml" />
       <module fileurl="file://$PROJECT_DIR$/04_ControlFlow/02_ConditionalStatement/02_ConditionalStatement.iml" filepath="$PROJECT_DIR$/04_ControlFlow/02_ConditionalStatement/02_ConditionalStatement.iml" />
       <module fileurl="file://$PROJECT_DIR$/02_OperatorsExpressions/02_OperatorsExpressions.iml" filepath="$PROJECT_DIR$/02_OperatorsExpressions/02_OperatorsExpressions.iml" />
       <module fileurl="file://$PROJECT_DIR$/03_ErrorsDebuggingBasics/03_ErrorsDebuggingBasics.iml" filepath="$PROJECT_DIR$/03_ErrorsDebuggingBasics/03_ErrorsDebuggingBasics.iml" />
       <module fileurl="file://$PROJECT_DIR$/04_ControlFlow/03_TernaryOperator/03_TernaryOperator.iml" filepath="$PROJECT_DIR$/04_ControlFlow/03_TernaryOperator/03_TernaryOperator.iml" />
       <module fileurl="file://$PROJECT_DIR$/04_ControlFlow/04_ControlFlow.iml" filepath="$PROJECT_DIR$/04_ControlFlow/04_ControlFlow.iml" />
       <module fileurl="file://$PROJECT_DIR$/04_ControlFlow/04_ForLoop/04_ForLoop.iml" filepath="$PROJECT_DIR$/04_ControlFlow/04_ForLoop/04_ForLoop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/05_Methods/05_Methods.iml" filepath="$PROJECT_DIR$/05_Methods/05_Methods.iml" />
       <module fileurl="file://$PROJECT_DIR$/04_ControlFlow/05_WhileLoop/05_WhileLoop.iml" filepath="$PROJECT_DIR$/04_ControlFlow/05_WhileLoop/05_WhileLoop.iml" />
       <module fileurl="file://$PROJECT_DIR$/04_ControlFlow/06_BreakContinueBranching/06_BreakContinueBranching.iml" filepath="$PROJECT_DIR$/04_ControlFlow/06_BreakContinueBranching/06_BreakContinueBranching.iml" />
       <module fileurl="file://$PROJECT_DIR$/04_ControlFlow/07_SwitchExpression/07_SwitchExpression.iml" filepath="$PROJECT_DIR$/04_ControlFlow/07_SwitchExpression/07_SwitchExpression.iml" />
