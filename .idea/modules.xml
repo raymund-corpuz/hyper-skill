@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/06_ArraysJava/01_Arrays/01_Arrays.iml" filepath="$PROJECT_DIR$/06_ArraysJava/01_Arrays/01_Arrays.iml" />
       <module fileurl="file://$PROJECT_DIR$/04_ControlFlow/01_ComparingValues_RationalOperators/01_ComparingValues_RationalOperators.iml" filepath="$PROJECT_DIR$/04_ControlFlow/01_ComparingValues_RationalOperators/01_ComparingValues_RationalOperators.iml" />
       <module fileurl="file://$PROJECT_DIR$/01_DataVariables/01_DataVariables.iml" filepath="$PROJECT_DIR$/01_DataVariables/01_DataVariables.iml" />
       <module fileurl="file://$PROJECT_DIR$/05_Methods/01_DeclaringMethod/01_DeclaringMethod.iml" filepath="$PROJECT_DIR$/05_Methods/01_DeclaringMethod/01_DeclaringMethod.iml" />
@@ -16,6 +17,7 @@
       <module fileurl="file://$PROJECT_DIR$/04_ControlFlow/04_ForLoop/04_ForLoop.iml" filepath="$PROJECT_DIR$/04_ControlFlow/04_ForLoop/04_ForLoop.iml" />
       <module fileurl="file://$PROJECT_DIR$/05_Methods/05_Methods.iml" filepath="$PROJECT_DIR$/05_Methods/05_Methods.iml" />
       <module fileurl="file://$PROJECT_DIR$/04_ControlFlow/05_WhileLoop/05_WhileLoop.iml" filepath="$PROJECT_DIR$/04_ControlFlow/05_WhileLoop/05_WhileLoop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/06_ArraysJava/06_ArraysJava.iml" filepath="$PROJECT_DIR$/06_ArraysJava/06_ArraysJava.iml" />
       <module fileurl="file://$PROJECT_DIR$/04_ControlFlow/06_BreakContinueBranching/06_BreakContinueBranching.iml" filepath="$PROJECT_DIR$/04_ControlFlow/06_BreakContinueBranching/06_BreakContinueBranching.iml" />
       <module fileurl="file://$PROJECT_DIR$/04_ControlFlow/07_SwitchExpression/07_SwitchExpression.iml" filepath="$PROJECT_DIR$/04_ControlFlow/07_SwitchExpression/07_SwitchExpression.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/hyper-skill.iml" filepath="$PROJECT_DIR$/.idea/hyper-skill.iml" />
