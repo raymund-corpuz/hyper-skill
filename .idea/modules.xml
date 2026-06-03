@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/04_ControlFlow/08_Methods/01_DeclaringMethods/01_DeclaringMethods.iml" filepath="$PROJECT_DIR$/04_ControlFlow/08_Methods/01_DeclaringMethods/01_DeclaringMethods.iml" />
       <module fileurl="file://$PROJECT_DIR$/04_ControlFlow/02_ConditionalStatement/02_ConditionalStatement.iml" filepath="$PROJECT_DIR$/04_ControlFlow/02_ConditionalStatement/02_ConditionalStatement.iml" />
       <module fileurl="file://$PROJECT_DIR$/05_Methods/02_FunctionalDecomposition/02_FunctionalDecomposition.iml" filepath="$PROJECT_DIR$/05_Methods/02_FunctionalDecomposition/02_FunctionalDecomposition.iml" />
+      <module fileurl="file://$PROJECT_DIR$/06_ArraysJava/02_IteratingArray/02_IteratingArray.iml" filepath="$PROJECT_DIR$/06_ArraysJava/02_IteratingArray/02_IteratingArray.iml" />
       <module fileurl="file://$PROJECT_DIR$/02_OperatorsExpressions/02_OperatorsExpressions.iml" filepath="$PROJECT_DIR$/02_OperatorsExpressions/02_OperatorsExpressions.iml" />
       <module fileurl="file://$PROJECT_DIR$/03_ErrorsDebuggingBasics/03_ErrorsDebuggingBasics.iml" filepath="$PROJECT_DIR$/03_ErrorsDebuggingBasics/03_ErrorsDebuggingBasics.iml" />
       <module fileurl="file://$PROJECT_DIR$/05_Methods/03_Overloading/03_Overloading.iml" filepath="$PROJECT_DIR$/05_Methods/03_Overloading/03_Overloading.iml" />
