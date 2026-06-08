@@ -19,6 +19,7 @@
       <module fileurl="file://$PROJECT_DIR$/06_ArraysJava/03_ArrayParameter/03_ArrayParameter.iml" filepath="$PROJECT_DIR$/06_ArraysJava/03_ArrayParameter/03_ArrayParameter.iml" />
       <module fileurl="file://$PROJECT_DIR$/03_ErrorsDebuggingBasics/03_ErrorsDebuggingBasics.iml" filepath="$PROJECT_DIR$/03_ErrorsDebuggingBasics/03_ErrorsDebuggingBasics.iml" />
       <module fileurl="file://$PROJECT_DIR$/09_OOP_ClassesObject/01_DefiningClasses/03_ExOnlineStore/03_ExOnlineStore.iml" filepath="$PROJECT_DIR$/09_OOP_ClassesObject/01_DefiningClasses/03_ExOnlineStore/03_ExOnlineStore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/09_OOP_ClassesObject/03_Modules/03_Modules.iml" filepath="$PROJECT_DIR$/09_OOP_ClassesObject/03_Modules/03_Modules.iml" />
       <module fileurl="file://$PROJECT_DIR$/05_Methods/03_Overloading/03_Overloading.iml" filepath="$PROJECT_DIR$/05_Methods/03_Overloading/03_Overloading.iml" />
       <module fileurl="file://$PROJECT_DIR$/04_ControlFlow/03_TernaryOperator/03_TernaryOperator.iml" filepath="$PROJECT_DIR$/04_ControlFlow/03_TernaryOperator/03_TernaryOperator.iml" />
       <module fileurl="file://$PROJECT_DIR$/04_ControlFlow/04_ControlFlow.iml" filepath="$PROJECT_DIR$/04_ControlFlow/04_ControlFlow.iml" />
@@ -33,6 +34,8 @@
       <module fileurl="file://$PROJECT_DIR$/09_OOP_ClassesObject/09_OOP_ClassesObject.iml" filepath="$PROJECT_DIR$/09_OOP_ClassesObject/09_OOP_ClassesObject.iml" />
       <module fileurl="file://$PROJECT_DIR$/09_OOP_ClassesObject/01_WhatIsOOP/01_Encapsulation/BankAccount/BankAccount.iml" filepath="$PROJECT_DIR$/09_OOP_ClassesObject/01_WhatIsOOP/01_Encapsulation/BankAccount/BankAccount.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/hyper-skill.iml" filepath="$PROJECT_DIR$/.idea/hyper-skill.iml" />
+      <module fileurl="file://$PROJECT_DIR$/09_OOP_ClassesObject/03_Modules/module-info.java/module-info.java.iml" filepath="$PROJECT_DIR$/09_OOP_ClassesObject/03_Modules/module-info.java/module-info.java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/09_OOP_ClassesObject/03_Modules/student.management/student.management.iml" filepath="$PROJECT_DIR$/09_OOP_ClassesObject/03_Modules/student.management/student.management.iml" />
     </modules>
   </component>
 </project>
