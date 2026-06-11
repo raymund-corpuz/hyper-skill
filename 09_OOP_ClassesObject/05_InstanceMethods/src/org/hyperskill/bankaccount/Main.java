@@ -11,7 +11,7 @@ public class Main {
 
         account[0] = new BankAccount("Raymund", 90111, 50_000, true);
         account[1] = new BankAccount("John", 90112, 150_000, true);
-        account[2] = new BankAccount("Marie", 90113, 0, false);
+        account[2] = new BankAccount("Marie", 90113, 40_000, false);
 
         System.out.println("Project Name:  Bank Account Management System - Summary Lesson");
         System.out.println();
@@ -20,7 +20,7 @@ public class Main {
         System.out.println();
         System.out.print("Choose Account: ");
         accountChoice = scanner.nextInt();
-        accountChoice += 1;
+        accountChoice -= 1;
         System.out.println();
         System.out.println("1 - Deposit");
         System.out.println("2 - Withdraw");
@@ -46,8 +46,8 @@ public class Main {
                     System.out.println("Invalid Transaction ❌");
             }
         }
-
-
+        System.out.println();
+        findRichestAccount(account);
     }
 
     public static void displayAllAccounts(BankAccount[] accounts) {
@@ -59,9 +59,8 @@ public class Main {
     public static void processDeposit(BankAccount account, int accountNumber, double amount) {
         if (accountNumber >= 0) {
             if (amount >= 100 && amount % 100 == 0) {
-                account.balance = account.deposit(amount);
                 System.out.println("Deposit Successful!✅");
-                System.out.println("New Balance: " + account.balance);
+                System.out.println("New Balance: " + account.deposit(amount));
             } else {
                 System.out.println("Invalid Amount❌");
             }
@@ -70,9 +69,8 @@ public class Main {
 
     public static void processWithdrawal(BankAccount account, int accountNumber, double amount) {
         if (accountNumber >= 0) {
-            account.balance = account.withdraw(amount);
             System.out.println("Withdrawal Successful!✅");
-            System.out.println("New Balance: " + account.balance);
+            System.out.println("New Balance: " + account.withdraw(amount));
         }
     }
 
