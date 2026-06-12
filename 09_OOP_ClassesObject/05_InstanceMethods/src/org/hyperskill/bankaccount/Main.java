@@ -57,30 +57,50 @@ public class Main {
     }
 
     public static void processDeposit(BankAccount account, int accountNumber, double amount) {
-        if (accountNumber >= 0) {
-            if (amount >= 100 && amount % 100 == 0) {
-                System.out.println("Deposit Successful!✅");
-                System.out.println("New Balance: " + account.deposit(amount));
-            } else {
-                System.out.println("Invalid Amount❌");
-            }
+//        if (accountNumber >= 0) {
+//            if (amount >= 100 && amount % 100 == 0) {
+//                System.out.println("Deposit Successful!✅");
+//                System.out.println("New Balance: " + account.deposit(amount));
+//            } else {
+//                System.out.println("Invalid Amount❌");
+//            }
+//        }
+        if (!account.isActive) {
+            System.out.println("Account Closed❌");
+        } else if (amount >= 100 & amount % 100 == 0) {
+            System.out.println("Deposit Successful! ✅");
+            System.out.println("New Balance: " + account.deposit(amount));
+        } else {
+            System.out.println("Invalid Amount❌");
         }
     }
 
     public static void processWithdrawal(BankAccount account, int accountNumber, double amount) {
-        if (accountNumber >= 0) {
+//        if (accountNumber >= 0) {
+//            System.out.println("Withdrawal Successful!✅");
+//            System.out.println("New Balance: " + account.withdraw(amount));
+//        }
+
+        if (!account.isActive) {
+            System.out.println("Account Closed❌");
+        } else if (amount <= 0) {
+            System.out.println("Invalid Amount❌");
+        } else if (amount > account.balance) {
+            System.out.println("insufficient Balance❌");
+        } else {
             System.out.println("Withdrawal Successful!✅");
             System.out.println("New Balance: " + account.withdraw(amount));
         }
     }
 
     public static void findRichestAccount(BankAccount[] accounts) {
-        double largest = 0;
+        double largest = accounts[0].balance;
         for (int i = 0; i < accounts.length; i++) {
             if (largest <= accounts[i].balance) {
                 largest = accounts[i].balance;
-                System.out.println("Richest Account Balance: " + largest);
+
             }
         }
+        System.out.println("Richest Account Balance: " + largest);
     }
 }
