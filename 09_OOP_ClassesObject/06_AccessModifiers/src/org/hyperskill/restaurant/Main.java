@@ -13,7 +13,6 @@ public class Main {
         food[3] = new Restaurant("Fried Chicken", 150, 0, "", 0);
         food[4] = new Restaurant("Coffee", 80, 0, "", 0);
 
-
         displayMenu(food);
         System.out.println();
         Restaurant order = selectMenuItem(scanner, food);
@@ -29,7 +28,6 @@ public class Main {
         for (int i = 0; i < foods.length; i++) {
             System.out.println((i + 1) + ". " + foods[i].displayOrderInfo());
         }
-        System.out.println();
     }
 
     public static Restaurant selectMenuItem(Scanner scanner, Restaurant[] food) {
