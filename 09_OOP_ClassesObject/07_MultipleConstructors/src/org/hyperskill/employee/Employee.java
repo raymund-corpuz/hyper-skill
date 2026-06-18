@@ -7,9 +7,9 @@ public class Employee {
     private int daysWorked;
     private boolean isActive;
 
-    public Employee(String employeeName) {
+    public Employee(String employeeName, String department) {
         this.employeeName = employeeName;
-        this.department = "General";
+        this.department = department;
         this.dailyRate = 500;
         this.daysWorked = 0;
         this.isActive = true;
