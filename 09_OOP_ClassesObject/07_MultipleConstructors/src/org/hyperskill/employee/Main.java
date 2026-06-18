@@ -17,20 +17,26 @@ public class Main {
         System.out.println("Project Name: Employee Attendance & Payroll System");
         System.out.println();
         displayAllEmployees(employee);
-        int selectedEmployee = selectEmployee(scanner, employee);
+        Employee selectedEmployee = selectEmployee(scanner, employee);
+        if (selectedEmployee == null) {
+            System.out.println();
+            System.out.println("No Employee Found ❌");
+            return;
+        }
         displayMenu();
         System.out.print("Choose Transaction: ");
         transaction = scanner.nextInt();
 
+
         switch (transaction) {
             case 1:
-                processAttendance(scanner, employee[selectedEmployee]);
+                processAttendance(scanner, selectedEmployee);
                 break;
             case 2:
-                viewSalary(employee[selectedEmployee]);
+                viewSalary(selectedEmployee);
                 break;
             default:
-                System.out.println("Invalid Input❌");
+                System.out.println("Invalid Transaction ❌");
                 break;
         }
         System.out.println("End Of Program...");
@@ -49,11 +55,15 @@ public class Main {
     }
 
     //SELECT EMPLOYEE
-    public static int selectEmployee(Scanner scanner, Employee[] employees) {
+    public static Employee selectEmployee(Scanner scanner, Employee[] employee) {
         System.out.print("Choose Employee: ");
         int chosenEmployee = scanner.nextInt();
         chosenEmployee--;
-        return chosenEmployee;
+
+        if (chosenEmployee == -1) {
+            return null;
+        }
+        return employee[chosenEmployee];
     }
 
     public static void displayMenu() {
