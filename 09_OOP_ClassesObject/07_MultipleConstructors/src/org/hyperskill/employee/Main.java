@@ -33,7 +33,16 @@ public class Main {
                 processAttendance(scanner, selectedEmployee);
                 break;
             case 2:
+                processTermination(scanner, selectedEmployee);
+                break;
+            case 3:
                 viewSalary(selectedEmployee);
+                break;
+            case 4:
+                findHighestSalary(employee);
+                break;
+            case 5:
+                System.out.println("Exiting Program...");
                 break;
             default:
                 System.out.println("Invalid Transaction ❌");
@@ -60,7 +69,7 @@ public class Main {
         int chosenEmployee = scanner.nextInt();
         chosenEmployee--;
 
-        if (chosenEmployee == -1) {
+        if (chosenEmployee < 0 || chosenEmployee >= employee.length) {
             return null;
         }
         return employee[chosenEmployee];
@@ -73,7 +82,8 @@ public class Main {
         System.out.println("1 - Record Attendance");
         System.out.println("2 - Terminate Employee");
         System.out.println("3 - View Salary");
-        System.out.println("4 - Exit");
+        System.out.println("4 - Find Highest Salary");
+        System.out.println("5 - Exit");
         System.out.println();
     }
 
@@ -100,6 +110,24 @@ public class Main {
         }
     }
 
+    //PROCESS TERMINATION
+    public static void processTermination(Scanner scanner, Employee employee) {
+        String terminated;
+        System.out.print("Terminate Employee? (Y/N): ");
+        terminated = scanner.next();
+        System.out.println();
+
+        if (terminated.equalsIgnoreCase("y")) {
+            System.out.println(employee.terminateEmployee());
+            System.out.println();
+            System.out.println("Employee: " + employee.getEmployeeName());
+            System.out.println("Status: " + (employee.isActive() ? "Active" : "Inactive"));
+            System.out.println();
+        } else if (terminated.equalsIgnoreCase("n")) {
+            System.out.println("Canceled Termination ❌");
+        }
+    }
+
     //VIEW SALARY
     public static void viewSalary(Employee employee) {
         System.out.println("==== EMPLOYEE DETAILS ====");
@@ -113,6 +141,33 @@ public class Main {
         System.out.println("Current Salary: " + employee.calculateSalary());
         System.out.println();
     }
-    //PROCESS TERMINATION
+
+
     //FIND HIGHEST SALARY
+    public static void findHighestSalary(Employee[] employees) {
+        double highest = employees[0].calculateSalary();
+        Employee highestSalary = employees[0];
+        System.out.println("==== PAYROLL SUMMARY ====");
+        System.out.println();
+
+        for (int i = 0; i < employees.length; i++) {
+            System.out.println(employees[i].getEmployeeName() + " - " + employees[i].calculateSalary());
+            if (highest <= employees[i].calculateSalary()) {
+                highest = employees[i].calculateSalary();
+            }
+        }
+
+        for (int i = 0; i < employees.length; i++) {
+            if (highest == employees[i].calculateSalary()) {
+                highestSalary = employees[i];
+            }
+        }
+        System.out.println("Highest Salary Employee");
+        System.out.println();
+        System.out.println("Name: " + highestSalary.getEmployeeName());
+        System.out.println("Department: " + highestSalary.getDepartment());
+        System.out.println();
+        System.out.println("Salary: " + highestSalary.calculateSalary());
+
+    }
 }

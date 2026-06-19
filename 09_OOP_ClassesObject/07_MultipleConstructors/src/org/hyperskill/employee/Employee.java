@@ -36,7 +36,8 @@ public class Employee {
     }
 
     String terminateEmployee() {
-        return this.employeeName + " is Terminated.❌";
+        this.isActive = false;
+        return "Employee Terminated Successfully! ✅";
     }
 
     public String getEmployeeName() {
