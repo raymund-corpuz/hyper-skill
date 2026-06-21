@@ -14,6 +14,9 @@ public class Main {
         movie[4] = new Cinema("Mission Impossible");
 
         displayAllMovies(movie);
+        System.out.println();
+        int movieChoice = selectMovie(scanner, movie);
+        displayTransactionMenu();
 
         scanner.close();
     }
@@ -22,5 +25,29 @@ public class Main {
         for (int i = 0; i < movies.length; i++) {
             movies[i].displayMovie(i);
         }
+    }
+
+    public static int selectMovie(Scanner scanner, Cinema[] movie) {
+        System.out.println();
+        System.out.println("Choose Movie: ");
+        int movieChoice = scanner.nextInt();
+        movieChoice--;
+        if (movieChoice < 0 || movieChoice >= movie.length) {
+            System.out.println("Invalid Choice❌");
+            return -1;
+        }
+        return movieChoice;
+    }
+
+    public static void displayTransactionMenu() {
+        System.out.println();
+        System.out.println("==== TRANSACTIONS ====");
+        System.out.println();
+        System.out.println("1 - Book Tickets");
+        System.out.println("2 - Cancel Tickets");
+        System.out.println("3 - View Movie Details");
+        System.out.println("4 - Find Highest Revenue Movie");
+        System.out.println("5 - Exit");
+        System.out.println();
     }
 }
