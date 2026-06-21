@@ -9,6 +9,7 @@ public class Cinema {
 
     //CONSTRUCTOR 1
     public Cinema(String title) {
+        this.title = title;
         this.genre = "Unknown";
         this.ticketPrice = 250;
         this.availableSeats = 100;
@@ -23,11 +24,11 @@ public class Cinema {
         this.availableSeats = availableSeats;
     }
 
-    void displayMovie() {
-        System.out.println("Movie: " + this.title);
-        System.out.println("Genre: " + this.genre);
-        System.out.println("Price: " + this.ticketPrice);
-        System.out.println("Available Seats: " + this.availableSeats);
+    void displayMovie(int order) {
+        System.out.println((order + 1) + ". " + "Movie: " + this.title);
+        System.out.println("   Genre: " + this.genre);
+        System.out.println("   Price: " + this.ticketPrice);
+        System.out.println("   Available Seats: " + this.availableSeats);
         System.out.println();
     }
 
@@ -52,7 +53,7 @@ public class Cinema {
         System.out.println("Remaining Seats: " + this.availableSeats);
     }
 
-    int cancelTickets(int quantity) {
+    void cancelTickets(int quantity) {
         this.ticketsSold = quantity;
         System.out.println("Cancellation Successful! ✅");
         System.out.println();
@@ -65,4 +66,19 @@ public class Cinema {
         return this.ticketsSold * this.ticketPrice;
     }
 
+    String getTitle() {
+        return this.title;
+    }
+
+    String getGenre() {
+        return this.genre;
+    }
+
+    int getAvailableSeats() {
+        return this.availableSeats;
+    }
+
+    int getTicketsSold() {
+        return this.ticketsSold;
+    }
 }
