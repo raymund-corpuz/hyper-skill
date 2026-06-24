@@ -19,12 +19,27 @@ public class Main {
 
 
         displayClients(clients);
+        displayEmployees(managers);
+        displayEmployees(programmers);
+
     }
 
     public static void displayClients(Client[] clients) {
         System.out.println("==== Clients ====");
+        System.out.println();
         for (int i = 0; i < clients.length; i++) {
             System.out.println((i + 1) + ". " + clients[i].displayInfo());
         }
+        System.out.println();
+    }
+
+    public static void displayEmployees(Employee[] employees) {
+        System.out.println("==== Employees ====");
+        System.out.println();
+        for (int i = 0; i < employees.length; i++) {
+            System.out.println((i + 1) + ". " + employees[i].displayInfo());
+        }
+        System.out.println();
+
     }
 }

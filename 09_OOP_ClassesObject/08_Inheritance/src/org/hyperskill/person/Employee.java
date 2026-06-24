@@ -11,6 +11,6 @@ public class Employee extends Person {
     }
 
     String displayInfo() {
-        return "My Name is " + this.name + ". I am " + this.age + " years old." + " I work at " + this.department;
+        return this.name + "(" + this.getClass() + ")";
     }
 }
