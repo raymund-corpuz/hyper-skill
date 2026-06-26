@@ -11,6 +11,6 @@ public class Employee extends Person {
     }
 
     String displayInfo() {
-        return this.name + "(" + this.getClass() + ")";
+        return this.name + " (" + this.getClass().getSimpleName() + ")";
     }
 }
