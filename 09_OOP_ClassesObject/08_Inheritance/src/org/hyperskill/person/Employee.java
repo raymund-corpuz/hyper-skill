@@ -10,7 +10,7 @@ public class Employee extends Person {
         this.salary = salary;
     }
 
-    String displayInfo() {
+    public String displayInfo() {
         return this.name + " (" + this.getClass().getSimpleName() + ")";
     }
 }

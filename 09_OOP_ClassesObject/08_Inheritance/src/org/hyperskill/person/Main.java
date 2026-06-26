@@ -21,48 +21,20 @@ public class Main {
         employees[3] = new Programmer("Kim", 28, "IT", 35_000, "Python");
         employees[4] = new Programmer("Karl", 33, "IT", 32_000, "Python");
 
-
+        System.out.println("Project Name: Company Management System: Summary Lesson");
         displayClients(clients);
         System.out.println("==== Employees ====");
         System.out.println();
         displayEmployees(employees);
         Employee selectedEmployee = selectEmployee(scanner, employees);
         if (selectedEmployee == null) {
+            scanner.close(); // Refactor
             return;
         }
         System.out.println();
         displayMenu();
-        int employeeAction = processEmployeeAction(scanner);
-
-        switch (employeeAction) {
-            case 1:
-                selectedEmployee.displayInfo();
-                break;
-            case 2:
-                if (selectedEmployee.getClass().getSimpleName().equals("Manager")) {
-                    System.out.println("Approve Project Successful ✅");
-                    System.out.println();
-                    System.out.println("Action Successful ✅");
-                } else {
-                    System.out.println("Only Managers can approve projects ❌");
-                }
-                break;
-            case 3:
-                if (selectedEmployee.getClass().getSimpleName().equals("Programmer")) {
-                    System.out.println("Write Code....");
-                    System.out.println();
-                    System.out.println("Action Successful ✅");
-                } else {
-                    System.out.println("Only Programmers can write code ❌");
-                }
-                break;
-            case 4:
-                System.out.println("Exiting the Program....");
-                break;
-            default:
-                System.out.println("Invalid Action ❌");
-        }
-
+        processEmployeeAction(scanner, selectedEmployee);
+        scanner.close(); // Refactor
     }
 
     public static void displayClients(Client[] clients) {
@@ -102,13 +74,33 @@ public class Main {
         System.out.println("4 - Exit");
     }
 
-    public static int processEmployeeAction(Scanner scanner) {
+    public static void processEmployeeAction(Scanner scanner, Employee employee) {
         System.out.println();
         System.out.print("Choose Employee Action: ");
-        int employeeAction = scanner.nextInt();
-        if (employeeAction < 1 || employeeAction > 4) {
-            return -1;
+        int action = scanner.nextInt();
+
+        switch (action) {
+            case 1:
+                System.out.println(employee.displayInfo());
+                break;
+            case 2:
+                if (employee instanceof Manager manager) {
+                    manager.approveProject();
+                }
+                break;
+            case 3:
+                if (employee instanceof Programmer programmer) {
+                    programmer.writeCode();
+                } else {
+                    System.out.println("Only Programmers can write code ❌");
+                }
+                break;
+            case 4:
+                System.out.println("Exiting the Program....");
+                break;
+            default:
+                System.out.println("Invalid Action ❌");
         }
-        return employeeAction;
     }
 }
+

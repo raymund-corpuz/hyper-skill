@@ -8,7 +8,8 @@ public class Programmer extends Employee {
         this.programmingLanguage = programmingLanguage;
     }
 
-    String writeCode() {
-        return "I am writing code using " + this.programmingLanguage;
+    void writeCode() {
+        System.out.println("Writing " + programmingLanguage + " code...");
+        System.out.println("Action Successful ✅");
     }
 }

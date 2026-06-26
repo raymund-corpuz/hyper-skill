@@ -9,7 +9,8 @@ public class Manager extends Employee {
 
     }
 
-    String approveProject() {
-        return "The project is approved✅ with a team size of " + this.teamSize;
+    void approveProject() {
+        System.out.println("Approving Project...");
+        System.out.println("Action Successful ✅");
     }
 }
