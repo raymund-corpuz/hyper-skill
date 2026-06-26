@@ -1,4 +1,5 @@
 module module_name {
-    requires java.sql;
+    exports org.hyperskill.message;
     exports org.hyperskill.person;
+
 }
