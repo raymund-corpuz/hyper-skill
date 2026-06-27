@@ -6,7 +6,7 @@ public class Message {
     private String content;
     private boolean isRead;
 
-    protected Message(String sender, String receiver, String content) {
+    public Message(String sender, String receiver, String content) {
         this.sender = sender;
         this.receiver = receiver;
         this.content = content;

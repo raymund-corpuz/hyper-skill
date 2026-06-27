@@ -6,20 +6,37 @@ import org.hyperskill.message.Person;
 public class Admin extends Person {
     private String department;
 
-    protected Admin(String name, int age, String department){
+    public Admin(String name, int age, String department) {
         super(name, age);
         this.department = department;
     }
 
-    String displayProfile(){
-        return this.name + " - " + this.department;
+    public String getDepartment() {
+        return this.department;
     }
 
-   Message[] deleteMessage(Message[] messages, int index){
-       for(int i = 0; i < messages.length; i++){
-           if(messages[i] !== index){
-               return messages;
-           }
-       }
+    @Override
+    public String displayProfile() {
+        return "==== ADMIN PROFILE ====\n" +
+                "Name: " + getName() +
+                "\nAge: " + getAge() +
+                "\nDepartment: " + department;
     }
+
+    // Delete a message
+    public void deleteMessage(Message[] messages, int index) {
+
+        if (index < 0 || index >= messages.length) {
+            System.out.println("Invalid Message ❌");
+            return;
+        }
+
+        if (messages[index] == null) {
+            System.out.println("Message Already Deleted ❌");
+            return;
+        }
+        messages[index] = null;
+        System.out.println("Message Deleted Successfully ✅");
+    }
+
 }

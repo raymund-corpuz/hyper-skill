@@ -1,19 +1,26 @@
 package org.hyperskill.message;
 
-public class Person {
+public abstract class Person {
     protected String name;
     protected int age;
 
-    protected Person(String name, int age) {
+    public Person(String name, int age) {
         this.name = name;
         this.age = age;
     }
 
-    String getName() {
+    protected String getName() {
         return name;
     }
 
-    int getAge() {
+    protected int getAge() {
         return age;
     }
+
+    //Display basic Information
+    public String displayProfile() {
+        return "Name: " + this.name + "\nAge: " + this.age;
+    }
+
+
 }
