@@ -12,16 +12,35 @@ public class Message {
         this.content = content;
         this.isRead = false;
     }
+    //Getters
+    public String getSender(){
+        return sender;
+    }
+    public String getReceiver(){
+        return receiver;
+    }
+    public String getContent(){
+        return content;
+    }
 
+    public boolean getIsRead(){
+        return isRead;
+    }
+    //Display Message
     String displayMessage() {
-        return this.content;
+        return "From: " + sender +
+                "\nTo: " + receiver +
+                "\n\nMessage: " + content +
+                "\n\nStatus: " + (isRead?"Read": "Unread");
     }
-
-    boolean markAsRead() {
-        return this.isRead = true;
+//Mark as Read
+    void  markAsRead() {
+        isRead = true;
+        System.out.println("Message Opened ✅");
     }
-
-    String editMessage(String newContent) {
-        return this.content = newContent;
+//Edit Message
+    void editMessage(String newContent) {
+        content = newContent;
+        System.out.println("Message Updated Successfully ✅");
     }
 }
