@@ -17,8 +17,8 @@ public class Message {
     public String displayMessage() {
         return "From: " + sender +
                 "\n To: " + receiver +
-                "\n " + content +
-                "\n Status: " + (isRead ? "Unread" : "Read");
+                "\n Content: " + content +
+                "\n Status: " + (isRead ? "Read" : "Unread");
     }
 
     public boolean markAsRead() {

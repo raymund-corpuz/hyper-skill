@@ -52,12 +52,14 @@ public class Main {
 
         displayUsers(users);
         displayMessages(messages);
-        int selectedMessage = selectMessage(scanner, messages);
-        if (selectedMessage == -1) {
+        Message selectedMessage = selectMessage(scanner, messages);
+        if (selectedMessage == null) {
             return;
         }
         System.out.println();
         displayMenu();
+        System.out.println();
+        processMenu(scanner, selectedMessage, messages, admin);
 
         scanner.close();
     }
@@ -79,14 +81,14 @@ public class Main {
         }
     }
 
-    public static int selectMessage(Scanner scanner, Message[] messages) {
+    public static Message selectMessage(Scanner scanner, Message[] messages) {
         System.out.print("Choose Message: ");
         int selectedMessage = scanner.nextInt() - 1;
         if (selectedMessage < 0 || selectedMessage >= messages.length) {
             System.out.println("Invalid Selected Message ❌");
-            return -1;
+            return null;
         }
-        return selectedMessage;
+        return messages[selectedMessage];
 
     }
 
@@ -98,5 +100,55 @@ public class Main {
         System.out.println("4 - Display Message");
         System.out.println("5 - Exit");
         System.out.println();
+    }
+
+    public static void processMenu(Scanner scanner, Message selectedMessage, Message[] message, Admin admin) {
+        System.out.print("Choose Action: ");
+        int action = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (action) {
+            case 1:
+                selectedMessage.markAsRead();
+                System.out.println();
+                System.out.println(selectedMessage.displayMessage());
+                break;
+            case 2:
+                System.out.print("Enter New Message: ");
+                String newMessage = scanner.nextLine();
+                selectedMessage.editMessage(newMessage);
+                System.out.println();
+                System.out.println(selectedMessage.displayMessage());
+                System.out.println("Message Updated Successfully ✅");
+                System.out.println();
+                break;
+            case 3:
+                int index = findMessageIndex(selectedMessage, message);
+                if (index != -1) {
+                    admin.deleteMessage(message, index);
+                }
+                break;
+            case 4:
+                System.out.println(selectedMessage.displayMessage());
+                break;
+            case 5:
+                System.out.println("Exiting Program...");
+                break;
+            default:
+                System.out.println("Invalid Action ❌");
+                break;
+
+        }
+    }
+
+    public static int findMessageIndex(Message selectedMessage, Message[] message) {
+        int index;
+        for (int i = 0; i < message.length; i++) {
+            if (selectedMessage == message[i]) {
+                return index = i;
+            }
+        }
+        return -1;
+
     }
 }
