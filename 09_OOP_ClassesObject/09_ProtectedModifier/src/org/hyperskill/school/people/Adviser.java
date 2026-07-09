@@ -1,18 +1,18 @@
 package org.hyperskill.school.people;
 
-public class Adviser extends Person {
+public class Adviser extends Teacher {
     protected String advisorySection;
 
-    public Adviser(String name, int age, String advisorySection) {
-        super(name, age);
+    public Adviser(String name, int age, String subject, double salary, String advisorySection) {
+        super(name, age, subject, salary);
         this.advisorySection = advisorySection;
     }
 
     @Override
     public String displayInfo() {
         return "Name: " + name +
-                "\nAge: " + age +
-                "\nAdvisory Section: " + advisorySection;
+                "\nSubject: " + subjects +
+                "\nAdvisory Section: (Adviser)";
     }
 
     public String assignSection(String section) {

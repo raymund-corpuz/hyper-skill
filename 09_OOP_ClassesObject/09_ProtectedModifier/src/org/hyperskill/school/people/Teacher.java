@@ -21,9 +21,8 @@ public class Teacher extends Person {
     @Override
     public String displayInfo() {
         return "Name: " + name +
-                "\nAge: " + age +
-                "\nSubject: " + subjects +
-                "\nSalary " + salary;
+                "\nSubject: " + subjects;
+
     }
 
     public String teachLesson() {
