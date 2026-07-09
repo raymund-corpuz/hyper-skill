@@ -26,6 +26,6 @@ public class Teacher extends Person {
     }
 
     public String teachLesson() {
-        return "I am teacher " + name + ". I will be teaching " + subjects;
+        return "I am teacher " + name + "." + "\nI will be teaching " + subjects + ".";
     }
 }
