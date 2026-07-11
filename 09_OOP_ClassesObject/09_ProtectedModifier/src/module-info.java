@@ -5,4 +5,5 @@ module module_name {
     exports org.fleet.vehicle.truck;
     exports org.fleet.vehicle.truck.delivery.truck;
     exports org.fleet.app;
+    exports org.fleet.vehicle;
 }

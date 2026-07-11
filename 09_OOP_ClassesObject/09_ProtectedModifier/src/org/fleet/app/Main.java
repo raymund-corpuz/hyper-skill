@@ -15,5 +15,17 @@ public class Main {
         vehicles[3] = new Truck("Isuzu", "Elf", true, 3500, 6);
         vehicles[4] = new DeliveryTruck("Volvo", "FH", false, 18000, 18, "North Luzon Route");
         vehicles[5] = new DeliveryTruck("Mercedes", "Actros", true, 20000, 18, "Metro Manila Route");
+
+        displayAllVehicles(vehicles);
+    }
+
+    public static void displayAllVehicles(Vehicle[] vehicles) {
+        System.out.println("==== ALL VEHICLES ====");
+        System.out.println();
+        for (int i = 0; i < vehicles.length; i++) {
+            System.out.println((i + 1) + ". ");
+            System.out.println(vehicles[i].displayInfo());
+            System.out.println();
+        }
     }
 }
