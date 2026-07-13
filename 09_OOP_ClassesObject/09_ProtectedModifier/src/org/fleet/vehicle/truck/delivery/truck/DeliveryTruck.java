@@ -22,6 +22,7 @@ public class DeliveryTruck extends Truck {
     }
 
     public String deliveryPackage() {
+
         return "The delivery truck is now delivering the package 📦...";
     }
 }
