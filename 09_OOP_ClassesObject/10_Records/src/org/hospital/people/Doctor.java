@@ -19,4 +19,7 @@ public class Doctor extends Person {
     }
 
 
+    public boolean isAvailable() {
+        return available;
+    }
 }
