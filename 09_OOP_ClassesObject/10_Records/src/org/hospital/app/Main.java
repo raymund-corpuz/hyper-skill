@@ -5,7 +5,7 @@ import org.hospital.people.Patient;
 import org.hospital.record.AppointmentRecord;
 
 import java.util.Scanner;
-import java.util.concurrent.RecursiveTask;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -77,50 +77,55 @@ public class Main {
 
         Doctor selectedDoctor = selectDoctor(scanner, doctors);
         if (selectedDoctor == null) {
+            scanner.close();
             return;
         }
-        doctorMenu();
+        boolean running = true;
 
-        int selectedAction = selectAction(scanner);
-        switch (selectedAction) {
-            case 1:
-                displayDoctorInformation(selectedDoctor);
-                break;
-            case 2:
-                if (!selectedDoctor.isAvailable()) {
-                    System.out.println();
-                    System.out.println("Doctor is unavailable.");
+        while (running) {
+            doctorMenu();
+            int selectedAction = selectAction(scanner);
+
+            switch (selectedAction) {
+                case 1:
+                    displayDoctorInformation(selectedDoctor);
                     break;
-                }
+                case 2:
 
-                displayPatients(patients);
+                    if (!selectedDoctor.isAvailable()) {
+                        System.out.println();
+                        System.out.println("Doctor is unavailable.");
+                        break;
+                    }
 
-                Patient selectedPatient =
-                        selectPatient(scanner, patients);
+                    displayPatients(patients);
 
-                if (selectedPatient == null) {
+                    Patient selectedPatient =
+                            selectPatient(scanner, patients);
+
+                    if (selectedPatient == null) {
+                        break;
+                    }
+
+                    appointmentRecord =
+                            approveAppointment(
+                                    scanner,
+                                    selectedDoctor,
+                                    selectedPatient);
+
                     break;
-                }
-
-                appointmentRecord =
-                        approveAppointment(
-                                scanner,
-                                selectedDoctor,
-                                selectedPatient);
-
-                break;
-            case 3:
-                displayAppointmentRecord(appointmentRecord);
-                break;
-            case 4:
-                System.out.println("Exiting Program...");
-                break;
-            default:
-                System.out.println("Invalid Action ❌");
-
+                case 3:
+                    displayAppointmentRecord(appointmentRecord);
+                    break;
+                case 4:
+                    running = false;
+                    System.out.println("Exiting Program...");
+                    break;
+                default:
+                    System.out.println("Invalid Action ❌");
+            }
 
         }
-
         scanner.close();
     }
 
@@ -191,16 +196,15 @@ public class Main {
         System.out.println("==== Appointment Details ====");
         System.out.println();
         System.out.print("Enter Appointment Date (MM/DD/YYYY): ");
-        String appointmentDate = scanner.nextLine();
-        System.out.println();
+        String appointmentDate = scanner.next();
         System.out.print("Enter Appointment Time (HH:MM): ");
-        String appointmentTime = scanner.nextLine();
+        String appointmentTime = scanner.next();
 
         AppointmentRecord apRecord = new AppointmentRecord(selectedDoctor.getName(), selectedPatient.getName(), appointmentDate, appointmentTime);
         System.out.println();
+        System.out.println("Successfully Set an Appointment ✅");
 
         return apRecord;
-
     }
 
 
