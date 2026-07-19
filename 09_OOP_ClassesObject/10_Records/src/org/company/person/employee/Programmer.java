@@ -1,6 +1,6 @@
 package org.company.person.employee;
 
-public class Programmer extends Employee{
+public class Programmer extends Employee {
     protected String programmingLanguages;
 
 
@@ -8,9 +8,17 @@ public class Programmer extends Employee{
         super(name, age, department, salary);
     }
 
-    public String displayProfile(){
-        return super.displayProfile()+
+    @Override
+    public String displayProfile() {
+        return super.displayProfile() +
                 "\nPosition: " + "Programmer" +
-                "\nLanguage: " + programmingLanguages
+                "\nLanguage: " + programmingLanguages;
     }
+
+    @Override
+    public void performJob() {
+        System.out.println("Writing the code using " + programmingLanguages);
+    }
+
+
 }

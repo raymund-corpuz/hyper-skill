@@ -18,4 +18,8 @@ public class Employee extends Person {
         return super.displayProfile() +
                 "\nDepartment: " + department;
     }
+
+    public void performJob() {
+        System.out.println("Employee performing a job. 💼");
+    }
 }

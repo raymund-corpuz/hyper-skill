@@ -15,4 +15,12 @@ public class Manager extends Employee {
                 "\nPosition: " + "Manager" +
                 "\nTeamSize: " + teamSize;
     }
+
+    @Override
+    public void performJob() {
+        System.out.println("Approving employee leave. ✅");
+        System.out.println("Managing a team size of " + teamSize + " employees.");
+    }
+
+
 }
