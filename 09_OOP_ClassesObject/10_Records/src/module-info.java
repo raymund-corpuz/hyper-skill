@@ -5,5 +5,6 @@ module module_name {
     exports org.hospital.record;
     exports org.company.app;
     exports org.company.person.employee;
+    exports org.company.person.record;
 
 }

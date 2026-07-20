@@ -6,6 +6,11 @@ public class Programmer extends Employee {
 
     public Programmer(String name, int age, String department, double salary, String programmingLanguages) {
         super(name, age, department, salary);
+        this.programmingLanguages = programmingLanguages;
+    }
+
+    public String getProgrammingLanguages() {
+        return programmingLanguages;
     }
 
     @Override

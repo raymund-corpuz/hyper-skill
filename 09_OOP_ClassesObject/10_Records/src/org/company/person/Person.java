@@ -14,4 +14,12 @@ public abstract class Person {
                 "\nAge: " + age;
     }
 
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
 }

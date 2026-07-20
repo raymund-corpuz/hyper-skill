@@ -11,12 +11,31 @@ public class Employee extends Person {
     public Employee(String name, int age, String department, double salary) {
         super(name, age);
         this.department = department;
+        this.salary = salary;
     }
 
     @Override
     public String displayProfile() {
         return super.displayProfile() +
                 "\nDepartment: " + department;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    @Override
+    public String getName() {
+        return super.getName();
+    }
+
+    @Override
+    public int getAge() {
+        return super.getAge();
     }
 
     public void performJob() {
