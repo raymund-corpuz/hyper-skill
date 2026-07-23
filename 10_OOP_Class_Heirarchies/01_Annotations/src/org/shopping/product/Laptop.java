@@ -11,6 +11,12 @@ public class Laptop extends Product {
 
     }
 
+    @Override
+    public String displayProduct() {
+        return super.displayProduct() +
+                "\nCategory: " + "Laptop";
+    }
+
     public String getBrand() {
         return brand;
     }

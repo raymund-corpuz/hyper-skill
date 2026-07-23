@@ -62,14 +62,40 @@ public class Main {
         );
 
         displayCustomers(customers);
+        displayAllProducts(products);
 
     }
 
     public static void displayCustomers(Customer[] customers) {
         System.out.println("==== CUSTOMERS =====");
         System.out.println();
-        for (Customer customer : customers) {
-            System.out.println(customer.getName());
+        for (int i = 0; i < customers.length; i++) {
+            System.out.println((i + 1) + ". " + customers[i].getName());
+        }
+        System.out.println();
+    }
+
+    public static Customer selectCustomer(Scanner scanner, Customer[] customers) {
+        System.out.print("Choose Customer: ");
+        int selected = scanner.nextInt() - 1;
+        System.out.println();
+        System.out.println("Welcome, " + customers[selected].getName() + "!");
+        System.out.println();
+        if (selected < 0 || selected >= customers.length) {
+            System.out.println("Selected Customer Not Found ❌");
+            return null;
+        }
+        return customers[selected];
+    }
+
+    public static void displayAllProducts(Product[] products) {
+        System.out.println("==== PRODUCTS ====");
+        System.out.println();
+
+        for (int i = 0; i < products.length; i++) {
+            System.out.println((i + 1) + ".");
+            System.out.println(products[i].displayProduct());
+            System.out.println();
         }
     }
 }

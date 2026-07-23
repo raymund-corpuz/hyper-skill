@@ -10,6 +10,12 @@ public class Clothing extends Product {
         this.color = color;
     }
 
+    @Override
+    public String displayProduct() {
+        return super.displayProduct() +
+                "\nCategory: " + "Clothing";
+    }
+
     public String getSize() {
         return size;
     }

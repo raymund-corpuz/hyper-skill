@@ -11,7 +11,7 @@ public class Product {
 
     public String displayProduct() {
         return "Product: " + productName +
-                "\nPrice: " + price;
+                "\nPrice: $" + price;
     }
 
     public double calculatePrice(int quantity, double price) {
