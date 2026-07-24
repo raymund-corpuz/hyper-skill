@@ -16,6 +16,14 @@ public class Clothing extends Product {
                 "\nCategory: " + "Clothing";
     }
 
+    @Override
+    public double calculatePrice(int qty, double price) {
+        if (qty > 3) {
+            return (price * 0.10) - price * qty;
+        }
+        return price * qty;
+    }
+
     public String getSize() {
         return size;
     }

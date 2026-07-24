@@ -17,6 +17,11 @@ public class Laptop extends Product {
                 "\nCategory: " + "Laptop";
     }
 
+    @Override
+    public double calculatePrice(int qty, double price) {
+
+    }
+
     public String getBrand() {
         return brand;
     }
