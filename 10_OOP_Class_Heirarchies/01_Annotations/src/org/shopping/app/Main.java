@@ -25,15 +25,14 @@ public class Main {
         products[0] = new Laptop(
                 "Dell Inspiron 15",
                 45000,
-                "Dell",
-                2 // 2-year warranty
+                "Dell", 2
         );
 
         products[1] = new Laptop(
                 "MacBook Air M4",
                 75000,
                 "Apple",
-                1 // 1-year warranty
+                1
         );
 
         products[2] = new Clothing(
@@ -67,8 +66,54 @@ public class Main {
         OrderRecord record = null;
 
         displayCustomers(customers);
+        Customer selectedCustomer = selectCustomer(scanner, customers);
         displayAllProducts(products);
 
+
+        boolean running = true;
+        while (running) {
+            Product selectedProduct = selectProduct(scanner, products);
+            int qty = productQuantity(scanner);
+            if (selectedProduct == null) {
+                System.out.println("Product Not Found ❌");
+                return;
+            }
+            displayMenu();
+            int action = chooseAction(scanner);
+            switch (action) {
+                case 1:
+                    displayProductInfo(selectedProduct);
+                    System.out.println();
+                    break;
+                case 2:
+                    if (selectedProduct == null) {
+                        System.out.println("Product Not Found ❌");
+                        scanner.close();
+                        return;
+                    }
+                    if (selectedProduct instanceof Laptop) {
+                        record = buyLaptop(selectedCustomer, selectedProduct, qty, today);
+                        break;
+                    }
+                    if (selectedProduct instanceof Clothing) {
+                        record = buyClothing(selectedCustomer, selectedProduct, qty, today);
+                        break;
+                    }
+                case 3:
+                    viewOrderReceipt(record);
+                    break;
+                case 4:
+                    System.out.println("Thank you for shopping! 😄");
+                    System.out.println();
+                    System.out.println("Program Ended.");
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Invalid Action ❌");
+                    break;
+            }
+        }
+        scanner.close();
     }
 
     public static void displayCustomers(Customer[] customers) {
@@ -83,13 +128,14 @@ public class Main {
     public static Customer selectCustomer(Scanner scanner, Customer[] customers) {
         System.out.print("Choose Customer: ");
         int selected = scanner.nextInt() - 1;
-        System.out.println();
-        System.out.println("Welcome, " + customers[selected].getName() + "!");
-        System.out.println();
         if (selected < 0 || selected >= customers.length) {
             System.out.println("Selected Customer Not Found ❌");
             return null;
         }
+        System.out.println();
+        System.out.println("Welcome, " + customers[selected].getName() + "!");
+        System.out.println();
+
         return customers[selected];
     }
 
@@ -114,7 +160,7 @@ public class Main {
         return products[choice];
     }
 
-    public static int productQuantity(Scanner scanner, Product[] products) {
+    public static int productQuantity(Scanner scanner) {
         System.out.print("Enter Quantity: ");
         int qty = scanner.nextInt();
 
@@ -144,13 +190,32 @@ public class Main {
         System.out.println();
     }
 
-    public static OrderRecord buyProduct(Customer customer, Product product, int qty, LocalDate today) {
+    public static OrderRecord buyClothing(Customer customer, Product product, int qty, LocalDate today) {
 
         System.out.println("Processing Order....");
         System.out.println();
         System.out.println("Quantity : " + qty);
         System.out.println();
         System.out.println("Discount Applied: 10%");
+        System.out.println();
+        System.out.println("Order Successful ✅");
+        System.out.println();
+        double totalPrice = product.calculatePrice(qty, product.getPrice());
+        System.out.println("Total Amount: $" + totalPrice);
+
+        return new OrderRecord(customer.getName(), product.getProductName(), qty, totalPrice, today);
+    }
+
+    public static OrderRecord buyLaptop(Customer customer, Product product, int qty, LocalDate today) {
+        int warranty = 0;
+        System.out.println("Processing Order....");
+        System.out.println();
+        System.out.println("Quantity : " + qty);
+        System.out.println();
+        if (product instanceof Laptop) {
+            warranty = ((Laptop) product).getWarranty();
+        }
+        System.out.println("Warranty Included : " + warranty + " Years");
         System.out.println();
         System.out.println("Order Successful ✅");
         System.out.println();
@@ -170,5 +235,11 @@ public class Main {
         System.out.println("Order date: " + record.orderDate());
         System.out.println();
         System.out.println("Thank you for shopping!");
+    }
+
+    public static int chooseAction(Scanner scanner) {
+        System.out.println();
+        System.out.print("Choose Action :");
+        return scanner.nextInt();
     }
 }
