@@ -1,25 +1,29 @@
 package org.library.people;
 
 public class Librarian extends Person {
-    protected boolean isApprove;
+    protected boolean isLibrarian;
 
-    public Librarian(String name, int age, boolean isApprove) {
+    public Librarian(String name, int age, boolean isLibrarian) {
         super(name, age);
-        this.isApprove = isApprove;
+        this.isLibrarian = isLibrarian;
     }
 
     //getters & Setters
     @Override
     public void displayProfile() {
         super.displayProfile();
-        System.out.println("Approved : " + (isApprove ? "True" : "False"));
+        System.out.println("Librarian : " + (isLibrarian ? "True" : "False"));
     }
 
-    public boolean isApprove() {
-        return isApprove;
+    public boolean libraryItemApproved() {
+        return this.isLibrarian = true;
+    }
+
+    public boolean isLibrarian() {
+        return isLibrarian;
     }
 
     public void setApprove(boolean approve) {
-        isApprove = approve;
+        isLibrarian = approve;
     }
 }
