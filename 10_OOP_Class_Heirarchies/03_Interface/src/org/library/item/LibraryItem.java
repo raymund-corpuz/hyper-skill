@@ -1,7 +1,9 @@
 package org.library.item;
 
 
-public class LibraryItem {
+import org.library.interfaces.Borrowable;
+
+public class LibraryItem implements Borrowable {
     protected String title;
     protected String author;
     protected boolean isAvailable;
@@ -41,5 +43,21 @@ public class LibraryItem {
 
     public void setAvailable(boolean available) {
         isAvailable = available;
+    }
+
+    @Override
+    public void borrow() {
+        if (!isAvailable) {
+            System.out.println("Sorry, the Book / Magazine is not available 😔");
+            return;
+        }
+        isAvailable = false;
+        System.out.println("Book / Magazine borrowed successfully. ✅");
+    }
+
+    @Override
+    public void returnItem() {
+        isAvailable = true;
+        System.out.println("Book / Magazine returned successfully. ✅");
     }
 }
