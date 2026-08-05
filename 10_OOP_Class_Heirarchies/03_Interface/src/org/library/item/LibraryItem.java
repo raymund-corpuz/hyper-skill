@@ -47,17 +47,17 @@ public class LibraryItem implements Borrowable {
 
     @Override
     public void borrow() {
-        if (!isAvailable) {
-            System.out.println("Sorry, the Book / Magazine is not available 😔");
-            return;
-        }
-        isAvailable = false;
-        System.out.println("Book / Magazine borrowed successfully. ✅");
+//        if (!isAvailable) {
+//            System.out.println("Sorry, the Book / Magazine is not available 😔");
+//            return;
+//        }
+//        isAvailable = false;
+//        System.out.println("Book / Magazine borrowed successfully. ✅");
     }
 
     @Override
     public void returnItem() {
-        isAvailable = true;
-        System.out.println("Book / Magazine returned successfully. ✅");
+//        isAvailable = true;
+//        System.out.println("Book / Magazine returned successfully. ✅");
     }
 }
