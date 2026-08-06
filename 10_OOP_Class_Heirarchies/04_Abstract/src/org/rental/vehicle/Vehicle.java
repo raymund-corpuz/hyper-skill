@@ -15,5 +15,13 @@ public abstract class Vehicle {
         this.available = available;
     }
 
+    public void displayInfo() {
+        System.out.println("Vehicle Id: " + vehicleId);
+        System.out.println("Brand: " + brand);
+        System.out.println("Model: " + model);
+        System.out.println("Daily Rate: " + dailyRate);
+        System.out.println("Available: " + (available ? "Available ✅" : "Not Available ❌"));
+    }
+
     abstract double calculateRentalCost(int days);
 }
