@@ -1,4 +1,6 @@
 package org.rental.record;
 
-public record RentalRecord() {
+import java.time.LocalDate;
+
+public record RentalRecord(String vehicleId, String brand, String model, LocalDate today) {
 }

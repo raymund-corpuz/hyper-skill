@@ -1,20 +1,25 @@
 package org.rental.app;
 
 import org.rental.customer.Customer;
+import org.rental.record.RentalRecord;
 import org.rental.vehicle.Car;
 import org.rental.vehicle.Motorcycle;
 import org.rental.vehicle.Van;
 import org.rental.vehicle.Vehicle;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
-import java.util.Vector;
+
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Customer> customers = new ArrayList<>();
+        ArrayList<RentalRecord> record = new ArrayList<>();
+        LocalDate today = LocalDate.now();
 
         customers.add(new Customer("Raymund", 31, true));
         customers.add(new Customer("Alice", 27, true));
@@ -86,14 +91,24 @@ public class Main {
         ));
         displayCustomers(customers);
         displayVehicles(vehicles);
-        addVehicle(vehicles, scanner);
-        int selectedVehicle = selectVehicle(vehicles, scanner);
-        if (selectedVehicle == -1) {
-            System.out.println("Invalid Selection of Vehicle");
+//        addVehicle(vehicles, scanner);
+//        int selectedVehicle = selectVehicle(vehicles, scanner);
+//        if (selectedVehicle == -1) {
+//            System.out.println("Invalid Selection of Vehicle");
+//            return;
+//        }
+//        updateVehicles(vehicles, selectedVehicle, scanner);
+//        displayVehicles(vehicles);
+//        deleteVehicle(vehicles, scanner);
+//        displayVehicles(vehicles);
+        RentalRecord myRecord = rentVehicle(vehicles, scanner);
+        record.add(myRecord);
+        if (myRecord == null) {
+            System.out.println("==== View Record Rental is Empty.❌ ====");
             return;
         }
-        updateVehicles(vehicles, selectedVehicle, scanner);
-        displayVehicles(vehicles);
+        viewRentalRecord(record);
+        returnVehicle(vehicles, record, scanner);
 
         scanner.close();
     }
@@ -142,15 +157,15 @@ public class Main {
         switch (addType) {
             case "Car":
                 vehicles.add(new Car(addVehicleId, addBrand, addModel, addDailyRate, addAvailable, addDays));
-                System.out.println("Successfully Updated Car. ✅");
+                System.out.println("Successfully Added Car. ✅");
                 break;
             case "Van":
                 vehicles.add(new Van(addVehicleId, addBrand, addModel, addDailyRate, addAvailable, addDays));
-                System.out.println("Successfully Updated Van. ✅");
+                System.out.println("Successfully Added Van. ✅");
                 break;
             case "Motorcycle":
                 vehicles.add(new Motorcycle(addVehicleId, addBrand, addModel, addDailyRate, addAvailable, addDays));
-                System.out.println("Successfully Updated Motorcycle. ✅");
+                System.out.println("Successfully Added Motorcycle. ✅");
                 break;
             default:
                 System.out.println("Invalid Vehicle Type. ❌");
@@ -213,9 +228,78 @@ public class Main {
 
 
     }
+
     //Delete Vehicles
+    public static void deleteVehicle(List<Vehicle> vehicles, Scanner scanner) {
+        System.out.println("==== Delete Vehicle ====");
+        System.out.println();
+        int deleteSelection = selectVehicle(vehicles, scanner);
+
+        for (int i = 0; i < vehicles.size(); i++) {
+            if (i == deleteSelection) {
+                vehicles.remove(i);
+            }
+        }
+        System.out.println("Successfully Deleted Vehicle.✅");
+
+    }
+
     //Rent Vehicles
+    public static RentalRecord rentVehicle(List<Vehicle> vehicles, Scanner scanner) {
+        System.out.println("==== Rent Vehicle ====");
+        System.out.println();
+        int choice = selectVehicle(vehicles, scanner);
+        Vehicle chosenVehicle = vehicles.get(choice);
+
+        if (!chosenVehicle.isAvailable()) {
+            System.out.println("Vehicle is Not Available");
+            return null;
+        }
+        chosenVehicle.rent();
+
+        LocalDate today = LocalDate.now();
+        return new RentalRecord(chosenVehicle.getVehicleId(), chosenVehicle.getBrand(), chosenVehicle.getModel(), today);
+    }
+
     //Return Vehicles
+    public static void returnVehicle(List<Vehicle> vehicles, List<RentalRecord> record, Scanner scanner) {
+        System.out.println("==== Return Vehicle ====");
+        System.out.println();
+        System.out.print("Enter Vehicle Id: ");
+        String myVehicleId = scanner.nextLine();
+        boolean found = false;
+
+        for (int i = 0; i < record.size(); i++) {
+            if (Objects.equals(myVehicleId, record.get(i).vehicleId())) {
+                found = true;
+                for (Vehicle v : vehicles) {
+                    if (Objects.equals(v.getVehicleId(), myVehicleId)) {
+                        v.returnVehicle();
+                        break;
+                    }
+                }
+                record.remove(i);
+                System.out.println("SuccessfullY Returned Vehicle.✅");
+                break;
+            }
+
+        }
+        if (!found) {
+            System.out.println("Vehicle Not Found! ❌");
+        }
+
+    }
+
     //View Rental Record
+    public static void viewRentalRecord(List<RentalRecord> record) {
+        System.out.println("==== View Rental Record ====");
+        System.out.println();
+        for (int i = 0; i < record.size(); i++) {
+            System.out.println("Vehicle Id: " + record.get(i).vehicleId());
+            System.out.println("Brand: " + record.get(i).brand());
+            System.out.println("Model: " + record.get(i).model());
+            System.out.println("Date Rented: " + record.get(i).today());
+        }
+    }
 
 }
