@@ -10,6 +10,20 @@ public class Customer extends Person {
         this.phoneNumber = phoneNumber;
     }
 
+    public class Address {
+        private String city;
+        private String province;
+
+        public void displayAddress() {
+            System.out.println("==== Address Info ====");
+            System.out.println("Customer: " + name);
+            System.out.println();
+            System.out.println("Address: " + city + ", " + province);
+        }
+
+    }
+
+
     @Override
     public void displayProfile() {
         super.displayProfile();

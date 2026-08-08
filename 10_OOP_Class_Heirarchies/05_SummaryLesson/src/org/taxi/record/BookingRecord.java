@@ -1,4 +1,7 @@
 package org.taxi.record;
 
-public record BookingRecord() {
+import java.time.LocalDate;
+
+public record BookingRecord(String customerName, String taxiId, String driverName, String pickupLocation,
+                            String destination, double distance, double fare, LocalDate bookingDate, String status) {
 }
