@@ -3,16 +3,23 @@ package org.taxi.people;
 public class Customer extends Person {
     private String customerId;
     private String phoneNumber;
+    Address address;
 
-    public Customer(String customerId, String name, int age, String phoneNumber) {
+    public Customer(String customerId, String name, int age, String phoneNumber, String city, String province) {
         super(name, age);
         this.customerId = customerId;
         this.phoneNumber = phoneNumber;
     }
 
+
     public class Address {
         private String city;
         private String province;
+
+        public Address(String city, String province) {
+            this.city = city;
+            this.province = province;
+        }
 
         public void displayAddress() {
             System.out.println("==== Address Info ====");
@@ -21,6 +28,21 @@ public class Customer extends Person {
             System.out.println("Address: " + city + ", " + province);
         }
 
+        public String getCity() {
+            return city;
+        }
+
+        public void setCity(String city) {
+            this.city = city;
+        }
+
+        public String getProvince() {
+            return province;
+        }
+
+        public void setProvince(String province) {
+            this.province = province;
+        }
     }
 
 
@@ -39,10 +61,15 @@ public class Customer extends Person {
         return phoneNumber;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
 
     }
+
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;

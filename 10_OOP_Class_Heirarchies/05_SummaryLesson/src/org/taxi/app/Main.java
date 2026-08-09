@@ -8,6 +8,7 @@ import org.taxi.vehicle.PremiumTaxi;
 import org.taxi.vehicle.StandardTaxi;
 import org.taxi.vehicle.Taxi;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -21,41 +22,52 @@ public class Main {
         ArrayList<BookingRecord> records = new ArrayList<>();
 
         //customers
+        ArrayList<Customer> customers = new ArrayList<>();
+
         customers.add(new Customer(
                 "CUS-001",
                 "Raymund Corpuz",
                 31,
-                "09171234567"
+                "09171234567",
+                "Dagupan City",
+                "Pangasinan"
         ));
 
         customers.add(new Customer(
                 "CUS-002",
                 "Alice Santos",
                 26,
-                "09281234567"
+                "09281234567",
+                "Urdaneta City",
+                "Pangasinan"
         ));
 
         customers.add(new Customer(
                 "CUS-003",
                 "Michael Cruz",
                 42,
-                "09391234567"
+                "09391234567",
+                "San Fernando City",
+                "La Union"
         ));
 
         customers.add(new Customer(
                 "CUS-004",
                 "Sophia Reyes",
                 29,
-                "09451234567"
+                "09451234567",
+                "Baguio City",
+                "Benguet"
         ));
 
         customers.add(new Customer(
                 "CUS-005",
                 "John Garcia",
                 19,
-                "09561234567"
+                "09561234567",
+                "Pozorrubio",
+                "Pangasinan"
         ));
-
         //standard taxi
         taxis.add(new StandardTaxi(
                 "TX-001",
@@ -121,6 +133,16 @@ public class Main {
         displayAllTaxi(taxis);
         deleteTaxi(taxis, scanner);
         displayAllTaxi(taxis);
+    }
+
+    //display all Customer
+    public static void displayCustomers(List<Customer> customers) {
+        System.out.println("==== Customers ====");
+        System.out.println();
+        for (int i = 0; i < customers.size(); i++) {
+            System.out.println((i + 1) + ".");
+            customers.get(i).displayProfile();
+        }
     }
 
     //select Taxi
@@ -231,4 +253,25 @@ public class Main {
         }
         System.out.println("Successfully deleted.✅ ");
     }
+
+    //book taxi
+    public static BookingRecord bookTaxi(Customer customer, List<Taxi> taxis, Scanner scanner, String destination, double distance) {
+        LocalDate today = LocalDate.now();
+        System.out.println("==== Book Taxi ====");
+        System.out.println();
+        int chosenTaxi = select(taxis, scanner);
+        scanner.nextLine();
+
+        for (int i = 0; i < taxis.size(); i++) {
+            if (i == chosenTaxi) {
+                taxis.get(i).book();
+            }
+        }
+
+        return new BookingRecord(customer.getName(), taxis.get(chosenTaxi).getTaxiId(),
+                taxis.get(chosenTaxi).getDriverName(), customer.getAddress().getCity(),
+                destination, distance, taxis.get(chosenTaxi).getBaseFare(), today, taxis.get(chosenTaxi).isAvailable());
+    }
+
+
 }

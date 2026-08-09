@@ -40,18 +40,22 @@ public abstract class Taxi {
 
     public void book() {
         if (!available) {
-            System.out.println("==== Book Info ====");
-            System.out.println();
             System.out.println(driverName + " is already booked.");
+            return;
         }
+        available = false;
+        System.out.println("Successfully book : " + driverName + ".✅");
+
     }
 
     public void release() {
         if (available) {
-            System.out.println("==== Release Info ====");
-            System.out.println();
-            System.out.println(driverName + " is release.");
+            System.out.println("Please book first: " + driverName);
+            return;
         }
+        available = true;
+        System.out.println(driverName + " is release.");
+
     }
 
     public String getTaxiId() {
