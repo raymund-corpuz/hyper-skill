@@ -21,9 +21,6 @@ public class Main {
         ArrayList<Taxi> taxis = new ArrayList<>();
         ArrayList<BookingRecord> records = new ArrayList<>();
 
-        //customers
-        ArrayList<Customer> customers = new ArrayList<>();
-
         customers.add(new Customer(
                 "CUS-001",
                 "Raymund Corpuz",
@@ -126,6 +123,8 @@ public class Main {
             }
         };
 
+        displayCustomers(customers);
+        Customer chosenCustomer = selectCustomer(customers, scanner);
 //        displayAllTaxi(taxis);
 //        addTaxi(taxis, scanner);
 //        displayAllTaxi(taxis);
@@ -133,6 +132,9 @@ public class Main {
         displayAllTaxi(taxis);
         deleteTaxi(taxis, scanner);
         displayAllTaxi(taxis);
+        BookingRecord myRecord = bookTaxi(chosenCustomer, taxis, scanner, "La Union", 15_000);
+        cancelBooking(chosenCustomer, records, taxis, scanner);
+
     }
 
     //display all Customer
@@ -156,6 +158,18 @@ public class Main {
             return -1;
         }
         return selected;
+    }
+
+    public static Customer selectCustomer(List<Customer> customers, Scanner scanner) {
+        System.out.print("Choose Customer: ");
+        int selectCustomer = scanner.nextInt() - 1;
+        scanner.nextLine();
+
+        if (selectCustomer < 0 || selectCustomer >= customers.size()) {
+            System.out.println("Customer Not Found.❌");
+            return null;
+        }
+        return customers.get(selectCustomer);
     }
 
     //add taxi
@@ -259,19 +273,58 @@ public class Main {
         LocalDate today = LocalDate.now();
         System.out.println("==== Book Taxi ====");
         System.out.println();
+
         int chosenTaxi = select(taxis, scanner);
         scanner.nextLine();
 
-        for (int i = 0; i < taxis.size(); i++) {
-            if (i == chosenTaxi) {
-                taxis.get(i).book();
-            }
+        Taxi taxi = taxis.get(chosenTaxi);
+
+        if (!taxi.isAvailable()) {
+            System.out.println("Taxi is currently unavailable. ❌");
+            return null;
         }
 
-        return new BookingRecord(customer.getName(), taxis.get(chosenTaxi).getTaxiId(),
+        if (distance <= 0) {
+            System.out.println("Distance must be greater than 0. ❌");
+            return null;
+        }
+
+        double fare = taxi.calculateFare(distance);
+        taxi.book();
+
+        BookingRecord record = new BookingRecord(customer.getName(), taxis.get(chosenTaxi).getTaxiId(),
                 taxis.get(chosenTaxi).getDriverName(), customer.getAddress().getCity(),
-                destination, distance, taxis.get(chosenTaxi).getBaseFare(), today, taxis.get(chosenTaxi).isAvailable());
+                destination, distance, taxis.get(chosenTaxi).getBaseFare(), today, "CONFIRMED");
+
+        System.out.println();
+        System.out.println("==== BOOKING CONFIRMED ====");
+        System.out.println();
+        System.out.println("Customer    : " + customer.getName());
+        System.out.println("Taxi ID     : " + taxi.getTaxiId());
+        System.out.println("Driver      : " + taxi.getDriverName());
+        System.out.println("Pickup      : " + customer.getAddress().getCity());
+        System.out.println("Destination : " + destination);
+        System.out.println("Distance    : " + distance + " km");
+        System.out.println("Fare        : ₱" + fare);
+        System.out.println("Status      : CONFIRMED");
+        System.out.println();
+
+        return record;
     }
 
 
+    //cancel booking
+    public static void cancelBooking(Customer customer, List<BookingRecord> records, List<Taxi> taxis, Scanner scanner) {
+        System.out.println("==== Cancel Taxi ====");
+        System.out.println();
+        System.out.print("Enter Taxi ID: ");
+        String chosenTaxi = scanner.nextLine();
+
+        for (Taxi v : taxis) {
+            if (v.getTaxiId().equalsIgnoreCase(chosenTaxi)) {
+                v.release();
+            }
+        }
+
+    }
 }

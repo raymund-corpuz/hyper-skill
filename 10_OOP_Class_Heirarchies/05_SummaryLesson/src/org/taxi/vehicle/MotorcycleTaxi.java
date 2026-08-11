@@ -7,7 +7,7 @@ public class MotorcycleTaxi extends Taxi {
     }
 
     @Override
-    double calculateFare(double distance) {
+    public double calculateFare(double distance) {
         return baseFare + distance * 30;
     }
 

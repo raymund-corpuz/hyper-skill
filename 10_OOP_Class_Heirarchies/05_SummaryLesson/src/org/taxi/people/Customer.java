@@ -3,12 +3,13 @@ package org.taxi.people;
 public class Customer extends Person {
     private String customerId;
     private String phoneNumber;
-    Address address;
+    private Address address;
 
     public Customer(String customerId, String name, int age, String phoneNumber, String city, String province) {
         super(name, age);
         this.customerId = customerId;
         this.phoneNumber = phoneNumber;
+        this.address = new Address(city, province);
     }
 
 

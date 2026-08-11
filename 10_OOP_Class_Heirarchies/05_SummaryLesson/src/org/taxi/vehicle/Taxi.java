@@ -28,7 +28,7 @@ public abstract class Taxi {
         }
     }
 
-    abstract double calculateFare(double distance);
+    public abstract double calculateFare(double distance);
 
     public void displayTaxiInfo() {
         System.out.println("Taxi ID: " + taxiId);
@@ -54,6 +54,7 @@ public abstract class Taxi {
             return;
         }
         available = true;
+        System.out.println(taxiId + "is release.");
         System.out.println(driverName + " is release.");
 
     }
