@@ -1,12 +1,14 @@
 package org.bank.account;
 
+import org.bank.people.Customer;
+
 public abstract class BankAccount {
     private String accountNumber;
-    private String accountHolder;
+    private Customer accountHolder;
     private double balance;
     private boolean active;
 
-    public BankAccount(String accountNumber, String accountHolder, double balance, boolean active) {
+    public BankAccount(String accountNumber, Customer accountHolder, double balance, boolean active) {
         this.accountNumber = accountNumber;
         this.accountHolder = accountHolder;
         this.balance = balance;
@@ -38,11 +40,11 @@ public abstract class BankAccount {
         this.accountNumber = accountNumber;
     }
 
-    public String getAccountHolder() {
+    public Customer getAccountHolder() {
         return accountHolder;
     }
 
-    public void setAccountHolder(String accountHolder) {
+    public void setAccountHolder(Customer accountHolder) {
         this.accountHolder = accountHolder;
     }
 

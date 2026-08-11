@@ -2,10 +2,10 @@ package org.bank.people;
 
 public class Customer extends Person {
     private String customerId;
-    private int phoneNumber;
+    private String phoneNumber;
     private final Address address;
 
-    public Customer(String name, int age, String customerId, int phoneNumber, String city, String province) {
+    public Customer(String customerId, String name, int age, String phoneNumber, String city, String province) {
         super(name, age);
         this.customerId = customerId;
         this.phoneNumber = phoneNumber;
@@ -66,11 +66,11 @@ public class Customer extends Person {
         this.customerId = customerId;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }

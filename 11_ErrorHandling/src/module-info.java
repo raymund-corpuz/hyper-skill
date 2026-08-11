@@ -6,4 +6,5 @@ module module_name {
     exports org.bank.interfaces;
     exports org.bank.exception;
     exports org.bank.data;
+    exports org.bank.crudManager;
 }
