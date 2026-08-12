@@ -25,9 +25,9 @@ public abstract class BankAccount {
 
     public abstract double calculateInterest();
 
-    public void displayAccountInfo() {
+    public void displayAccount(Customer customer) {
         System.out.println("Account Number: " + accountNumber);
-        System.out.println("Account Holder: " + accountHolder);
+        System.out.println("Account Holder: " + customer.getName());
         System.out.println("Balance: " + balance);
         System.out.println("Active: " + (active ? "YES" : "NO"));
     }
@@ -63,4 +63,6 @@ public abstract class BankAccount {
     public void setActive(boolean active) {
         this.active = active;
     }
+
+
 }
