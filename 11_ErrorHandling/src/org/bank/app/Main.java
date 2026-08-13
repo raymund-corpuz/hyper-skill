@@ -127,7 +127,7 @@ public class Main {
         // DISPLAY ACCOUNTS
         // =========================
 
-        getAllAccounts(accountCrud);
+        //getAllAccounts(accountCrud);
 
 
         scanner.close();
