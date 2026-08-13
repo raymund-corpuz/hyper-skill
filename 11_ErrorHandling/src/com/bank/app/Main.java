@@ -87,13 +87,76 @@ public class Main {
         System.out.println("Successfully  Added Customer. ✅");
         System.out.println();
     }
+
     //update Customer
+    public static void updateCustomer(ArrayList<Customer> customers, Scanner scanner) {
+        int select = selectCustomer(scanner, customers);
+        System.out.println("==== UPDATE CUSTOMER ====");
+        System.out.println();
+        String updateCustomerId = "CUS-00" + customers.size() + 1;
+        System.out.print("Enter Name: ");
+        String updateName = scanner.nextLine();
+        System.out.print("Enter Age: ");
+        int updateAge = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Enter Phone Number: ");
+        String updatePhoneNumber = scanner.nextLine();
+        System.out.print("Enter City: ");
+        String updateCity = scanner.nextLine();
+        System.out.print("Enter Province: ");
+        String updateProvince = scanner.nextLine();
+        System.out.println();
+
+        customers.set(select, new Customer(updateCustomerId, updateName, updateAge, updatePhoneNumber, updateCity, updateProvince));
+        System.out.println("Successfully  Updated Customer: " + customers.get(select).getName());
+        System.out.println();
+    }
+
     //delete Customer
+    public static void deleteCustomer(ArrayList<Customer> customers, Scanner scanner) {
+        int select = selectCustomer(scanner, customers);
+        System.out.println("==== DELETE CUSTOMER ====");
+        System.out.println();
+        System.out.println("Successfully Deleted: " + customers.get(select).getName());
+        customers.remove(select);
+        System.out.println();
+    }
     //open Account
+
     //update Account
     //close Account
     //select Customer
+    public static int selectCustomer(Scanner scanner, ArrayList<Customer> customers) {
+        System.out.println("==== SELECT CUSTOMER ====");
+        System.out.println();
+        System.out.print("Select Customer: ");
+        int select = scanner.nextInt() - 1;
+        scanner.nextLine();
+        System.out.println();
+
+        if (select < 0 || select >= customers.size()) {
+            System.out.println("Invalid Customer Selection. ❌");
+            return -1;
+        }
+
+        return select;
+    }
+
     //select Account
+    public static int selectAccount(Scanner scanner, ArrayList<BankAccount> accounts) {
+        System.out.println("==== SELECT ACCOUNT ====");
+        System.out.println();
+        System.out.print("Select Account: ");
+        int select = scanner.nextInt() - 1;
+        scanner.nextLine();
+        System.out.println();
+
+        if (select < 0 || select >= accounts.size()) {
+            System.out.println("Invalid Account Selection. ❌");
+            return -1;
+        }
+        return select;
+    }
     //deposit
     //withdraw
     //view transaction history
