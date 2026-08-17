@@ -7,7 +7,7 @@ import com.bank.account.SavingsAccount;
 import com.bank.people.Customer;
 import com.bank.record.TransactionRecord;
 
-import java.lang.reflect.Array;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -36,7 +36,7 @@ public class Main {
 
         boolean running = true;
         while (running) {
-            displayMenu(scanner, customers, running);
+            displayMenu(scanner, customers, running, accounts, transactions);
         }
 
         scanner.close();
@@ -71,7 +71,7 @@ public class Main {
     public static void addCustomer(ArrayList<Customer> customers, Scanner scanner) {
         System.out.println("==== ADD CUSTOMER ====");
         System.out.println();
-        String addCustomerId = "CUS-00" + customers.size() + 1;
+        String addCustomerId = "CUS-00" + (customers.size() + 1);
         System.out.print("Enter Name: ");
         String addName = scanner.nextLine();
         System.out.print("Enter Age: ");
@@ -93,9 +93,12 @@ public class Main {
     //update Customer
     public static void updateCustomer(ArrayList<Customer> customers, Scanner scanner) {
         int select = selectCustomer(scanner, customers);
+        if (select == -1) {
+            return;
+        }
         System.out.println("==== UPDATE CUSTOMER ====");
         System.out.println();
-        String updateCustomerId = "CUS-00" + customers.size() + 1;
+        String updateCustomerId = "CUS-00" + (customers.size() + 1);
         System.out.print("Enter Name: ");
         String updateName = scanner.nextLine();
         System.out.print("Enter Age: ");
@@ -179,6 +182,7 @@ public class Main {
         String accountNumber = scanner.nextLine();
         System.out.println("Enter Balance: ");
         double balance = scanner.nextDouble();
+        scanner.nextLine();
         if (balance <= 1000) {
             System.out.println("Balance must be greater than 1000");
             return;
@@ -251,10 +255,46 @@ public class Main {
     }
 
     //deposit
+    public static void deposit(Scanner scanner, BankAccount account, ArrayList<TransactionRecord> records) {
+        System.out.println("==== DEPOSIT ====");
+        System.out.println();
+        System.out.println("Enter Transaction Id: ");
+        String transactionId = scanner.nextLine();
+        String transactionType = account.getClass().getSimpleName();
+        System.out.println("Enter Amount: ");
+        double amount = scanner.nextDouble();
+        scanner.nextLine();
+        double balanceAfterTransaction = account.deposit(amount);
+
+
+        LocalDate today = LocalDate.now();
+        TransactionRecord newRecord = new TransactionRecord(transactionId, account.getAccountNumber(), transactionType, amount, balanceAfterTransaction, today);
+
+        System.out.println("New Transaction is Added");
+        records.add(newRecord);
+        viewTransactionHistory(records);
+    }
+
     //withdraw
     //view transaction history
+    public static void viewTransactionHistory(ArrayList<TransactionRecord> records) {
+        System.out.println("==== TRANSACTION RECORD ====");
+        System.out.println();
+        for (int i = 0; i < records.size(); i++) {
+            System.out.println("Transaction Id: " + records.get(i).transactionId());
+            System.out.println("Transaction Id: " + records.get(i).accountNumber());
+            System.out.println("Transaction Id: " + records.get(i).transactionType());
+            System.out.println("Transaction Id: " + records.get(i).amount());
+            System.out.println("Transaction Id: " + records.get(i).balanceAfterTransaction());
+            System.out.println("Transaction Id: " + records.get(i).date());
+            System.out.println();
+        }
+
+
+    }
+
     //display Main Menu
-    public static void displayMenu(Scanner scanner, ArrayList<Customer> customers, boolean running) {
+    public static void displayMenu(Scanner scanner, ArrayList<Customer> customers, boolean running, ArrayList<BankAccount> accounts, ArrayList<TransactionRecord> transactionRecords) {
         System.out.println("==== BANKING ACCOUNT SYSTEM ====");
         System.out.println();
         System.out.println("1 - Customer Management ");
@@ -264,32 +304,37 @@ public class Main {
         System.out.println("3 - Transaction Management");
         System.out.println();
         System.out.println("4 - Exit");
+        System.out.println();
+        System.out.print("Select Options: ");
         int choice = scanner.nextInt();
         scanner.nextLine();
 
         switch (choice) {
             case 1:
-                displayCustomerMenu(scanner, customers);
+                displayCustomerMenu(scanner, customers, accounts, transactionRecords);
                 break;
             case 2:
                 System.out.println("Account Menu");
                 break;
             case 3:
-                System.out.println("Transaction Menu");
+                int chosenCustomer = selectCustomer(scanner, customers);
+                Customer finalCustomer = customers.get(chosenCustomer);
+                int chosenAccount = selectAccount(scanner, accounts);
+                BankAccount finalAccount = accounts.get(chosenAccount);
+                transactionMenu(scanner, accounts, finalAccount, transactionRecords, customers);
                 break;
             case 4:
                 System.out.println("Exiting Program...");
-                running = false;
                 break;
             default:
-                System.out.println("Invalid Choice. ❌");
+                System.out.println("Invalid Selection. ❌");
                 running = false;
                 break;
         }
     }
 
     //Customer Menu
-    public static void displayCustomerMenu(Scanner scanner, ArrayList<Customer> customers) {
+    public static void displayCustomerMenu(Scanner scanner, ArrayList<Customer> customers, ArrayList<BankAccount> accounts, ArrayList<TransactionRecord> records) {
         System.out.println("==== CUSTOMER MENU ====");
         System.out.println();
         System.out.println("1 - Add Customer");
@@ -318,12 +363,48 @@ public class Main {
                 System.out.println("DELETING CUSTOMERS");
                 break;
             case 5:
-                displayMenu(scanner, customers, true);
+                displayMenu(scanner, customers, true, accounts, records);
                 break;
             default:
                 System.out.println("Invalid Choice. ❌");
         }
     }
+
     //Account Menu
     //Transaction Menu
+    public static void transactionMenu(Scanner scanner, ArrayList<BankAccount> accounts, BankAccount account, ArrayList<TransactionRecord> records, ArrayList<Customer> customers) {
+        System.out.println("==== Transaction Menu ====");
+        System.out.println();
+        System.out.println("1 - Deposit");
+        System.out.println();
+        System.out.println("2 - Withdraw");
+        System.out.println();
+        System.out.println("3 - View Transaction History");
+        System.out.println();
+        System.out.println("4 -  Back");
+        System.out.println();
+        System.out.print("Select Transaction:");
+        int transaction = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (transaction) {
+            case 1:
+                deposit(scanner, account, records);
+                break;
+            case 2:
+                System.out.println("Withdraw");
+                break;
+            case 3:
+                viewTransactionHistory(records);
+                break;
+            case 4:
+                displayMenu(scanner, customers, true, accounts, records);
+                break;
+            default:
+                System.out.println("Invalid Transaction. ❌");
+                break;
+        }
+
+    }
 }
+
