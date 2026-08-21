@@ -91,13 +91,13 @@ public class Main {
                 addCustomer(customers, scanner);
                 break;
             case 2:
-                viewCustomer();
+                viewCustomer(customers);
                 break;
             case 3:
-                updateCustomer();
+                updateCustomer(customers, scanner);
                 break;
             case 4:
-                deleteCustomer();
+                deleteCustomer(customers, scanner);
                 break;
             case 5:
                 displayMainMenu(scanner);
@@ -132,17 +132,55 @@ public class Main {
     }
 
     //view customer
-    public static void viewCustomer() {
+    public static void viewCustomer(ArrayList<Customer> customers) {
         System.out.println("==== View Customer ====");
+        System.out.println();
+        for (int i = 0; i < customers.size(); i++) {
+            System.out.println((i + 1) + ".");
+            customers.get(i).displayCustomerInfo();
+            System.out.println();
+        }
     }
 
     //update customer
-    public static void updateCustomer() {
+    public static void updateCustomer(ArrayList<Customer> customers, Scanner scanner) {
         System.out.println("==== Update Customer ====");
+        System.out.println();
+        int choice = selectOption(scanner);
+        if (choice < 0 || choice >= customers.size()) {
+            System.out.println("Customer Not Found. ❌");
+            return;
+        }
+        Customer customer = customers.get(choice);
+
+        System.out.println("Name: ");
+        String name = scanner.nextLine();
+        System.out.println("Age: ");
+        int age = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Phone: ");
+        String phone = scanner.nextLine();
+        System.out.println("City: ");
+        String city = scanner.nextLine();
+        System.out.println("Province: ");
+        String province = scanner.nextLine();
+
+        customers.set(choice, new Customer(customer.getCustomerId(), name, age, phone, city, province));
+
+        System.out.println("Successfully Updated: " + customer.getName() + ". ✅");
     }
 
     //delete customer
-    public static void deleteCustomer() {
+    public static void deleteCustomer(ArrayList<Customer> customers, Scanner scanner) {
         System.out.println("==== Delete Customer ====");
+        System.out.println();
+        int choice = selectOption(scanner);
+        choice--;
+        if (choice < 0 || choice >= customers.size()) {
+            System.out.println("Customer Not Found. ❌");
+            return;
+        }
+        System.out.println("Successfully Deleted: " + customers.get(choice).getName());
+        customers.remove(choice);
     }
 }
