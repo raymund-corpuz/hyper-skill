@@ -28,27 +28,27 @@ public class Main {
         restaurants.add(new CoffeeShop("Barako Coffee", 80, "Large"));
 
         boolean running = true;
+        int menuSelection = displayMainMenu(scanner);
 
         while (running) {
-            int menuSelection = displayMainMenu(scanner);
-
             switch (menuSelection) {
                 case 1:
                     customerManagement(scanner, customers);
                     break;
                 case 2:
-//                    restaurantManagement();
-                    System.out.println("==== RESTAURANT MANAGEMENT ====");
+                    restaurantManagement(scanner, restaurants);
                     break;
                 case 3:
 //                    orderManagement();
                     System.out.println("==== ORDER MANAGEMENT ====");
                     break;
                 case 4:
+                    System.out.println("Exiting the Program...");
                     running = false;
                     break;
                 default:
                     System.out.println("Selection Not Found. ❌");
+                    running = false;
                     break;
             }
         }
@@ -183,4 +183,81 @@ public class Main {
         System.out.println("Successfully Deleted: " + customers.get(choice).getName());
         customers.remove(choice);
     }
+
+    //Restaurant
+    public static void restaurantManagement(Scanner scanner, ArrayList<Restaurant> restaurants) {
+        System.out.println("==================================");
+        System.out.println("          RESTAURANT MENU         ");
+        System.out.println("==================================");
+        System.out.println("1 - Add Restaurant");
+        System.out.println("2 - View Restaurant");
+        System.out.println("3 - Update Restaurant");
+        System.out.println("4 - Delete Restaurant");
+        System.out.println("5 - Back");
+
+        int options = selectOption(scanner);
+
+        switch (options) {
+            case 1:
+                addRestaurant(restaurants, scanner);
+                break;
+            case 2:
+                viewRestaurant(restaurants);
+                break;
+            case 3:
+                System.out.println("Update Restaurant");
+                break;
+            case 4:
+                System.out.println("Delete Restaurant");
+                break;
+            case 5:
+                displayMainMenu(scanner);
+                break;
+            default:
+                System.out.println("Invalid Option: Restaurant Menu❌");
+                break;
+        }
+    }
+
+    //add restaurant
+    public static void addRestaurant(ArrayList<Restaurant> restaurants, Scanner scanner) {
+        System.out.println("==== Add Restaurant ====");
+        System.out.println();
+        System.out.println("Enter Restaurant Name: ");
+        String name = scanner.nextLine();
+        System.out.println("Enter Delivery Fee: ");
+        double deliveryFee = scanner.nextDouble();
+        scanner.nextLine();
+        System.out.println("Coffee Shop or Fastfood? ");
+        String type = scanner.nextLine();
+
+        switch (type.toLowerCase()) {
+            case "coffeeshop":
+                System.out.println("Enter Drink Size: ");
+                String drinkSize = scanner.nextLine();
+                restaurants.add(new CoffeeShop(name, deliveryFee, drinkSize));
+                System.out.println("Successfully Added Coffee Shop ✅");
+                break;
+            case "fastfood":
+                System.out.println("Enter Cooking Time: ");
+                String cookingTime = scanner.nextLine();
+                restaurants.add(new FastFood(name, deliveryFee, cookingTime));
+                System.out.println("Successfully Added Fast Food ✅");
+                break;
+            default:
+                System.out.println("Type Not Found❌");
+                break;
+        }
+    }
+
+    //View Restaurant
+    public static void viewRestaurant(ArrayList<Restaurant> restaurants) {
+        System.out.println("==== View Restaurants ====");
+        System.out.println();
+        for (int i = 0; i < restaurants.size(); i++) {
+            System.out.println((i + 1) + ". " + restaurants.get(i).getRestaurantName());
+        }
+    }
+
+
 }
