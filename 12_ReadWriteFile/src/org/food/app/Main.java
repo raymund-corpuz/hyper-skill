@@ -7,6 +7,7 @@ import org.food.restaurant.FastFood;
 import org.food.restaurant.Restaurant;
 
 import java.lang.reflect.Array;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -40,8 +41,7 @@ public class Main {
                     restaurantManagement(scanner, restaurants);
                     break;
                 case 3:
-//                    orderManagement();
-                    System.out.println("==== ORDER MANAGEMENT ====");
+                    orderManagement(restaurants, customers, orders, scanner);
                     break;
                 case 4:
                     System.out.println("Exiting the Program...");
@@ -313,5 +313,120 @@ public class Main {
         System.out.println("Successfully Deleted: " + restaurants.get(choice).getRestaurantName());
         restaurants.remove(choice);
     }
+
+    //Order Management
+    public static void orderManagement(ArrayList<Restaurant> restaurants, ArrayList<Customer> customers, ArrayList<OrderRecord> records, Scanner scanner) {
+        System.out.println("=========================================");
+        System.out.println("           ORDER MANAGEMENT              ");
+        System.out.println("=========================================");
+        System.out.println("1 - Place Order");
+        System.out.println("2 - View Order History");
+        System.out.println("3 - Cancel Order");
+        System.out.println("4 - Save Orders to File");
+        System.out.println("5 - Read Orders from File");
+        System.out.println("6 - Back");
+
+        int choice = selectOption(scanner);
+
+        switch (choice) {
+            case 1:
+                placeOrder(restaurants, customers, records, scanner);
+                break;
+            case 2:
+                System.out.println("==== View Order History ====");
+                break;
+            case 3:
+                System.out.println("==== Cancel Order ====");
+                break;
+            case 4:
+                System.out.println("==== Save Orders to File ====");
+                break;
+            case 5:
+                System.out.println("==== Read Orders from File ====");
+                break;
+            case 6:
+                displayMainMenu(scanner);
+                break;
+            default:
+                System.out.println("Invalid Option ❌");
+                break;
+        }
+    }
+
+    //place Order
+    public static void placeOrder(ArrayList<Restaurant> restaurants, ArrayList<Customer> customers, ArrayList<OrderRecord> records, Scanner scanner) {
+        System.out.println("==== Place Order ====");
+        System.out.println();
+        System.out.println("Customer List: ");
+        for (int i = 0; i < customers.size(); i++) {
+            System.out.println((i + 1) + ". " + customers.get(i).getName());
+        }
+        System.out.println();
+        int choice = selectOption(scanner);
+        choice--;
+        if (choice < 0 || choice >= customers.size()) {
+            System.out.println("Customer Not Found. ❌");
+            return;
+        }
+        Customer selectedCustomer = customers.get(choice);
+        System.out.println("Restaurant List: ");
+        for (int i = 0; i < restaurants.size(); i++) {
+            System.out.println((i + 1) + ". " + restaurants.get(i).getRestaurantName());
+        }
+        System.out.println();
+        int restaurantChoice = selectOption(scanner);
+        restaurantChoice--;
+        if (restaurantChoice < 0 || restaurantChoice >= customers.size()) {
+            System.out.println("Customer Not Found. ❌");
+            return;
+        }
+        Restaurant selectedRestaurant = restaurants.get(restaurantChoice);
+        System.out.println("Enter Food: ");
+        String food = scanner.nextLine();
+
+        if (selectedRestaurant instanceof FastFood) {
+            selectedRestaurant.order();
+            records.add(new OrderRecord(selectedCustomer.getName(), selectedRestaurant.getRestaurantName(), food, selectedRestaurant.getDeliveryFee(), LocalDate.now()));
+        }
+
+        if (selectedRestaurant instanceof CoffeeShop) {
+            selectedRestaurant.order();
+            records.add(new OrderRecord(selectedCustomer.getName(), selectedRestaurant.getRestaurantName(), food, selectedRestaurant.getDeliveryFee(), LocalDate.now()));
+        }
+
+
+//        switch (type.toLowerCase()) {
+//            case "fastfood":
+//                for (int i = 0; i < restaurants.size(); i++) {
+//                    if (selectedRestaurant.getName().equalsIgnoreCase(restaurants.get(i).getRestaurantName())) {
+//                        double price = restaurants.get(i).getDeliveryFee();
+//                        restaurants.get(i).order();
+//                        OrderRecord orderRecord = new OrderRecord(selectedCustomer.getName(), selectedRestaurant.getName(), food, price, LocalDate.now());
+//                        records.add(orderRecord);
+//                        break;
+//                    }
+//                }
+//            case "coffeeshop":
+//                for (int i = 0; i < restaurants.size(); i++) {
+//                    if (selectedRestaurant.getName().equalsIgnoreCase(restaurants.get(i).getRestaurantName())) {
+//                        double price = restaurants.get(i).getDeliveryFee();
+//                        restaurants.get(i).order();
+//                        OrderRecord orderRecord = new OrderRecord(selectedCustomer.getName(), selectedRestaurant.getName(), food, price, LocalDate.now());
+//                        records.add(orderRecord);
+//                        break;
+//                    }
+//                }
+//            default:
+//                System.out.println("Type Not Found. ❌");
+//                break;
+//        }
+
+
+    }
+    //view Order history
+    //cancel order
+    //save orders to file
+    //read orders from file
+
 
 }

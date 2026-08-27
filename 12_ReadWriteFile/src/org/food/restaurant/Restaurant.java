@@ -1,6 +1,6 @@
 package org.food.restaurant;
 
-public abstract class Restaurant {
+public abstract class Restaurant implements Deliverable {
     private String restaurantName;
     private double deliveryFee;
 
@@ -26,5 +26,11 @@ public abstract class Restaurant {
 
     public void setDeliveryFee(double deliveryFee) {
         this.deliveryFee = deliveryFee;
+    }
+
+
+    @Override
+    public void order() {
+
     }
 }
