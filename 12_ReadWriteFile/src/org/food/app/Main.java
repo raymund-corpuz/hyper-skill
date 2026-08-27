@@ -6,6 +6,7 @@ import org.food.restaurant.CoffeeShop;
 import org.food.restaurant.FastFood;
 import org.food.restaurant.Restaurant;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -205,10 +206,10 @@ public class Main {
                 viewRestaurant(restaurants);
                 break;
             case 3:
-                System.out.println("Update Restaurant");
+                updateRestaurant(restaurants, scanner);
                 break;
             case 4:
-                System.out.println("Delete Restaurant");
+                deleteRestaurant(restaurants, scanner);
                 break;
             case 5:
                 displayMainMenu(scanner);
@@ -259,5 +260,58 @@ public class Main {
         }
     }
 
+
+    //Update Restaurant
+    public static void updateRestaurant(ArrayList<Restaurant> restaurants, Scanner scanner) {
+        viewRestaurant(restaurants);
+        System.out.print("==== Update Restaurant ====");
+        System.out.println();
+        System.out.println();
+        int choice = selectOption(scanner);
+        choice--;
+        if (choice < 0 || choice >= restaurants.size()) {
+            System.out.println("Restaurant Not Found. ❌");
+            return;
+        }
+        System.out.print("Enter Restaurant Name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter Delivery Fee: ");
+        double deliveryFee = scanner.nextDouble();
+        scanner.nextLine();
+        System.out.print("Enter Restaurant Type: (FastFood / CoffeeShop");
+        String type = scanner.nextLine();
+
+        switch (type.toLowerCase()) {
+            case "fastfood":
+                System.out.print("Enter Cooking Time: ");
+                String cookingTime = scanner.nextLine();
+                restaurants.set(choice, new FastFood(name, deliveryFee, cookingTime));
+                System.out.println("Successfully Updated: " + restaurants.get(choice).getRestaurantName());
+                break;
+            case "coffeeshop":
+                System.out.print("Enter Drink Size: ");
+                String drinkSize = scanner.nextLine();
+                restaurants.set(choice, new CoffeeShop(name, deliveryFee, drinkSize));
+                System.out.println("Successfully Updated: " + restaurants.get(choice).getRestaurantName());
+                break;
+            default:
+                System.out.println("Type Not Found. ❌");
+                break;
+        }
+    }
+
+    //delete Restaurant
+    public static void deleteRestaurant(ArrayList<Restaurant> restaurants, Scanner scanner) {
+        System.out.println("==== Delete Restaurant ====");
+        System.out.println();
+        int choice = selectOption(scanner);
+        choice--;
+        if (choice < 0 || choice >= restaurants.size()) {
+            System.out.println("Restaurant Not Found. ❌");
+            return;
+        }
+        System.out.println("Successfully Deleted: " + restaurants.get(choice).getRestaurantName());
+        restaurants.remove(choice);
+    }
 
 }
