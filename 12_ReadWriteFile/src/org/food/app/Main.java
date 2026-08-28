@@ -6,6 +6,9 @@ import org.food.restaurant.CoffeeShop;
 import org.food.restaurant.FastFood;
 import org.food.restaurant.Restaurant;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,6 +18,8 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        File file = new File("C:\\Users\\raymu\\OneDrive\\Desktop\\hyper-skill\\12_ReadWriteFile\\src\\org\\food\\Order.txt");
+
 
         ArrayList<Customer> customers = new ArrayList<>();
         ArrayList<Restaurant> restaurants = new ArrayList<>();
@@ -41,7 +46,7 @@ public class Main {
                     restaurantManagement(scanner, restaurants);
                     break;
                 case 3:
-                    orderManagement(restaurants, customers, orders, scanner);
+                    orderManagement(restaurants, customers, orders, file, scanner);
                     break;
                 case 4:
                     System.out.println("Exiting the Program...");
@@ -315,7 +320,7 @@ public class Main {
     }
 
     //Order Management
-    public static void orderManagement(ArrayList<Restaurant> restaurants, ArrayList<Customer> customers, ArrayList<OrderRecord> records, Scanner scanner) {
+    public static void orderManagement(ArrayList<Restaurant> restaurants, ArrayList<Customer> customers, ArrayList<OrderRecord> records, File file, Scanner scanner) {
         System.out.println("=========================================");
         System.out.println("           ORDER MANAGEMENT              ");
         System.out.println("=========================================");
@@ -329,6 +334,8 @@ public class Main {
         int choice = selectOption(scanner);
         System.out.println();
 
+        OrderRecord newRecord = null;
+
         switch (choice) {
             case 1:
                 placeOrder(restaurants, customers, records, scanner);
@@ -340,7 +347,8 @@ public class Main {
                 cancelOrder(records, scanner);
                 break;
             case 4:
-                System.out.println("==== Save Orders to File ====");
+                saveOrderFile(file, records);
+                //System.out.println("==== Save Orders to File ====");
                 break;
             case 5:
                 System.out.println("==== Read Orders from File ====");
@@ -385,15 +393,12 @@ public class Main {
         System.out.println("Enter Food: ");
         String food = scanner.nextLine();
 
-        if (selectedRestaurant instanceof FastFood) {
-            selectedRestaurant.order();
-            records.add(new OrderRecord(selectedCustomer.getName(), selectedRestaurant.getRestaurantName(), food, selectedRestaurant.getDeliveryFee(), LocalDate.now()));
-        }
-
-        if (selectedRestaurant instanceof CoffeeShop) {
-            selectedRestaurant.order();
-            records.add(new OrderRecord(selectedCustomer.getName(), selectedRestaurant.getRestaurantName(), food, selectedRestaurant.getDeliveryFee(), LocalDate.now()));
-        }
+        selectedRestaurant.order();
+        records.add(new OrderRecord(selectedCustomer.getName(), selectedRestaurant.getRestaurantName(), food, selectedRestaurant.getDeliveryFee(), LocalDate.now()));
+//        if (selectedRestaurant instanceof CoffeeShop) {
+//            selectedRestaurant.order();
+//            return new OrderRecord(selectedCustomer.getName(), selectedRestaurant.getRestaurantName(), food, selectedRestaurant.getDeliveryFee(), LocalDate.now());
+//        }
     }
 
     //view Order history
@@ -440,10 +445,17 @@ public class Main {
                 records.remove(i);
             }
         }
-
-
     }
+
     //save orders to file
+    public static void saveOrderFile(File file, ArrayList<OrderRecord> records) {
+        try (FileWriter writer = new FileWriter(file)) {
+            System.out.println("Successfully Save the Record.✅");
+            writer.write(String.valueOf(records));
+        } catch (IOException e) {
+            System.out.println("An exception occurred: " + e.getMessage());
+        }
+    }
     //read orders from file
 
 
