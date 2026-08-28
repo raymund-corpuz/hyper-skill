@@ -327,16 +327,17 @@ public class Main {
         System.out.println("6 - Back");
 
         int choice = selectOption(scanner);
+        System.out.println();
 
         switch (choice) {
             case 1:
                 placeOrder(restaurants, customers, records, scanner);
                 break;
             case 2:
-                System.out.println("==== View Order History ====");
+                viewOrderHistory(records);
                 break;
             case 3:
-                System.out.println("==== Cancel Order ====");
+                cancelOrder(records, scanner);
                 break;
             case 4:
                 System.out.println("==== Save Orders to File ====");
@@ -393,38 +394,55 @@ public class Main {
             selectedRestaurant.order();
             records.add(new OrderRecord(selectedCustomer.getName(), selectedRestaurant.getRestaurantName(), food, selectedRestaurant.getDeliveryFee(), LocalDate.now()));
         }
+    }
 
+    //view Order history
+    public static void viewOrderHistory(ArrayList<OrderRecord> records) {
+        if (records.isEmpty()) {
+            System.out.println("Order List is Empty.❌");
+            return;
+        }
+        System.out.println("==== Order History ====");
+        System.out.println();
+        for (int i = 0; i < records.size(); i++) {
+            System.out.println((i + 1) + ".");
+            System.out.println("Customer Name: " + records.get(i).customerName());
+            System.out.println("Restaurant Name: " + records.get(i).restaurantName());
+            System.out.println("Food: " + records.get(i).food());
+            System.out.println("Total Price: " + records.get(i).price());
+            System.out.println("Order Date: " + records.get(i).date());
+            System.out.println();
+        }
+    }
 
-//        switch (type.toLowerCase()) {
-//            case "fastfood":
-//                for (int i = 0; i < restaurants.size(); i++) {
-//                    if (selectedRestaurant.getName().equalsIgnoreCase(restaurants.get(i).getRestaurantName())) {
-//                        double price = restaurants.get(i).getDeliveryFee();
-//                        restaurants.get(i).order();
-//                        OrderRecord orderRecord = new OrderRecord(selectedCustomer.getName(), selectedRestaurant.getName(), food, price, LocalDate.now());
-//                        records.add(orderRecord);
-//                        break;
-//                    }
-//                }
-//            case "coffeeshop":
-//                for (int i = 0; i < restaurants.size(); i++) {
-//                    if (selectedRestaurant.getName().equalsIgnoreCase(restaurants.get(i).getRestaurantName())) {
-//                        double price = restaurants.get(i).getDeliveryFee();
-//                        restaurants.get(i).order();
-//                        OrderRecord orderRecord = new OrderRecord(selectedCustomer.getName(), selectedRestaurant.getName(), food, price, LocalDate.now());
-//                        records.add(orderRecord);
-//                        break;
-//                    }
-//                }
-//            default:
-//                System.out.println("Type Not Found. ❌");
-//                break;
-//        }
+    //cancel order
+    public static void cancelOrder(ArrayList<OrderRecord> records, Scanner scanner) {
+        System.out.println("==== Cancel Order ====");
+        System.out.println();
+        viewOrderHistory(records);
+        int orderSelected = selectOption(scanner);
+        orderSelected--;
+
+        if (orderSelected < 0 || orderSelected >= records.size()) {
+            System.out.println("Order Not Found. ❌");
+            return;
+        }
+
+        for (int i = 0; i < records.size(); i++) {
+            if (orderSelected == i) {
+                System.out.println("Customer Name: " + records.get(i).customerName());
+                System.out.println("Restaurant Name: " + records.get(i).restaurantName());
+                System.out.println("Food: " + records.get(i).food());
+                System.out.println("Total Price: " + records.get(i).price());
+                System.out.println("Order Date: " + records.get(i).date());
+                System.out.println("Order Successfully Canceled.✅");
+                System.out.println();
+                records.remove(i);
+            }
+        }
 
 
     }
-    //view Order history
-    //cancel order
     //save orders to file
     //read orders from file
 

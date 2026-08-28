@@ -29,6 +29,6 @@ public class FastFood extends Restaurant implements Deliverable {
 
     @Override
     public void cancel() {
-
+        System.out.println("Order Canceled");
     }
 }

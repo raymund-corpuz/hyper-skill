@@ -33,4 +33,9 @@ public abstract class Restaurant implements Deliverable {
     public void order() {
 
     }
+
+    @Override
+    public void cancel() {
+
+    }
 }
