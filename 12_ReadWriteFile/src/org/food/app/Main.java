@@ -6,10 +6,7 @@ import org.food.restaurant.CoffeeShop;
 import org.food.restaurant.FastFood;
 import org.food.restaurant.Restaurant;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.lang.reflect.Array;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -35,9 +32,10 @@ public class Main {
         restaurants.add(new CoffeeShop("Barako Coffee", 80, "Large"));
 
         boolean running = true;
-        int menuSelection = displayMainMenu(scanner);
 
         while (running) {
+            displayMainMenu();
+            int menuSelection = selectOption(scanner);
             switch (menuSelection) {
                 case 1:
                     customerManagement(scanner, customers);
@@ -67,7 +65,7 @@ public class Main {
         return choice;
     }
 
-    public static int displayMainMenu(Scanner scanner) {
+    public static void displayMainMenu() {
         System.out.println("============================");
         System.out.println("           MAIN MENU        ");
         System.out.println("============================");
@@ -77,7 +75,6 @@ public class Main {
         System.out.println("4 - Exit");
         System.out.println();
 
-        return selectOption(scanner);
     }
 
     //customer Management
@@ -106,7 +103,7 @@ public class Main {
                 deleteCustomer(customers, scanner);
                 break;
             case 5:
-                displayMainMenu(scanner);
+                displayMainMenu();
                 break;
             default:
                 System.out.println("Invalid Selection.❌");
@@ -217,7 +214,7 @@ public class Main {
                 deleteRestaurant(restaurants, scanner);
                 break;
             case 5:
-                displayMainMenu(scanner);
+                displayMainMenu();
                 break;
             default:
                 System.out.println("Invalid Option: Restaurant Menu❌");
@@ -334,8 +331,6 @@ public class Main {
         int choice = selectOption(scanner);
         System.out.println();
 
-        OrderRecord newRecord = null;
-
         switch (choice) {
             case 1:
                 placeOrder(restaurants, customers, records, scanner);
@@ -348,13 +343,12 @@ public class Main {
                 break;
             case 4:
                 saveOrderFile(file, records);
-                //System.out.println("==== Save Orders to File ====");
                 break;
             case 5:
-                System.out.println("==== Read Orders from File ====");
+                readOrderFile(file);
                 break;
             case 6:
-                displayMainMenu(scanner);
+                displayMainMenu();
                 break;
             default:
                 System.out.println("Invalid Option ❌");
@@ -395,10 +389,6 @@ public class Main {
 
         selectedRestaurant.order();
         records.add(new OrderRecord(selectedCustomer.getName(), selectedRestaurant.getRestaurantName(), food, selectedRestaurant.getDeliveryFee(), LocalDate.now()));
-//        if (selectedRestaurant instanceof CoffeeShop) {
-//            selectedRestaurant.order();
-//            return new OrderRecord(selectedCustomer.getName(), selectedRestaurant.getRestaurantName(), food, selectedRestaurant.getDeliveryFee(), LocalDate.now());
-//        }
     }
 
     //view Order history
@@ -456,7 +446,19 @@ public class Main {
             System.out.println("An exception occurred: " + e.getMessage());
         }
     }
+
     //read orders from file
+    public static void readOrderFile(File file) {
+
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNext()) {
+                System.out.println(scanner.nextLine() + " ");
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File Not Found:  " + e.getMessage());
+        }
+    }
 
 
 }
