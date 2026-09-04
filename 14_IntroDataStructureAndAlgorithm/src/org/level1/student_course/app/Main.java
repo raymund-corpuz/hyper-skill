@@ -4,10 +4,7 @@ import org.level1.student_course.course.Course;
 import org.level1.student_course.people.Student;
 import org.level1.student_course.record.RegistrationRecord;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -129,12 +126,13 @@ public class Main {
                     searchingStudentAndCourse(students, courses, scanner);
                     break;
                 case 6:
-                    System.out.println("Sort");
+                    sortingStudentAndCourse(students, courses, scanner);
+                    break;
                 case 7:
                     System.out.println("View Student Schedule");
                     break;
                 case 8:
-                    System.out.println("Registration History");
+                    registerStudent(students, courses, registrationHistory, scanner);
                     break;
                 case 9:
                     System.out.println("Exiting the Program....");
@@ -313,7 +311,120 @@ public class Main {
 
     //---------- Sort ---------------------
     public static void sortingStudentAndCourse(List<Student> students, List<Course> courses, Scanner scanner) {
+        System.out.println("==== Sort Student ====");
+        System.out.println();
+        System.out.println("1 - Sort Student By Name: ");
+        System.out.println("2 - Sort Student By ID: ");
+        System.out.println("3 - Sort Student By Age: ");
+        System.out.println("4 - Sort Student By Course: ");
 
+        int options = optionSelection(scanner);
+
+        switch (options) {
+            case 1:
+                System.out.println("==== Students Sorted By Name ====");
+                System.out.println();
+                students.sort(Comparator.comparing(Student::getName));
+                for (Student student : students) {
+                    System.out.println(student.getName());
+                }
+                System.out.println();
+                break;
+            case 2:
+                System.out.println("==== Students Sorted By ID ====");
+                System.out.println();
+                students.sort(Comparator.comparing(Student::getStudentId));
+                for (Student student : students) {
+                    System.out.println(student.getStudentId() + " | " + student.getName());
+                }
+                System.out.println();
+                break;
+            case 3:
+                System.out.println("==== Student Sorted By Age ====");
+                System.out.println();
+                students.sort(Comparator.comparing(Student::getAge));
+                for (Student student : students) {
+                    System.out.println(student.getName() + " | " + student.getAge());
+                }
+                System.out.println();
+                break;
+            case 4:
+                System.out.println("==== Student Sorted By Courses ====");
+                System.out.println();
+                students.sort(Comparator.comparing(Student::getCourse));
+                for (Student student : students) {
+                    System.out.println(student.getCourse() + " | " + student.getName());
+                }
+                System.out.println();
+                break;
+            default:
+                System.out.println("Invalid Options. ❌");
+                break;
+        }
+    }
+
+
+    //---------- Register Students ---------------
+    public static void registerStudent(List<Student> students, List<Course> courses, LinkedList<RegistrationRecord> records, Scanner scanner) {
+        System.out.println("==== Register Student ====");
+        System.out.println();
+        RegistrationRecord newRecord = null;
+        System.out.println("Enter Student ID: ");
+        String studentId = scanner.nextLine();
+        String name = "";
+
+        for (Student student : students) {
+            if (student.getStudentId().equalsIgnoreCase(studentId)) {
+                System.out.println("Student: ");
+                name = student.getName();
+                System.out.println(student.getName());
+            }
+        }
+        System.out.println();
+        System.out.println("Available Courses: ");
+        System.out.println();
+        System.out.println("1. CS101 - Java Programming");
+        System.out.println("2. CS102 - Data Structures");
+        System.out.println("3. DB101 - Database System");
+        System.out.println("4. NET101 - Computer Networking");
+        System.out.println("5. WEB101 - Web Development");
+
+        System.out.println();
+
+        int options = optionSelection(scanner);
+
+        switch (options) {
+            case 1:
+                newRecord = new RegistrationRecord(studentId, name, "CS101", "Java Programming", "Registered");
+                System.out.println("Registration Successful✅");
+                records.add(newRecord);
+                break;
+            case 2:
+                newRecord = new RegistrationRecord(studentId, name, "CS102", "Data Structures", "Registered");
+                System.out.println("Registration Successful✅");
+                records.add(newRecord);
+                break;
+            case 3:
+                newRecord = new RegistrationRecord(studentId, name, "DB101", "Data System", "Registered");
+                System.out.println("Registration Successful✅");
+                records.add(newRecord);
+                break;
+            case 4:
+                newRecord = new RegistrationRecord(studentId, name, "NET101", "Computer Networking", "Registered");
+                System.out.println("Registration Successful✅");
+                records.add(newRecord);
+                break;
+            case 5:
+                newRecord = new RegistrationRecord(studentId, name, "WEB101", "Web Development", "Registered");
+                System.out.println("Registration Successful✅");
+                records.add(newRecord);
+                break;
+            default:
+                System.out.println("Invalid Option.❌");
+                records.add(newRecord);
+                break;
+
+        }
     }
 }
 
