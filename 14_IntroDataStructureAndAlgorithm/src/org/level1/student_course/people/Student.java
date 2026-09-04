@@ -1,39 +1,52 @@
 package org.level1.student_course.people;
 
+import org.level1.student_course.course.Course;
+
+import java.util.ArrayList;
+
 public class Student {
     private String studentId;
     private String name;
     private int age;
     private String email;
-    private String course;
+    private ArrayList<Course> registeredCourses;
 
-    public Student(String studentId, String name, int age, String email, String course) {
+    public Student(String studentId, String name, int age, String email) {
         this.studentId = studentId;
         this.name = name;
         this.age = age;
         this.email = email;
-        this.course = course;
+        this.registeredCourses = new ArrayList<>();
     }
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "studentId='" + studentId + '\'' +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", email='" + email + '\'' +
-                ", course='" + course + '\'' +
-                '}';
+    //Register a course
+    public void registerCourse(Course course) {
+        registeredCourses.add(course);
+    }
+
+    //Drop a course
+    public void dropCourse(Course course) {
+        registeredCourses.remove(course);
     }
 
     public void displayProfile() {
         System.out.println("ID: " + studentId);
         System.out.println("Name: " + name);
         System.out.println("Age: " + age);
-        System.out.println("Program: " + course);
+        System.out.println("Email: " + email);
+        System.out.println("Registerd Courses: ");
+
+        if (registeredCourses.isEmpty()) {
+            System.out.println("No Registered Courses.❌");
+        } else {
+            for (Course course : registeredCourses) {
+                System.out.println(course.getCourseId() + " - " + course.getCourseName());
+            }
+        }
     }
 
     //getters & setters
+
     public String getStudentId() {
         return studentId;
     }
@@ -42,20 +55,12 @@ public class Student {
         this.studentId = studentId;
     }
 
-    public String getName() {
-        return name;
+    public ArrayList<Course> getRegisteredCourses() {
+        return registeredCourses;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
+    public void setRegisteredCourses(ArrayList<Course> registeredCourses) {
+        this.registeredCourses = registeredCourses;
     }
 
     public String getEmail() {
@@ -66,11 +71,19 @@ public class Student {
         this.email = email;
     }
 
-    public String getCourse() {
-        return course;
+    public int getAge() {
+        return age;
     }
 
-    public void setCourse(String course) {
-        this.course = course;
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

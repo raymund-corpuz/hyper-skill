@@ -26,7 +26,35 @@ public class Course {
                 '}';
     }
 
+    //Register a student
+    public boolean registerStudent() {
+        if (availableSlots <= 0) {
+            return false;
+        }
+        availableSlots--;
+        return true;
+    }
+
+    //Drop a student
+    public boolean dropStudent() {
+        if (availableSlots >= capacity) {
+            return false;
+        }
+        availableSlots++;
+        return true;
+    }
+
+    //Display Course
+    public void displayCourse() {
+        System.out.println("Course ID: " + courseId);
+        System.out.println("Course Name: " + courseName);
+        System.out.println("Instructor: " + instructor);
+        System.out.println("Capacity: " + capacity);
+        System.out.println("Available Slots: " + availableSlots);
+    }
+
     //getters & setters
+
 
     public String getCourseId() {
         return courseId;
@@ -40,6 +68,9 @@ public class Course {
         return availableSlots;
     }
 
+    public void setAvailableSlots(int availableSlots) {
+        this.availableSlots = availableSlots;
+    }
 
     public int getCapacity() {
         return capacity;
