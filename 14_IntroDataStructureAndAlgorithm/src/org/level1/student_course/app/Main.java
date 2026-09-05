@@ -27,40 +27,37 @@ public class Main {
                 "STU-001",
                 "Raymund Corpuz",
                 31,
-                "raymund@gmail.com",
-                "Computer Science"
+                "raymund@gmail.com"
+
         ));
 
         students.add(new Student(
                 "STU-002",
                 "Alice Santos",
                 22,
-                "alice@gmail.com",
-                "Information Technology"
+                "alice@gmail.com"
+
         ));
 
         students.add(new Student(
                 "STU-003",
                 "Michael Cruz",
                 24,
-                "michael@gmail.com",
-                "Computer Science"
+                "michael@gmail.com"
         ));
 
         students.add(new Student(
                 "STU-004",
                 "Sophia Reyes",
                 21,
-                "sophia@gmail.com",
-                "Information Technology"
+                "sophia@gmail.com"
         ));
 
         students.add(new Student(
                 "STU-005",
                 "John Garcia",
                 23,
-                "john@gmail.com",
-                "Computer Science"
+                "john@gmail.com"
         ));
 
         //-------------- Courses ----------------------
@@ -117,7 +114,7 @@ public class Main {
                     System.out.println("Course Management");
                     break;
                 case 3:
-                    System.out.println("Register Student");
+                    registrationManagement(students, courses, registrationHistory, scanner);
                     break;
                 case 4:
                     System.out.println("Drop Course");
@@ -129,10 +126,10 @@ public class Main {
                     sortingStudentAndCourse(students, courses, scanner);
                     break;
                 case 7:
-                    System.out.println("View Student Schedule");
+                    viewRegistrationHistory(registrationHistory);
                     break;
                 case 8:
-                    registerStudent(students, courses, registrationHistory, scanner);
+                    System.out.println("Registration History");
                     break;
                 case 9:
                     System.out.println("Exiting the Program....");
@@ -316,7 +313,6 @@ public class Main {
         System.out.println("1 - Sort Student By Name: ");
         System.out.println("2 - Sort Student By ID: ");
         System.out.println("3 - Sort Student By Age: ");
-        System.out.println("4 - Sort Student By Course: ");
 
         int options = optionSelection(scanner);
 
@@ -348,15 +344,6 @@ public class Main {
                 }
                 System.out.println();
                 break;
-            case 4:
-                System.out.println("==== Student Sorted By Courses ====");
-                System.out.println();
-                students.sort(Comparator.comparing(Student::getCourse));
-                for (Student student : students) {
-                    System.out.println(student.getCourse() + " | " + student.getName());
-                }
-                System.out.println();
-                break;
             default:
                 System.out.println("Invalid Options. ❌");
                 break;
@@ -364,67 +351,63 @@ public class Main {
     }
 
 
-    //---------- Register Students ---------------
-    public static void registerStudent(List<Student> students, List<Course> courses, LinkedList<RegistrationRecord> records, Scanner scanner) {
+    //---------- Registration Management ---------------
+    public static LinkedList<RegistrationRecord> registrationManagement(List<Student> students, List<Course> courses, LinkedList<RegistrationRecord> registrationHistory, Scanner scanner) {
         System.out.println("==== Register Student ====");
         System.out.println();
-        RegistrationRecord newRecord = null;
         System.out.println("Enter Student ID: ");
         String studentId = scanner.nextLine();
-        String name = "";
 
-        for (Student student : students) {
-            if (student.getStudentId().equalsIgnoreCase(studentId)) {
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getStudentId().equalsIgnoreCase(studentId)) {
                 System.out.println("Student: ");
-                name = student.getName();
-                System.out.println(student.getName());
+                System.out.println(students.get(i).getName());
             }
         }
+
         System.out.println();
         System.out.println("Available Courses: ");
         System.out.println();
-        System.out.println("1. CS101 - Java Programming");
-        System.out.println("2. CS102 - Data Structures");
-        System.out.println("3. DB101 - Database System");
-        System.out.println("4. NET101 - Computer Networking");
-        System.out.println("5. WEB101 - Web Development");
-
-        System.out.println();
-
-        int options = optionSelection(scanner);
-
-        switch (options) {
-            case 1:
-                newRecord = new RegistrationRecord(studentId, name, "CS101", "Java Programming", "Registered");
-                System.out.println("Registration Successful✅");
-                records.add(newRecord);
-                break;
-            case 2:
-                newRecord = new RegistrationRecord(studentId, name, "CS102", "Data Structures", "Registered");
-                System.out.println("Registration Successful✅");
-                records.add(newRecord);
-                break;
-            case 3:
-                newRecord = new RegistrationRecord(studentId, name, "DB101", "Data System", "Registered");
-                System.out.println("Registration Successful✅");
-                records.add(newRecord);
-                break;
-            case 4:
-                newRecord = new RegistrationRecord(studentId, name, "NET101", "Computer Networking", "Registered");
-                System.out.println("Registration Successful✅");
-                records.add(newRecord);
-                break;
-            case 5:
-                newRecord = new RegistrationRecord(studentId, name, "WEB101", "Web Development", "Registered");
-                System.out.println("Registration Successful✅");
-                records.add(newRecord);
-                break;
-            default:
-                System.out.println("Invalid Option.❌");
-                records.add(newRecord);
-                break;
-
+        for (int i = 0; i < courses.size(); i++) {
+            System.out.println((i + 1) + ". " + courses.get(i).getCourseId() + " - " + courses.get(i).getCourseName());
         }
+        System.out.println();
+        int options = optionSelection(scanner);
+        options--;
+        if (options < 0 || options >= courses.size()) {
+            System.out.println("Course Not Found.❌");
+            return null;
+        }
+
+        for (Student student : students) {
+            if (student.getStudentId().equalsIgnoreCase(studentId)) {
+                Course selectedCourse = courses.get(options);
+                System.out.println();
+                student.registerCourse(selectedCourse);
+                registrationHistory.addLast(new RegistrationRecord(studentId, student.getName(), selectedCourse.getCourseId(), selectedCourse.getCourseName(), "REGISTERED"));
+            }
+        }
+        return registrationHistory;
+    }
+
+    // -------------- View Registration History ---------------
+    public static void viewRegistrationHistory(LinkedList<RegistrationRecord> registrationRecords) {
+        System.out.println("==== Registration History ====");
+        System.out.println();
+        if (registrationRecords.isEmpty()) {
+            System.out.println("Registration History: No Record Found. ❌");
+            return;
+        }
+
+        for (RegistrationRecord record : registrationRecords) {
+            System.out.println("Student ID: " + record.studentId());
+            System.out.println("Student Name: " + record.studentName());
+            System.out.println("Course ID: " + record.courseId());
+            System.out.println("Course Name: " + record.courseName());
+            System.out.println("Status: " + record.action());
+            System.out.println();
+        }
+
     }
 }
 

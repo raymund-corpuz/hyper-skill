@@ -15,17 +15,6 @@ public class Course {
         this.availableSlots = availableSlots;
     }
 
-    @Override
-    public String toString() {
-        return "Course{" +
-                "courseId='" + courseId + '\'' +
-                ", courseName='" + courseName + '\'' +
-                ", instructor='" + instructor + '\'' +
-                ", capacity=" + capacity +
-                ", availableSlots=" + availableSlots +
-                '}';
-    }
-
     //Register a student
     public boolean registerStudent() {
         if (availableSlots <= 0) {

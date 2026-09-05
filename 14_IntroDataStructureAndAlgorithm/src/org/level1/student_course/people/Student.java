@@ -21,6 +21,7 @@ public class Student {
 
     //Register a course
     public void registerCourse(Course course) {
+        System.out.println("Successfully Registered.✅");
         registeredCourses.add(course);
     }
 
