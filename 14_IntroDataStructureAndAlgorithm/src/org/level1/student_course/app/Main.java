@@ -105,19 +105,18 @@ public class Main {
         while (running) {
             displayMainMenu();
             int options = optionSelection(scanner);
-
             switch (options) {
                 case 1:
-                    System.out.println("Student Management");
+                    studentManagement(scanner);
                     break;
                 case 2:
-                    System.out.println("Course Management");
+                    courseManagement(scanner);
                     break;
                 case 3:
                     registrationManagement(students, courses, registrationHistory, scanner);
                     break;
                 case 4:
-                    System.out.println("Drop Course");
+                    dropCourse(students, courses, scanner);
                     break;
                 case 5:
                     searchingStudentAndCourse(students, courses, scanner);
@@ -126,10 +125,10 @@ public class Main {
                     sortingStudentAndCourse(students, courses, scanner);
                     break;
                 case 7:
-                    viewRegistrationHistory(registrationHistory);
+                    System.out.println("Student Schedule");
                     break;
                 case 8:
-                    System.out.println("Registration History");
+                    viewRegistrationHistory(registrationHistory);
                     break;
                 case 9:
                     System.out.println("Exiting the Program....");
@@ -213,7 +212,7 @@ public class Main {
     }
 
     //---------- Course Management ----------------
-    public static void viewManagement(Scanner scanner) {
+    public static void courseManagement(Scanner scanner) {
         System.out.println("==== Course Management ====");
         System.out.println();
         System.out.println("1 - Add Course");
@@ -250,7 +249,92 @@ public class Main {
         }
     }
 
-    //---------- Registration Management -------------
+    //---------- Registration Management ---------------
+    public static void registrationManagement(List<Student> students, List<Course> courses, LinkedList<RegistrationRecord> registrationHistory, Scanner scanner) {
+        System.out.println("=============================================");
+        System.out.println("                 Register Student            ");
+        System.out.println("=============================================");
+        System.out.println();
+        System.out.println("Enter Student ID: ");
+        String studentId = scanner.nextLine();
+
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getStudentId().equalsIgnoreCase(studentId)) {
+                System.out.println("Student: ");
+                System.out.println(students.get(i).getName());
+            }
+        }
+
+        System.out.println();
+        System.out.println("Available Courses: ");
+        System.out.println();
+        for (int i = 0; i < courses.size(); i++) {
+            System.out.println((i + 1) + ". " + courses.get(i).getCourseId() + " - " + courses.get(i).getCourseName());
+        }
+        System.out.println();
+        System.out.println("Select from Available Courses");
+        System.out.println("----------------------------------------");
+        int options = optionSelection(scanner);
+        options--;
+        if (options < 0 || options >= courses.size()) {
+            System.out.println("Course Not Found.❌");
+            return;
+        }
+
+        for (Student student : students) {
+            if (student.getStudentId().equalsIgnoreCase(studentId)) {
+                Course selectedCourse = courses.get(options);
+                System.out.println();
+                student.registerCourse(selectedCourse);
+                registrationHistory.addLast(new RegistrationRecord(studentId, student.getName(), selectedCourse.getCourseId(), selectedCourse.getCourseName(), "REGISTERED"));
+            }
+        }
+    }
+
+    // -------------- Drop Course ----------------------------
+    public static void dropCourse(List<Student> students, List<Course> courses, Scanner scanner) {
+        System.out.println("========================================");
+        System.out.println("              DROP COURSE               ");
+        System.out.println("========================================");
+        System.out.println();
+        System.out.println("Enter Student ID: ");
+        String studentId = scanner.nextLine();
+        System.out.println();
+        System.out.println("Student Information");
+        System.out.println("----------------------------------------");
+        for (Student student : students) {
+            if (student.getStudentId().equalsIgnoreCase(studentId)) {
+                System.out.println("Student ID: " + student.getStudentId());
+                System.out.println("Name      : " + student.getName());
+                System.out.println("Program   : Computer Science");
+            }
+        }
+        System.out.println("Registered Courses");
+        System.out.println("-----------------------------------------");
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getStudentId().equalsIgnoreCase(studentId)) {
+                for (Course course : courses) {
+                    System.out.println(course);
+                }
+            }
+        }
+        System.out.println();
+        System.out.println("-----------------------------------------");
+        int options = optionSelection(scanner);
+        options--;
+        if (options < 0 || options >= courses.size()) {
+            System.out.println("Course Not Found.❌");
+            return;
+        }
+        Course selectedCourse = courses.get(options);
+
+        for (Student student : students) {
+            if (student.getStudentId().equalsIgnoreCase(studentId)) {
+                student.dropCourse(selectedCourse);
+                selectedCourse.dropStudent();
+            }
+        }
+    }
 
     //---------- Searching --------------------
     public static void searchingStudentAndCourse(List<Student> students, List<Course> courses, Scanner scanner) {
@@ -350,49 +434,11 @@ public class Main {
         }
     }
 
-
-    //---------- Registration Management ---------------
-    public static LinkedList<RegistrationRecord> registrationManagement(List<Student> students, List<Course> courses, LinkedList<RegistrationRecord> registrationHistory, Scanner scanner) {
-        System.out.println("==== Register Student ====");
-        System.out.println();
-        System.out.println("Enter Student ID: ");
-        String studentId = scanner.nextLine();
-
-        for (int i = 0; i < students.size(); i++) {
-            if (students.get(i).getStudentId().equalsIgnoreCase(studentId)) {
-                System.out.println("Student: ");
-                System.out.println(students.get(i).getName());
-            }
-        }
-
-        System.out.println();
-        System.out.println("Available Courses: ");
-        System.out.println();
-        for (int i = 0; i < courses.size(); i++) {
-            System.out.println((i + 1) + ". " + courses.get(i).getCourseId() + " - " + courses.get(i).getCourseName());
-        }
-        System.out.println();
-        int options = optionSelection(scanner);
-        options--;
-        if (options < 0 || options >= courses.size()) {
-            System.out.println("Course Not Found.❌");
-            return null;
-        }
-
-        for (Student student : students) {
-            if (student.getStudentId().equalsIgnoreCase(studentId)) {
-                Course selectedCourse = courses.get(options);
-                System.out.println();
-                student.registerCourse(selectedCourse);
-                registrationHistory.addLast(new RegistrationRecord(studentId, student.getName(), selectedCourse.getCourseId(), selectedCourse.getCourseName(), "REGISTERED"));
-            }
-        }
-        return registrationHistory;
-    }
-
     // -------------- View Registration History ---------------
     public static void viewRegistrationHistory(LinkedList<RegistrationRecord> registrationRecords) {
-        System.out.println("==== Registration History ====");
+        System.out.println("=============================================");
+        System.out.println("            Registration History             ");
+        System.out.println("=============================================");
         System.out.println();
         if (registrationRecords.isEmpty()) {
             System.out.println("Registration History: No Record Found. ❌");
@@ -407,7 +453,11 @@ public class Main {
             System.out.println("Status: " + record.action());
             System.out.println();
         }
-
     }
 }
+
+
+
+
+
 

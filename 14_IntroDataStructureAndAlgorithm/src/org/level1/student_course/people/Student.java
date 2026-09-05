@@ -27,6 +27,7 @@ public class Student {
 
     //Drop a course
     public void dropCourse(Course course) {
+        System.out.println("Course drop Successfully.✅");
         registeredCourses.remove(course);
     }
 
