@@ -286,6 +286,7 @@ public class Main {
                 Course selectedCourse = courses.get(options);
                 System.out.println();
                 student.registerCourse(selectedCourse);
+                selectedCourse.registerStudent();
                 registrationHistory.addLast(new RegistrationRecord(studentId, student.getName(), selectedCourse.getCourseId(), selectedCourse.getCourseName(), "REGISTERED"));
             }
         }
@@ -313,9 +314,9 @@ public class Main {
         System.out.println("-----------------------------------------");
         for (int i = 0; i < students.size(); i++) {
             if (students.get(i).getStudentId().equalsIgnoreCase(studentId)) {
-                for (Course course : courses) {
-                    System.out.println(course);
-                }
+//                for (Course course : courses) {
+//                    System.out.println(course);
+//                }
             }
         }
         System.out.println();
