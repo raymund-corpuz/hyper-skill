@@ -419,6 +419,132 @@ public class Main1 {
         System.out.println("Course: " + selectedCourse.getCourseId() + " - " + selectedCourse.getCourseName());
         System.out.println("Available Slots: " + selectedCourse.getAvailableSlots());
     }
+
+    // ==============================================
+    //      Drop Course
+    // ==============================================
+    public static void dropCourse(List<Student> students, List<Course> courses, LinkedList<RegistrationRecord> registrationHistory, Scanner scanner) {
+        System.out.println();
+        System.out.println("=============================================");
+        System.out.println("            Drop Course                     ");
+        System.out.println("=============================================");
+
+        //Find Student
+        System.out.println("Enter Student ID: ");
+        String studentId = scanner.nextLine();
+
+        Student selectedStudent = null;
+
+        for (Student student : students) {
+            if (student.getStudentId().equalsIgnoreCase(studentId)) {
+                selectedStudent = student;
+                break;
+            }
+        }
+
+        //Student Not Found
+        if (selectedStudent == null) {
+            System.out.println();
+            System.out.println("Student not found.❌");
+            return;
+        }
+
+        //Student Information
+        System.out.println();
+        System.out.println("Student Information");
+        System.out.println("-------------------------------------------");
+        System.out.println("Student ID: " + selectedStudent.getStudentId());
+        System.out.println("Name      : " + selectedStudent.getName());
+
+        //Get Registered Courses
+        List<Course> registeredCourses = selectedStudent.getRegisteredCourses();
+
+        if (registeredCourses.isEmpty()) {
+            System.out.println();
+            System.out.println("Student is not registered for any course.");
+            return;
+        }
+
+        //Display Registered Courses
+        System.out.println();
+        System.out.println("Registered Courses");
+        System.out.println("-----------------------------------------");
+
+        for (int i = 0; i < registeredCourses.size(); i++) {
+            Course course = registeredCourses.get(i);
+            System.out.println((i + 1) + ". " + course.getCourseId() + " - " + course.getCourseName());
+        }
+        System.out.println();
+        System.out.println("0. Cancel");
+
+        //Course Selection
+        System.out.println("Select course to drop: ");
+
+        int option;
+        try {
+            option = scanner.nextInt();
+            scanner.nextLine();
+        } catch (Exception e) {
+            System.out.println("Invalid Input.❌");
+            scanner.nextLine();
+            return;
+        }
+
+        // Cancel
+        if (option == 0) {
+            System.out.println("Drop course cancelled.");
+            return;
+        }
+
+        //Validate Option
+        if (option < 1 || option > registeredCourses.size()) {
+            System.out.println("Invalid Course Selection.");
+            return;
+        }
+
+        Course selectedCourse = courses.get(option - 1);
+
+        //Confirmation
+        System.out.println();
+        System.out.println("Selected Course:");
+        System.out.println("------------------------------------");
+        System.out.println("Course ID: " + selectedCourse.getCourseId());
+        System.out.println("Course Name: " + selectedCourse.getCourseName());
+        System.out.println("Instructor: " + selectedCourse.getInstructor());
+        System.out.println();
+        System.out.println("Are you sure you want to drop this course?");
+        System.out.println();
+        System.out.println("1. Yes");
+        System.out.println("2. No");
+
+        int confirmation = optionSelection(scanner);
+
+        if (confirmation != 1) {
+            System.out.println();
+            System.out.println("Drop Course Cancelled.");
+            return;
+        }
+
+        //Drop Course
+        selectedStudent.dropCourse(selectedCourse);
+        selectedCourse.dropStudent();
+
+        //Registration History
+        registrationHistory.addLast(new RegistrationRecord(selectedStudent.getStudentId(), selectedStudent.getName(), selectedCourse.getCourseId(), selectedCourse.getCourseName(), "DROPPED"));
+
+        //Success Message
+        System.out.println();
+        System.out.println("======================================");
+        System.out.println("            Course Dropped            ");
+        System.out.println("======================================");
+        System.out.println("Student: " + selectedStudent.getName());
+        System.out.println("Course: " + selectedCourse.getCourseId() + " - " + selectedCourse.getCourseName());
+        System.out.println();
+        System.out.println("Course Dropped Successfully.✅");
+        System.out.println("Available Slots: " + selectedCourse.getAvailableSlots());
+
+    }
+
 }
     
     
