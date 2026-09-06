@@ -4,10 +4,7 @@ import org.level1.student_course.course.Course;
 import org.level1.student_course.people.Student;
 import org.level1.student_course.record.RegistrationRecord;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main1 {
     public static void main(String[] args) {
@@ -145,9 +142,38 @@ public class Main1 {
                     break;
                 case 3:
                     registrationManagement(students, courses, registrationHistory, scanner);
+                    break;
+                case 4:
+                    dropCourse(students, courses, registrationHistory, scanner);
+                    break;
+                case 5:
+                    searchingStudentAndCourse(students, courses, scanner);
+                    break;
+                case 6:
+                    sortingStudentAndCourse(students, courses, scanner);
+                    break;
+                case 7:
+                    viewStudentSchedule(students, scanner);
+                    break;
+                case 8:
+                    viewRegistrationHistory(registrationHistory);
+                    break;
+                case 9:
+                    running = false;
+                    System.out.println("===========================================");
+                    System.out.println("        THANK YOU FOR USING THE SYSTEM              ");
+                    System.out.println("===========================================");
+                    break;
+                default:
+                    System.out.println();
+                    System.out.println("Invalid Option.❌");
+                    System.out.println("Please Try Again...");
+
+
             }
         }
 
+        scanner.close();
     }
 
     // ==================================================
@@ -502,7 +528,7 @@ public class Main1 {
             return;
         }
 
-        Course selectedCourse = courses.get(option - 1);
+        Course selectedCourse = registeredCourses.get(option - 1);
 
         //Confirmation
         System.out.println();
@@ -545,6 +571,353 @@ public class Main1 {
 
     }
 
+    //===============================================
+    //      Search
+    //===============================================
+    public static void searchingStudentAndCourse(List<Student> students, List<Course> courses, Scanner scanner) {
+
+        System.out.println();
+        System.out.println("=========================================");
+        System.out.println("                Search                    ");
+        System.out.println("=========================================");
+        System.out.println();
+        System.out.println("1. Search Student by ID");
+        System.out.println("2. Search Student by Name");
+        System.out.println("3. Search Course by ID");
+        System.out.println("4. Search Course by Name");
+        System.out.println("5. Back");
+        System.out.println();
+        int option = optionSelection(scanner);
+
+        switch (option) {
+            case 1:
+                System.out.print("Enter Student ID: ");
+                String studentId = scanner.nextLine();
+
+                boolean studentFound = false;
+
+                for (Student student : students) {
+                    if (student.getStudentId().equalsIgnoreCase(studentId)) {
+                        System.out.println();
+                        student.displayProfile();
+                        studentFound = true;
+                        break;
+                    }
+                }
+
+                if (!studentFound) {
+                    System.out.println("Student Not Found.❌");
+                }
+                break;
+            case 2:
+                System.out.println("Enter Student Name: ");
+                String studentName = scanner.nextLine();
+
+                boolean nameFound = false;
+
+                for (Student student : students) {
+                    if (student.getName().equalsIgnoreCase(studentName)) {
+                        System.out.println();
+                        student.displayProfile();
+                        nameFound = true;
+                        break;
+                    }
+                }
+                if (!nameFound) {
+                    System.out.println("Student Not Found. ❌");
+                }
+                break;
+            case 3:
+                System.out.println("Enter Course ID: ");
+                String courseId = scanner.nextLine();
+
+                boolean courseFound = false;
+
+                for (Course course : courses) {
+                    if (course.getCourseId().equalsIgnoreCase(courseId)) {
+                        System.out.println();
+                        System.out.println(course);
+                        courseFound = true;
+                        break;
+                    }
+                }
+
+                if (!courseFound) {
+                    System.out.println("Course Not Found.❌");
+                }
+                break;
+            case 4:
+                System.out.println("Enter Course Name: ");
+                String courseName = scanner.nextLine();
+
+                boolean courseNameFound = false;
+
+                for (Course course : courses) {
+                    if (course.getCourseName().equalsIgnoreCase(courseName)) {
+                        System.out.println();
+                        System.out.println(course);
+
+                        courseNameFound = true;
+                        break;
+                    }
+                }
+
+                if (!courseNameFound) {
+                    System.out.println("Course Not Found.❌");
+                }
+                break;
+
+            case 5:
+                return;
+            default:
+                System.out.println("Invalid Option.❌");
+                break;
+
+        }
+
+        // ========================================
+        // SORT
+        // ========================================
+    }
+
+    public static void sortingStudentAndCourse(
+            List<Student> students,
+            List<Course> courses,
+            Scanner scanner) {
+
+        System.out.println();
+        System.out.println("========================================");
+        System.out.println("                 SORT                   ");
+        System.out.println("========================================");
+        System.out.println();
+        System.out.println("1. Students by Name");
+        System.out.println("2. Students by ID");
+        System.out.println("3. Students by Age");
+        System.out.println("4. Courses by Name");
+        System.out.println("5. Courses by ID");
+        System.out.println("6. Back");
+        System.out.println();
+
+        int option = optionSelection(scanner);
+
+        switch (option) {
+
+            case 1:
+
+                students.sort(
+                        Comparator.comparing(
+                                Student::getName
+                        )
+                );
+
+                System.out.println();
+                System.out.println("Students sorted by name.");
+
+                for (Student student : students) {
+                    System.out.println(student);
+                }
+
+                break;
+
+            case 2:
+
+                students.sort(
+                        Comparator.comparing(
+                                Student::getStudentId
+                        )
+                );
+
+                System.out.println();
+                System.out.println("Students sorted by ID.");
+
+                for (Student student : students) {
+                    System.out.println(student);
+                }
+
+                break;
+
+            case 3:
+
+                students.sort(
+                        Comparator.comparing(
+                                Student::getAge
+                        )
+                );
+
+                System.out.println();
+                System.out.println("Students sorted by age.");
+
+                for (Student student : students) {
+                    System.out.println(student);
+                }
+
+                break;
+
+            case 4:
+
+                courses.sort(
+                        Comparator.comparing(
+                                Course::getCourseName
+                        )
+                );
+
+                System.out.println();
+                System.out.println("Courses sorted by name.");
+
+                for (Course course : courses) {
+                    System.out.println(course);
+                }
+
+                break;
+
+            case 5:
+
+                courses.sort(
+                        Comparator.comparing(
+                                Course::getCourseId
+                        )
+                );
+
+                System.out.println();
+                System.out.println("Courses sorted by ID.");
+
+                for (Course course : courses) {
+                    System.out.println(course);
+                }
+
+                break;
+
+            case 6:
+                return;
+
+            default:
+                System.out.println("Invalid option.");
+        }
+    }
+
+    // ========================================
+    // VIEW STUDENT SCHEDULE
+    // ========================================
+
+    public static void viewStudentSchedule(
+            List<Student> students,
+            Scanner scanner) {
+
+        System.out.println();
+        System.out.println("========================================");
+        System.out.println("         STUDENT SCHEDULE");
+        System.out.println("========================================");
+
+        System.out.print("Enter Student ID: ");
+        String studentId = scanner.nextLine();
+
+        Student selectedStudent = null;
+
+        for (Student student : students) {
+
+            if (student.getStudentId()
+                    .equalsIgnoreCase(studentId)) {
+
+                selectedStudent = student;
+                break;
+            }
+        }
+
+        if (selectedStudent == null) {
+
+            System.out.println();
+            System.out.println("Student not found.");
+            return;
+        }
+
+        System.out.println();
+        System.out.println(
+                "Student : "
+                        + selectedStudent.getName()
+        );
+
+        System.out.println("----------------------------------------");
+
+        List<Course> registeredCourses =
+                selectedStudent.getRegisteredCourses();
+
+        if (registeredCourses.isEmpty()) {
+
+            System.out.println(
+                    "No courses registered."
+            );
+
+            return;
+        }
+
+        for (Course course : registeredCourses) {
+
+            System.out.println(
+                    course.getCourseId()
+                            + " - "
+                            + course.getCourseName()
+                            + " | Instructor: "
+                            + course.getInstructor()
+            );
+        }
+    }
+
+    // ========================================
+    // REGISTRATION HISTORY
+    // ========================================
+
+    public static void viewRegistrationHistory(
+            LinkedList<RegistrationRecord> registrationRecords) {
+
+        System.out.println();
+        System.out.println("========================================");
+        System.out.println("        REGISTRATION HISTORY");
+        System.out.println("========================================");
+
+        if (registrationRecords.isEmpty()) {
+
+            System.out.println();
+            System.out.println(
+                    "Registration History: "
+                            + "No Record Found."
+            );
+
+            return;
+        }
+
+        System.out.println();
+
+        for (RegistrationRecord record : registrationRecords) {
+
+            System.out.println(
+                    "Student ID   : "
+                            + record.studentId()
+            );
+
+            System.out.println(
+                    "Student Name : "
+                            + record.studentName()
+            );
+
+            System.out.println(
+                    "Course ID    : "
+                            + record.courseId()
+            );
+
+            System.out.println(
+                    "Course Name  : "
+                            + record.courseName()
+            );
+
+            System.out.println(
+                    "Status       : "
+                            + record.action()
+            );
+
+            System.out.println("----------------------------------------");
+        }
+    }
 }
+
     
     
