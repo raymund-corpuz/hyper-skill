@@ -1,3 +1,5 @@
+package org.demo;
+
 import java.util.HashMap;
 
 public class HashTableDemo {

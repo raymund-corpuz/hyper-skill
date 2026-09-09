@@ -1,3 +1,5 @@
+package org.demo;
+
 public class SimpleHashDemo {
     public static void main(String[] args) {
         System.out.println("Project Name: Simple Hash Demo ");

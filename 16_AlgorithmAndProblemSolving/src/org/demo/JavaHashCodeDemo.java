@@ -1,3 +1,5 @@
+package org.demo;
+
 public class JavaHashCodeDemo {
     public static void main(String[] args) {
         String a = "Tim Black";

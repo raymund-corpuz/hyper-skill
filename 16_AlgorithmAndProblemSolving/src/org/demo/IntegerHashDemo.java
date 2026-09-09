@@ -1,3 +1,5 @@
+package org.demo;
+
 public class IntegerHashDemo {
     public static void main(String[] args) {
         int x = 10;
