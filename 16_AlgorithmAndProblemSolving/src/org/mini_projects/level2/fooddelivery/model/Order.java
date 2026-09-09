@@ -1,5 +1,6 @@
 package org.mini_projects.level2.fooddelivery.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
@@ -16,7 +17,7 @@ public class Order {
         this.orderId = orderId;
         this.customerName = customerName;
         this.restaurantName = restaurantName;
-        this.orderItems = orderItems;
+        this.orderItems = new ArrayList<>();
         this.totalPrice = totalPrice;
         this.paymentMethod = paymentMethod;
         this.orderStatus = orderStatus;

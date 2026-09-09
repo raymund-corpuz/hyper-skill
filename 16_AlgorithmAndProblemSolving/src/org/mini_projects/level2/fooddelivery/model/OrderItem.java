@@ -1,5 +1,6 @@
 package org.mini_projects.level2.fooddelivery.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderItem {
@@ -9,11 +10,12 @@ public class OrderItem {
     private double subTotal;
 
     public OrderItem(List<FoodItem> foodItem, int quantity, double price, double subTotal) {
-        this.foodItem = foodItem;
+        this.foodItem = new ArrayList<>();
         this.quantity = quantity;
         this.price = price;
         this.subTotal = subTotal;
     }
+
 
     //getters & setters
 

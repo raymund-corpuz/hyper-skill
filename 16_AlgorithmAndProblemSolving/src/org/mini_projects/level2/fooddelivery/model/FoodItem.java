@@ -15,6 +15,20 @@ public class FoodItem {
         this.available = available;
     }
 
+    //display()
+    public void display() {
+        String status = available ? "Available" : "Not Available";
+        System.out.println();
+        System.out.println("Name: " + name);
+        System.out.println("Category: " + category);
+        System.out.println("Price: " + price);
+        System.out.println("Status" + status);
+    }
+
+    @Override
+    public String toString() {
+        return foodId + " - " + name + " - " + " - ₱" + price;
+    }
     //getters & setters
 
     public String getFoodId() {
