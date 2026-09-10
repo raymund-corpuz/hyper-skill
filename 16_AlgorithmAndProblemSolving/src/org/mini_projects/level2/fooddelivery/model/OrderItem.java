@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderItem {
-    private List<FoodItem> foodItem;
+    private FoodItem foodItem;
     private int quantity;
     private double price;
     private double subTotal;
 
-    public OrderItem(List<FoodItem> foodItem, int quantity, double price, double subTotal) {
-        this.foodItem = new ArrayList<>();
+    public OrderItem(FoodItem foodItem, int quantity, double price, double subTotal) {
+        this.foodItem = foodItem;
         this.quantity = quantity;
         this.price = price;
         this.subTotal = subTotal;

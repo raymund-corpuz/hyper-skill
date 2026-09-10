@@ -8,20 +8,23 @@ public class Order {
     private Customer customerName;
     private Restaurant restaurantName;
     private List<OrderItem> orderItems;
-    private double totalPrice;
     private String paymentMethod;
     private String orderStatus;
-    private String orderDate;
 
-    public Order(String orderId, Customer customerName, Restaurant restaurantName, List<OrderItem> orderItems, double totalPrice, String paymentMethod, String orderStatus, String orderDate) {
+
+    public Order(String orderId, Customer customerName, Restaurant restaurantName, String paymentMethod) {
         this.orderId = orderId;
         this.customerName = customerName;
         this.restaurantName = restaurantName;
-        this.orderItems = new ArrayList<>();
-        this.totalPrice = totalPrice;
         this.paymentMethod = paymentMethod;
-        this.orderStatus = orderStatus;
-        this.orderDate = orderDate;
+        this.orderStatus = "PENDING";
+
+        this.orderItems = new ArrayList<>();
+
+    }
+
+    public void addItem(FoodItem foodItem, int quantity) {
+        OrderItem orderItem = new OrderItem(foodItem, quantity);
     }
 
     //getters & setters
