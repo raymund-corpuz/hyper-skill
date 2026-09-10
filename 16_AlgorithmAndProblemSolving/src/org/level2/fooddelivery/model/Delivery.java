@@ -4,16 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Delivery extends Person {
-    private List<Order> orders;
+    private Order order;
     private String deliveryAddress;
     private String deliveryStatus;
 
-    public Delivery(String id, String name, String phone, String deliveryAddress, String deliveryStatus) {
+    public Delivery(String id, String name, String phone, Order order, String deliveryAddress, String deliveryStatus) {
         super(id, name, phone);
+        this.order = order;
         this.deliveryAddress = deliveryAddress;
-        this.deliveryStatus = deliveryStatus;
+        this.deliveryStatus = "ASSIGNED";
 
-        this.orders = new ArrayList<>();
+
     }
 
     @Override
@@ -24,5 +25,31 @@ public class Delivery extends Person {
         System.out.println("Delivery Phone: " + getPhone());
         System.out.println("Delivery Address: " + deliveryAddress);
         System.out.println("Delivery Status: " + deliveryStatus);
+    }
+
+    // getters----------------------
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public String getDeliveryAddress() {
+        return deliveryAddress;
+    }
+
+    public void setDeliveryAddress(String deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
+    }
+
+    public String getDeliveryStatus() {
+        return deliveryStatus;
+    }
+
+    public void setDeliveryStatus(String deliveryStatus) {
+        this.deliveryStatus = deliveryStatus;
     }
 }

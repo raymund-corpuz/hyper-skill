@@ -16,29 +16,79 @@ public class Order {
         this.customerName = customerName;
         this.restaurant = restaurant;
         this.paymentMethod = paymentMethod;
-        this.status = status;
-
+        this.status = "PENDING";
         this.orderItems = new ArrayList<>();
     }
 
 
     //add , remove, calculateTotal, updateStatus, diplayOrder
-    public void addOrder(OrderItem order) {
-        orderItems.add(order);
+    public void addItem(FoodItem foodItem, int quantity) {
+        OrderItem orderItem = new OrderItem(foodItem, quantity);
+
+        orderItems.add(orderItem);
     }
 
-    public void removeOrder(OrderItem order) {
-        orderItems.remove(order);
+    public void removeItem(OrderItem orderItem) {
+        orderItems.remove(orderItem);
     }
 
-    public void displayOrder() {
-        System.out.println();
-        if (orderItems.isEmpty()) {
-            System.out.println("No order to display.");
-            return;
+    public double calculateTotal() {
+        double total = 0;
+
+        for (OrderItem item : orderItems) {
+            total += item.getSubTotal();
         }
-        for (OrderItem orderItem : orderItems) {
-            orderItem.displayOrderItem();
-        }
+
+        return total;
+    }
+
+    // ----------- getters
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(String restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

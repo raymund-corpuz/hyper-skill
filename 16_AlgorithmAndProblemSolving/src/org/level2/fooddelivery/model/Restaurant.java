@@ -21,6 +21,39 @@ public class Restaurant {
         this.menu = new ArrayList<>();
     }
 
+    //add , remove, display, restaurant
+    public void addFoodItem(FoodItem item) {
+        menu.add(item);
+    }
+
+    public void removeFoodItem(FoodItem item) {
+        menu.remove(item);
+    }
+
+    public void displayFoodItem() {
+        if (menu.isEmpty()) {
+            System.out.println("Menu is empty.❌");
+            return;
+        }
+        for (FoodItem item : menu) {
+            item.display();
+        }
+    }
+
+    public void displayRestaurant() {
+        System.out.println();
+        System.out.println("===================================");
+        System.out.println("            Restaurant");
+        System.out.println("===================================");
+        System.out.println();
+        System.out.println("ID: " + restaurantId);
+        System.out.println("Name: " + name);
+        System.out.println("Address: " + address);
+        System.out.println("Category: " + category);
+        System.out.println("Rating: " + rating);
+    }
+
+
     //-------------
 
     public String getRestaurantId() {

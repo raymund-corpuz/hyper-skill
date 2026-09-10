@@ -7,13 +7,13 @@ public class Customer extends Person {
     private String email;
     private String address;
 
-    private List<Order> orders;
+    private List<Order> orderList;
 
     public Customer(String id, String name, String phone, String email, String address) {
         super(id, name, phone);
         this.email = email;
         this.address = address;
-        this.orders = new ArrayList<>();
+        this.orderList = new ArrayList<>();
     }
 
 
@@ -23,6 +23,22 @@ public class Customer extends Person {
         System.out.print("Name: " + getName());
         System.out.print("Phone: " + getPhone());
         System.out.print("Address: " + address);
+    }
+
+    // add, view (added after checking)
+    public void addOrder(Order order) {
+        orderList.add(order);
+    }
+
+    public void viewOrder() {
+        if (orderList.isEmpty()) {
+            System.out.println("Order is empty.❌");
+            return;
+        }
+
+        for (Order order : orderList) {
+            System.out.println(order);
+        }
     }
 
     //----------
@@ -43,11 +59,11 @@ public class Customer extends Person {
         this.address = address;
     }
 
-    public List<Order> getOrders() {
-        return orders;
+    public List<Order> getOrderList() {
+        return orderList;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
     }
 }
