@@ -25,6 +25,29 @@ public class Restaurant implements Displayable {
         this.menu = new ArrayList<>();
     }
 
+
+    //Add
+    public void addFoodItem(FoodItem foodItem) {
+        menu.add(foodItem);
+    }
+
+    //View
+    public void displayMenu() {
+        System.out.println();
+        System.out.println("=====================================");
+        System.out.println("            Main Menu ");
+        System.out.println("=====================================");
+
+        if (menu.isEmpty()) {
+            System.out.println("No food items available");
+            return;
+        }
+
+        for (FoodItem foodItem : menu) {
+            foodItem.display();
+        }
+    }
+
     @Override
     public void display() {
         System.out.println("==================================");
@@ -36,28 +59,6 @@ public class Restaurant implements Displayable {
         System.out.println("Address     : " + address);
         System.out.println("Category    : " + category);
         System.out.println("Rating      : " + rating);
-    }
-
-    //Add
-    public void addFoodItem(FoodItem foodItem) {
-        menu.add(foodItem);
-    }
-
-    //View
-    public void displayMenu() {
-        if (menu.isEmpty()) {
-            System.out.println("No food items available");
-            return;
-        }
-
-        for (FoodItem foodItem : menu) {
-            foodItem.display();
-        }
-    }
-
-    //remove
-    public void removeFoodItem(FoodItem foodItem) {
-        menu.remove(foodItem);
     }
 
     //getter

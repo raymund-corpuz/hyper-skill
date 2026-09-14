@@ -1,61 +1,95 @@
 package org.fooddelivery.model;
 
+import org.fooddelivery.enums.OrderStatus;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    private List<OrderItem> orderItemList;
-    private String customer;
-    private String restaurant;
+    private String orderId;
+    private Customer customer;
+    private Restaurant restaurant;
+    private List<OrderItem> orderItems;
     private String paymentMethod;
-    private String status;
+    private OrderStatus status;
 
     //Constructor
 
-    public Order(String customer, String restaurant, String paymentMethod, String status) {
+    public Order(String orderId, Customer customer, Restaurant restaurant, String paymentMethod) {
+        this.orderId = orderId;
         this.customer = customer;
         this.restaurant = restaurant;
         this.paymentMethod = paymentMethod;
-        this.status = "PENDING";
-        this.orderItemList = new ArrayList<>();
+
+        this.status = OrderStatus.PENDING;
+        this.orderItems = new ArrayList<>();
     }
 
-    //add
-    public void addOrderItem(FoodItem foodItem, int quantity) {
-        OrderItem orderItem = new OrderItem(foodItem, quantity);
+    public void addItem(FoodItem fooditem, int quantity) {
+        OrderItem orderItem = new OrderItem(fooditem, quantity);
 
-        orderItemList.add(orderItem);
+        orderItems.add(orderItem);
     }
 
-    //remove
-    public void removerOrderItem(OrderItem orderItem) {
-        if (orderItemList.isEmpty()) {
-            System.out.println("Order List is Empty.❌");
-            return;
+    public void removeItem(OrderItem orderItem) {
+        orderItems.remove(orderItem);
+    }
+
+    public double calculateTotal() {
+        double total = 0;
+
+        for (OrderItem orderItem : orderItems) {
+            total += orderItem.getSubTotal();
         }
-        orderItemList.remove(orderItem);
+        return total;
     }
 
+    public void updateStatus(OrderStatus status) {
+        this.status = status;
+    }
+    /*
+     * INNER CLASS
+     *
+     * This class exists only as a helper
+     * for displaying an Order summary.
+     */
 
-    //getter
-
-    public List<OrderItem> getOrderItemList() {
-        return orderItemList;
+    public class OrderSummary {
+        public void display() {
+            System.out.println("==================================");
+            System.out.println("              Order Summary ");
+            System.out.println("==================================");
+            System.out.println("Order ID: " + orderId);
+            System.out.println("Customer: " + customer.getName());
+            System.out.println("Restaurant: " + restaurant.getRestaurantName());
+            System.out.println("Payment: " + paymentMethod);
+            System.out.println("Status: " + status);
+            System.out.println("Total:  \u20B1" + calculateTotal());
+            System.out.println("==================================");
+        }
     }
 
-    public String getCustomer() {
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public Customer getCustomer() {
         return customer;
     }
 
-    public String getRestaurant() {
+    public Restaurant getRestaurant() {
         return restaurant;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
     }
 
     public String getPaymentMethod() {
         return paymentMethod;
     }
 
-    public String getStatus() {
+    public OrderStatus getStatus() {
         return status;
     }
 }
