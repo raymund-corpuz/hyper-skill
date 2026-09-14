@@ -1,9 +1,11 @@
 package org.fooddelivery.model;
 
+import org.fooddelivery.interfaces.Displayable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Restaurant {
+public class Restaurant implements Displayable {
     private String restaurantId;
     private String restaurantName;
     private String address;
@@ -23,20 +25,33 @@ public class Restaurant {
         this.menu = new ArrayList<>();
     }
 
+    @Override
+    public void display() {
+        System.out.println("==================================");
+        System.out.println("            Restaurant");
+        System.out.println("==================================");
+        System.out.println();
+        System.out.println("ID          : " + restaurantId);
+        System.out.println("Name        : " + restaurantName);
+        System.out.println("Address     : " + address);
+        System.out.println("Category    : " + category);
+        System.out.println("Rating      : " + rating);
+    }
+
     //Add
-    public void addMenu(FoodItem foodItem) {
+    public void addFoodItem(FoodItem foodItem) {
         menu.add(foodItem);
     }
 
     //View
-    public void viewMenu() {
+    public void displayMenu() {
         if (menu.isEmpty()) {
-            System.out.println("Menu is Empty.❌");
+            System.out.println("No food items available");
             return;
         }
 
         for (FoodItem foodItem : menu) {
-            System.out.println(foodItem);
+            foodItem.display();
         }
     }
 

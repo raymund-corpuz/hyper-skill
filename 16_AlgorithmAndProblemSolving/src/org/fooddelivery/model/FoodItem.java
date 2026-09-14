@@ -1,6 +1,9 @@
 package org.fooddelivery.model;
 
-public class FoodItem {
+import org.fooddelivery.interfaces.Displayable;
+import org.fooddelivery.interfaces.Searchable;
+
+public class FoodItem implements Displayable, Searchable {
     private String foodId;
     private String name;
     private String category;
@@ -17,14 +20,17 @@ public class FoodItem {
         this.available = available;
     }
 
+    @Override
+    public boolean matches(String keyword) {
+        return name.toLowerCase().contains(keyword.toLowerCase());
+    }
+
     //Display Food
-    public void displayFoodItem() {
-        System.out.println();
-        System.out.println("ID: " + foodId);
-        System.out.println("Name: " + name);
-        System.out.println("Category: " + category);
-        System.out.println("Price: " + price);
-        System.out.println("Available: " + (available ? "Available" : "Not Available"));
+    @Override
+    public void display() {
+        String status = available ? "Available" : "Unavailable";
+
+        System.out.println(foodId + " | " + category + " |  ₱" + price + " | " + status);
     }
 
 
