@@ -5,10 +5,7 @@ import org.hotel.model.Reservation;
 import org.hotel.model.Room;
 
 import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,6 +15,28 @@ public class Main {
         List<Room> rooms = new ArrayList<>();
         List<Reservation> reservations = new ArrayList<>();
         LinkedList<Reservation> reservationQueue = new LinkedList<>();
+        Set<String> guestIds = new HashSet<>();
+        Set<String> roomTypes = new LinkedHashSet<>();
+        Set<String> sortedRoomTypes = new TreeSet<>();
+
+        roomTypes.add("Single");
+        roomTypes.add("Double");
+        roomTypes.add("Suite");
+        roomTypes.add("Single");
+
+        System.out.println("Expected: ");
+        System.out.println();
+        for (String roomType : roomTypes) {
+            sortedRoomTypes.add(roomType);
+            System.out.println(roomType);
+        }
+        System.out.println();
+        System.out.println("Sorted Room Types:");
+        System.out.println();
+        for (String sortedRoomType : sortedRoomTypes) {
+            System.out.println(sortedRoomType);
+        }
+
 
         guests.add(new Guest(
                 "G001",
@@ -159,12 +178,15 @@ public class Main {
                 4
         ));
 
-        addReservation(guests, rooms, reservations, reservationQueue, scanner);
+        addReservation(guests, rooms, reservations, reservationQueue, guestIds, scanner);
+
+        searchReservationGuestId(guestIds, reservations, scanner);
+        addReservation(guests, rooms, reservations, reservationQueue, guestIds, scanner);
 
         scanner.close();
     }
 
-    public static void addReservation(List<Guest> guests, List<Room> rooms, List<Reservation> reservations, LinkedList<Reservation> reservationQue, Scanner scanner) {
+    public static void addReservation(List<Guest> guests, List<Room> rooms, List<Reservation> reservations, LinkedList<Reservation> reservationQue, Set<String> guestIds, Scanner scanner) {
         System.out.println("=====================================");
         System.out.println("                Add Reservation ");
         System.out.println("=====================================");
@@ -183,7 +205,8 @@ public class Main {
         }
         System.out.println();
 
-        String reservation = "RES00" + (reservations.size() + 1);
+
+        String reservationId = "RES00" + (reservations.size() + 1);
         System.out.print("Select Guest ");
         int selectGuest = selectOption(scanner);
         selectGuest--;
@@ -193,6 +216,13 @@ public class Main {
             return;
         }
         Guest selectedGuest = guests.get(selectGuest);
+
+        boolean duplicatedBooking = guestIds.contains(selectedGuest.getId());
+
+        if (duplicatedBooking) {
+            System.out.println("Duplicate Booking: Please check reservation list.");
+            return;
+        }
 
         System.out.print("Select Room: ");
         int selectRoom = selectOption(scanner);
@@ -210,18 +240,35 @@ public class Main {
         scanner.nextLine();
 
         System.out.println("Successfully Added a Reservation.✅");
-        reservationQue.addLast(new Reservation(reservation, selectedGuest, selectedRoom, nights));
+        guestIds.add(selectedGuest.getId());
+        reservationQue.addLast(new Reservation(reservationId, selectedGuest, selectedRoom, nights));
         System.out.println();
         reservationQue.getLast().display();
 
     }
 
     public static int selectOption(Scanner scanner) {
-        System.out.println();
         int option = scanner.nextInt();
         scanner.nextLine();
         return option;
     }
 
+    public static void searchReservationGuestId(Set<String> guestIds, List<Reservation> reservations, Scanner scanner) {
+        System.out.println("=================================");
+        System.out.println("        Reservation Guest List ");
+        System.out.println("=================================");
+        System.out.println();
+        for (String guest : guestIds) {
+            System.out.println(guest);
+        }
+        System.out.print("Enter Guest Id: ");
+        String guestId = scanner.nextLine();
+
+        for (Reservation reservation : reservations) {
+            if (reservation.getGuest().getId().equalsIgnoreCase(guestId)) {
+                reservation.display();
+            }
+        }
+    }
 
 }
