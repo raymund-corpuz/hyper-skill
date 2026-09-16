@@ -18,6 +18,8 @@ public class Main {
         Set<String> guestIds = new HashSet<>();
         Set<String> roomTypes = new LinkedHashSet<>();
         Set<String> sortedRoomTypes = new TreeSet<>();
+        Map<String, Room> roomMap = new HashMap<>();
+
 
         roomTypes.add("Single");
         roomTypes.add("Double");
@@ -178,10 +180,11 @@ public class Main {
                 4
         ));
 
-        addReservation(guests, rooms, reservations, reservationQueue, guestIds, scanner);
+        checkRoomAvailable(roomMap, rooms, scanner);
+        //addReservation(guests, rooms, reservations, reservationQueue, guestIds, scanner);
 
-        searchReservationGuestId(guestIds, reservations, scanner);
-        addReservation(guests, rooms, reservations, reservationQueue, guestIds, scanner);
+        //searchReservationGuestId(guestIds, reservations, scanner);
+        //addReservation(guests, rooms, reservations, reservationQueue, guestIds, scanner);
 
         scanner.close();
     }
@@ -269,6 +272,21 @@ public class Main {
                 reservation.display();
             }
         }
+    }
+
+    public static void checkRoomAvailable(Map<String, Room> roomMap, List<Room> rooms, Scanner scanner) {
+        for (Room room : rooms) {
+            roomMap.put(room.getRoomNumber(), room);
+        }
+        System.out.println();
+        System.out.println("==== Check Room ====");
+        System.out.println("Enter Room Number: ");
+        String roomNumber = scanner.nextLine();
+        Room selectedRoom = roomMap.get(roomNumber);
+
+        selectedRoom.display();
+
+
     }
 
 }
