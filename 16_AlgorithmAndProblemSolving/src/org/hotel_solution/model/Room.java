@@ -10,11 +10,11 @@ public class Room implements Displayable, Searchable {
     private double price;
     private boolean available;
 
-    public Room(String roomNumber, boolean available, double price, String roomType) {
+    public Room(String roomNumber, String roomType, double price, boolean available) {
         this.roomNumber = roomNumber;
-        this.available = available;
-        this.price = price;
         this.roomType = roomType;
+        this.price = price;
+        this.available = available;
     }
 
     @Override
