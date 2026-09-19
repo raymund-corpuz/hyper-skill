@@ -38,6 +38,10 @@ public class Reservation {
         }
     }
 
+    public void cancel() {
+        this.status = ReservationStatus.CANCELLED;
+    }
+
     public String getId() {
         return id;
     }

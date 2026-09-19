@@ -14,6 +14,7 @@ public class Guest extends Person {
         System.out.println("Name: " + getName());
         System.out.println("Phone: " + getPhone());
         System.out.println("Email: " + email);
+        System.out.println("----------------------------------");
     }
 
     public String getEmail() {
