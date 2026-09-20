@@ -6,11 +6,10 @@ import org.hotel_implementation.model.Guest;
 import org.hotel_implementation.model.Reservation;
 import org.hotel_implementation.model.Room;
 import org.hotel_implementation.exception.InvalidReservationException;
+import org.hotel_implementation.record.ReservationRecord;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import static org.hotel_implementation.util.IdGenerator.generateGuestId;
 import static org.hotel_implementation.util.IdGenerator.generateReservationId;
@@ -82,7 +81,40 @@ public class ReservationService {
         System.out.println("Total : " + reservation.calculateTotal());
     }
 
+    //processNextReservation
+    public Reservation processNextReservation() {
+        if (reservations.isEmpty()) {
+            return null;
+        }
+
+        return reservationQueues.removeFirst();
+    }
+
     //generate report
+    public Map<String, Integer> generateReport() {
+        Map<String, Integer> report = new LinkedHashMap<>();
+
+        for (Reservation reservation : reservations) {
+            String status = reservation.getStatus().name();
+
+            report.merge(status, 1, Integer::sum);
+        }
+
+        return report;
+    }
+
 
     //create reservation record
+    public ReservationRecord createReservationRecord(Reservation reservation) {
+        return new ReservationRecord(reservation.getId(),
+                reservation.getGuest().getName(), reservation.getRoom().getRoomNumber(), reservation.calculateTotal(), reservation.getStatus().name());
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public LinkedList<Reservation> getReservationQueues() {
+        return reservationQueues;
+    }
 }
