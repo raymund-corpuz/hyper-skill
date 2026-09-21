@@ -94,7 +94,7 @@ public class ReservationService {
     }
 
     //createReport()
-    public Reservation createReport(Reservation reservation) {
+    public ReservationRecord createReport(Reservation reservation) {
         return new ReservationRecord(reservation.getId(), reservation.getGuest().getName(), reservation.getRooms().getRoomNumber(), reservation.calculateTotal(), reservation.getStatus().name());
     }
 }
