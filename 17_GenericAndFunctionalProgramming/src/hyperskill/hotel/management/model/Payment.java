@@ -19,6 +19,10 @@ public class Payment {
         this.paymentDate = paymentDate;
     }
 
+    public void displayProfile() {
+        System.out.println(paymentId + "|" + bookingId + "|" + amount + "|" + paymentStatus + "|" + paymentDate);
+    }
+
     //getter
 
     public String getPaymentId() {

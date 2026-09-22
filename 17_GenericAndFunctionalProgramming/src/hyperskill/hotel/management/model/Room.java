@@ -16,6 +16,11 @@ public class Room {
         this.status = status;
     }
 
+    public void displayProfile() {
+        System.out.println(roomNumber + "|" + roomType + "| $" + pricePerNight + "|" + status);
+    }
+
+
     //getter
 
     public String getRoomNumber() {

@@ -1,5 +1,7 @@
 package hyperskill.hotel.management.model;
 
+import java.util.Objects;
+
 public class Guest {
     private String id;
     private String firstName;
@@ -16,6 +18,24 @@ public class Guest {
         this.phoneNumber = phoneNumber;
         this.address = address;
     }
+
+    public void displayProfile() {
+        System.out.println(id + "|" + firstName + "|" + lastName + "|" + email + "|" + phoneNumber + "|" + address);
+    }
+
+    //equals
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Guest guest = (Guest) o;
+        return Objects.equals(id, guest.id) && Objects.equals(firstName, guest.firstName) && Objects.equals(lastName, guest.lastName) && Objects.equals(email, guest.email) && Objects.equals(phoneNumber, guest.phoneNumber) && Objects.equals(address, guest.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, email, phoneNumber, address);
+    }
+
 
     //getters
 
