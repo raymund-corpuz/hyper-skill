@@ -19,8 +19,10 @@ public class Guest {
         this.address = address;
     }
 
-    public void displayProfile() {
-        System.out.println(id + "|" + firstName + "|" + lastName + "|" + email + "|" + phoneNumber + "|" + address);
+    public void display() {
+        System.out.println(firstName + " " + lastName);
+        System.out.println("ID: " + id);
+        System.out.println("Email: " + email);
     }
 
     //equals

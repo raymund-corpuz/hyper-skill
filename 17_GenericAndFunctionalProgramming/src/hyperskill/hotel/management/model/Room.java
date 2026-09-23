@@ -16,8 +16,11 @@ public class Room {
         this.status = status;
     }
 
-    public void displayProfile() {
-        System.out.println(roomNumber + "|" + roomType + "| $" + pricePerNight + "|" + status);
+    public void display() {
+        System.out.println(roomNumber);
+        System.out.println("Type: " + roomType);
+        System.out.println("Price: $" + pricePerNight);
+        System.out.println("Status: " + status);
     }
 
 

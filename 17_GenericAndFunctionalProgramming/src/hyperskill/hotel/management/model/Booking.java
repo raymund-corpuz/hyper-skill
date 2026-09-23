@@ -18,10 +18,13 @@ public class Booking {
         this.checkOutDate = checkOutDate;
     }
 
-    public void displayProfile() {
-        System.out.println(bookingId + "|" + guest.getFirstName() + "|" + room.getRoomNumber() + "|" + checkInDate + "|" + checkOutDate);
+    public void display() {
+        System.out.println(bookingId);
+        System.out.println("Guest: " + guest.getFirstName() + " " + guest.getLastName());
+        System.out.println("Room: " + room.getRoomNumber());
+        System.out.println("Check-in: " + checkInDate);
+        System.out.println("Check-out: " + checkOutDate);
     }
-
     //getter
 
     public String getBookingId() {

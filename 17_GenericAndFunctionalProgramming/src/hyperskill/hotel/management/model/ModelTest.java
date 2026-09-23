@@ -19,29 +19,29 @@ public class ModelTest {
 
         Payment gcash = new Payment("P001", booking1.getBookingId(), room1.getPricePerNight(), PaymentStatus.PENDING, LocalDateTime.now());
         //print guest
-        guest1.displayProfile();
+        guest1.display();
 
         System.out.println();
         guest1.setEmail("raymund@example.com");
         System.out.println("Updated Email: " + guest1.getEmail());
         System.out.println();
-        guest1.displayProfile();
+        guest1.display();
 
         System.out.println("-------------------------------");
         System.out.println("Room");
-        room1.displayProfile();
+        room1.display();
         System.out.println();
         room1.setStatus(RoomStatus.MAINTENANCE);
-        room1.displayProfile();
+        room1.display();
 
         System.out.println("------------------------------");
         System.out.println("Booking");
-        booking1.displayProfile();
+        booking1.display();
 
         System.out.println();
         System.out.println("-------------------------------");
         System.out.println("Payment");
-        gcash.displayProfile();
+        gcash.display();
 
 
     }
