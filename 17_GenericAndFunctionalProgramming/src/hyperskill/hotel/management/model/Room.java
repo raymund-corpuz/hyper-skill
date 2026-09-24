@@ -1,20 +1,23 @@
 package hyperskill.hotel.management.model;
 
 import hyperskill.hotel.management.model.enums.RoomStatus;
+import hyperskill.hotel.management.model.enums.RoomType;
+
 
 public class Room {
     private String roomNumber;
-    private String roomType;
+    private RoomType roomType;
     private double pricePerNight;
     private RoomStatus status;
 
 
-    public Room(String roomNumber, String roomType, double pricePerNight, RoomStatus status) {
+    public Room(String roomNumber, RoomType roomType, double pricePerNight, RoomStatus status) {
         this.roomNumber = roomNumber;
         this.roomType = roomType;
         this.pricePerNight = pricePerNight;
         this.status = status;
     }
+
 
     public void display() {
         System.out.println(roomNumber);
@@ -30,9 +33,6 @@ public class Room {
         return roomNumber;
     }
 
-    public String getRoomType() {
-        return roomType;
-    }
 
     public double getPricePerNight() {
         return pricePerNight;
@@ -48,7 +48,11 @@ public class Room {
         this.roomNumber = roomNumber;
     }
 
-    public void setRoomType(String roomType) {
+    public RoomType getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(RoomType roomType) {
         this.roomType = roomType;
     }
 
