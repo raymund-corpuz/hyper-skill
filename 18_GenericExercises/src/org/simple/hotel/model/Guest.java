@@ -8,6 +8,7 @@ public class Guest extends Person implements Displayable, Searchable {
     Searchable search = new Searchable() {
         @Override
         public boolean matches(String keyword) {
+
             return getName().matches(keyword) || getId().matches(keyword);
         }
     };
@@ -36,4 +37,6 @@ public class Guest extends Person implements Displayable, Searchable {
     public void setNumberOfBookings(int numberOfBookings) {
         this.numberOfBookings = numberOfBookings;
     }
+
+
 }

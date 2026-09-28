@@ -59,6 +59,14 @@ public class Booking implements Displayable, Searchable {
         return room;
     }
 
+    public BookingStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BookingStatus status) {
+        this.status = status;
+    }
+
     public void setRoom(Room room) {
         this.room = room;
     }
