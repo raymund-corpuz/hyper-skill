@@ -85,7 +85,7 @@ public class GuestRepository implements Searchable<Guest> {
         return guestMap.get(id);
     }
 
-    public List<Guest> getAll() {
+    public ArrayList<Guest> getAll() {
         return new ArrayList<>(guests);
     }
 
