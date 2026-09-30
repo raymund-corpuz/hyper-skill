@@ -6,22 +6,30 @@ import org.simple_solution.hotel.model.Guest;
 import java.util.*;
 
 public class GuestRepository implements Searchable<Guest> {
+
     //array
-    private Guest[] guestArray = new Guest[100];
+    Guest[] guestArray = new Guest[100];
+
     //arrayList
-    private final List<Guest> guests = new ArrayList<>();
-    //linkedHashSet
-    private final LinkedHashSet<String> guestEmail = new LinkedHashSet<>();
-    //hashSet
-    private final HashSet<String> uniqueNames = new HashSet<>();
-    //treeSet
-    private final TreeSet<Integer> guestIds = new TreeSet<>();
-    //hashMap
-    private final HashMap<Integer, Guest> guestMap = new HashMap<>();
-    //linkedHashMap
-    private final LinkedHashMap<Integer, Guest> orderGuestMap = new LinkedHashMap<>();
-    //treeMap
-    private final TreeMap<Integer, Guest> sortedGuestMap = new TreeMap<>();
+    List<Guest> guests = new ArrayList<>();
+
+    //linked hash set
+    LinkedHashSet<String> guestEmail = new LinkedHashSet<>();
+
+    //Hash set
+    HashSet<String> uniqueNames = new HashSet<>();
+
+    //Tree set
+    TreeSet<Integer> guestIds = new TreeSet<>();
+
+    //HashMap
+    HashMap<Integer, Guest> guestMap = new HashMap<>();
+
+    //Linked Hash Map
+    LinkedHashMap<Integer, Guest> orderGuestMap = new LinkedHashMap<>();
+
+    //Tree Map
+    TreeMap<Integer, Guest> sortedGuestMap = new TreeMap<>();
 
 
     public void add(Guest guest) {
@@ -31,18 +39,17 @@ public class GuestRepository implements Searchable<Guest> {
         guestEmail.add(guest.getEmail());
         uniqueNames.add(guest.getName());
         guestIds.add(guest.getId());
-
         guestMap.put(guest.getId(), guest);
         orderGuestMap.put(guest.getId(), guest);
         sortedGuestMap.put(guest.getId(), guest);
 
         addToArray(guest);
+
     }
 
     public void addToArray(Guest guest) {
 
         for (int i = 0; i < guestArray.length; i++) {
-
             if (guestArray[i] == null) {
                 guestArray[i] = guest;
                 break;
@@ -51,7 +58,6 @@ public class GuestRepository implements Searchable<Guest> {
     }
 
     public void remove(int id) {
-
         Guest guest = guestMap.remove(id);
 
         if (guest == null) {
@@ -62,17 +68,16 @@ public class GuestRepository implements Searchable<Guest> {
         guestEmail.remove(guest.getEmail());
         uniqueNames.remove(guest.getName());
         guestIds.remove(guest.getId());
-        orderGuestMap.remove(id);
-        sortedGuestMap.remove(id);
+        orderGuestMap.remove(guest.getId(), guest);
+        sortedGuestMap.remove(guest.getId(), guest);
 
         for (int i = 0; i < guestArray.length; i++) {
-
             if (guestArray[i] != null && guestArray[i].getId() == id) {
-
                 guestArray[i] = null;
                 break;
             }
         }
+
     }
 
     @Override
@@ -80,7 +85,7 @@ public class GuestRepository implements Searchable<Guest> {
         return guestMap.get(id);
     }
 
-    public ArrayList<Guest> getAll() {
+    public List<Guest> getAll() {
         return new ArrayList<>(guests);
     }
 
@@ -89,10 +94,11 @@ public class GuestRepository implements Searchable<Guest> {
     }
 
     public boolean emailExists(String email) {
-        return guestEmails.contains(email);
+        return guestEmail.contains(email);
     }
 
     public TreeSet<Integer> getGuestIds() {
         return new TreeSet<>(guestIds);
     }
+
 }
