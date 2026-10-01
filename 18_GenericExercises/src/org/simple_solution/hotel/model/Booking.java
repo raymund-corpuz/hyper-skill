@@ -1,8 +1,9 @@
 package org.simple_solution.hotel.model;
 
+import org.simple_solution.hotel.interfaces.Bookable;
 import org.simple_solution.hotel.interfaces.Displayable;
 
-public class Booking implements Displayable {
+public class Booking implements Bookable, Displayable {
 
     private int bookingId;
     private Guest guest;
@@ -18,6 +19,19 @@ public class Booking implements Displayable {
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.status = BookingStatus.CONFIRMED;
+    }
+
+
+    @Override
+    public void book() {
+        room.setAvailable(false);
+        this.status = BookingStatus.COMPLETED;
+    }
+
+    @Override
+    public void cancel() {
+        room.setAvailable(true);
+        this.status = BookingStatus.CANCELLED;
     }
 
     @Override
