@@ -9,6 +9,11 @@ public class Guest extends Person {
         this.numberOfBookings = 0;
     }
 
+    public Guest(int id, String name, String email, String phone, int numberOfBookings) {
+        super(id, name, email, phone);
+        this.numberOfBookings = numberOfBookings;
+    }
+
     @Override
     public void displayInfo() {
         System.out.println("--------------------------------");
