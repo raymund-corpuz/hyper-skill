@@ -43,6 +43,18 @@ public class RoomService {
         System.out.println("Room successfully remove.");
     }
 
+    public void displayAvailableRooms() {
+
+        ArrayList<Room> rooms = repository.getAvailableRooms();
+
+        if (rooms.isEmpty()) {
+            System.out.println("Rooms are occupied.");
+            return;
+        }
+
+        rooms.forEach(Room::displayInfo);
+    }
+
     public void displayRooms() {
 
         ArrayList<Room> rooms = repository.getRooms();
