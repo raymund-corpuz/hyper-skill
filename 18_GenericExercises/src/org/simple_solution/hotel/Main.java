@@ -1,11 +1,14 @@
 package org.simple_solution.hotel;
 
-import org.simple.hotel.model.Booking;
 import org.simple.hotel.model.RoomType;
+import org.simple.hotel.record.GuestSummary;
+import org.simple_solution.hotel.exception.BookingNotFoundException;
 import org.simple_solution.hotel.exception.GuestNotFoundException;
+import org.simple_solution.hotel.exception.RoomNotAvailableException;
 import org.simple_solution.hotel.file.FileManager;
-import org.simple_solution.hotel.model.Guest;
-import org.simple_solution.hotel.model.Room;
+import org.simple_solution.hotel.generic.GenericRepository;
+import org.simple_solution.hotel.generic.Pair;
+import org.simple_solution.hotel.model.*;
 import org.simple_solution.hotel.repository.BookingRepository;
 import org.simple_solution.hotel.repository.GuestRepository;
 import org.simple_solution.hotel.repository.RoomRepository;
@@ -15,6 +18,8 @@ import org.simple_solution.hotel.service.RoomService;
 import org.simple_solution.hotel.util.IdGenerator;
 import org.simple_solution.hotel.util.InputHelper;
 
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Main {
@@ -223,9 +228,7 @@ public class Main {
                 case 0 -> running = false;
                 default -> System.out.println("Invalid choice");
             }
-
         }
-        input.close();
     }
 
     private void addRoom() {
@@ -283,4 +286,227 @@ public class Main {
     //===================
     // Booking Menu
     //===================
+
+    private void bookingMenu() {
+
+        boolean running = true;
+
+        while (running) {
+
+            System.out.println();
+            System.out.println("==== Booking Management ====");
+            System.out.println("1. Create Booking");
+            System.out.println("2. Cancel Booking");
+            System.out.println("3. Find Booking");
+            System.out.println("4. Display Bookings");
+            System.out.println("0. Back");
+
+            int choice = input.readInt("Enter choice: ");
+
+            switch (choice) {
+
+                case 1 -> createBooking();
+                case 2 -> cancelBooking();
+                case 3 -> findBooking();
+                case 4 -> bookingService.displayBookings();
+                case 0 -> running = false;
+                default -> {
+                    System.out.println("Invalid choice");
+                }
+            }
+        }
+    }
+
+    public void createBooking() {
+
+        int guestId = input.readInt("Guest Id: ");
+        int roomNumber = input.readInt("Room Number: ");
+        String checkIn = input.readString("Check-in date: ");
+        String checkOut = input.readString("Check-out date: ");
+        int bookingId = IdGenerator.nextBookingId();
+
+        try {
+            Booking booking = bookingService.createBooking(bookingId, guestId, roomNumber, checkIn, checkOut);
+
+            System.out.println("Booking create successfully.");
+            booking.displayInfo();
+        } catch (GuestNotFoundException | RoomNotAvailableException e) {
+            System.out.println("Error in booking: " + e.getMessage());
+        }
+    }
+
+    public void cancelBooking() {
+
+        int bookingId = input.readInt("Booking Id: ");
+
+        try {
+            bookingService.cancelBooking(bookingId);
+
+        } catch (GuestNotFoundException | RoomNotAvailableException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public void findBooking() {
+
+        int bookingId = input.readInt("Booking Id: ");
+
+        try {
+            Booking booking = bookingService.findBooking(bookingId);
+
+            booking.displayInfo();
+
+        } catch (BookingNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    //=======================
+    //Search
+    //=======================
+    private void searchMenu() {
+
+        System.out.println();
+        System.out.println("==== Search Menu ====");
+        System.out.println("1. Search Guest");
+        System.out.println("2. Search Room");
+        System.out.println("3. Search Booking");
+
+        int choice = input.readInt("Enter choice: ");
+
+        switch (choice) {
+            case 1 -> findGuest();
+            case 2 -> findRoom();
+            case 3 -> findBooking();
+            default -> {
+                System.out.println("Invalid choice");
+            }
+        }
+    }
+
+    //=================
+    //Display
+    //=================
+
+    public void displayData() {
+
+        System.out.println();
+        System.out.println("==== Guests ====");
+        guestService.displayGuests();
+        System.out.println();
+        System.out.println("==== Rooms ====");
+        roomService.displayRooms();
+        System.out.println();
+        System.out.println("==== Bookings ====");
+        bookingService.displayBookings();
+    }
+
+    //==================
+    //File Processing
+    //==================
+    private void saveData() {
+
+        fileManager.saveGuest(guestRepository);
+
+        fileManager.saveRooms(roomRepository);
+    }
+
+    private void loadData() {
+
+        fileManager.loadGuests(guestRepository);
+
+        fileManager.loadRooms(roomRepository);
+    }
+
+    //====================
+    //OOP Demonstration
+    //====================
+    private void demonstrateOOP() {
+        System.out.println();
+        System.out.println("==== OOP Demonstration ====");
+        /*
+         * Polymorphism
+         */
+        Person person1 = new Guest(999, "Demo Guest", "guest@test.com", "09123456789");
+
+        Person person2 = new Employee(1000, "Demo Employee", "employee@test.com", "0911111111", "Manager", 50000);
+
+        person1.displayInfo();
+        person2.displayInfo();
+
+        /*
+         * Inner class demonstration
+         */
+        Room room = new Room(999, RoomType.DELUXE, 5000, true);
+
+        Room.RoomDetails details = room.new RoomDetails(9, "Ocean");
+
+        details.displayDetails();
+
+        /*
+         * Anonymous class
+         */
+        Runnable anonymousExample = new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Anonymous class is running.");
+            }
+        };
+        anonymousExample.run();
+
+        /*
+         * Record
+         */
+
+        GuestSummary summary = new GuestSummary(1, "John Doe", "john@email.com");
+
+        System.out.println("Record: " + summary);
+    }
+
+    //===============
+    //Generic Demonstration
+    //===============
+    private void demonstrateGenerics() {
+
+        GenericRepository<String> stringRepository = new GenericRepository<>();
+
+        stringRepository.add("Hotel");
+        stringRepository.add("Management");
+        stringRepository.add("System");
+
+        System.out.println(stringRepository.getAll());
+
+        GenericRepository<Guest> guestGenericRepository = new GenericRepository<>();
+
+        Guest guest = new Guest(500, "Generic Guest", "generic@test.com", "09999999999");
+
+        guestGenericRepository.add(guest);
+
+        System.out.println(guestGenericRepository.getAll());
+
+        /*
+         * Generic instance method
+         */
+        stringRepository.print("Hello Generics");
+        stringRepository.print(1234);
+
+
+        /*
+         * Generic static method
+         */
+        List<String> names = List.of("John", "Mary", "David");
+
+        String first = GenericRepository.getFirst(names);
+        System.out.println("First name: " + first);
+
+        /*
+         * Generic Pair
+         */
+
+        Pair<Integer, String> pair = new Pair<>(101, "Room 101");
+
+        System.out.println("Pair: " + pair);
+
+    }
 }
