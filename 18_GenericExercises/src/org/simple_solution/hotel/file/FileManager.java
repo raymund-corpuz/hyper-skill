@@ -10,7 +10,7 @@ import java.io.*;
 
 public class FileManager {
 
-    private static final String FILE_NAME = "hotel-data.txt";
+    private static final String FILE_NAME = "C:\\Users\\raymu\\OneDrive\\Desktop\\hyper-skill\\18_GenericExercises\\src\\org\\simple_solution\\hotel\\hotel-data.txt";
 
     public void saveGuest(GuestRepository repository) {
 
@@ -73,7 +73,7 @@ public class FileManager {
 
     public void saveRooms(RoomRepository repository) {
 
-        File file = new File("rooms-data.txt");
+        File file = new File("C:\\Users\\raymu\\OneDrive\\Desktop\\hyper-skill\\18_GenericExercises\\src\\org\\simple_solution\\hotel\\rooms-data.txt");
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
 
@@ -93,7 +93,7 @@ public class FileManager {
 
     public void loadRooms(RoomRepository repository) {
 
-        File file = new File("rooms-data.txt");
+        File file = new File("C:\\Users\\raymu\\OneDrive\\Desktop\\hyper-skill\\18_GenericExercises\\src\\org\\simple_solution\\hotel\\rooms-data.txt");
 
         if (!file.exists()) {
             return;
