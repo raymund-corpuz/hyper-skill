@@ -1,0 +1,11 @@
+RoomType:
+    - SINGLE
+    - DOUBLE
+    - DELUXE
+    - SUITE
+
+BookingStatus
+    - PENDING
+    - CONFIRMED
+    - CANCELLED
+    - COMPLETED

@@ -1,0 +1,4 @@
+Exceptions:
+    - Guest not found exception
+    - Room not available exception
+    - Booking not found exception

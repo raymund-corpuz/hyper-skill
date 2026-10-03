@@ -1,0 +1,7 @@
+GuestRepository
+    - guestId (HashMap)
+    - guestName (HashSet)
+    - guests (ArrayList)
+    - add()
+    - remove()
+    - find()

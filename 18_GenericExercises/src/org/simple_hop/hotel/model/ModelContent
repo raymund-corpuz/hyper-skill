@@ -1,0 +1,24 @@
+Person (abstract) done
+    -id
+    -name
+    -email
+    -phone
+    - Guest done
+        -numberOfNights
+        -numberOfBookings
+    - Employee done
+        -position
+        -salary
+Room done
+    -roomNumber
+    -RoomType
+    -price
+    -RoomStatus
+Booking done
+    -bookingId
+    -Guest
+    -Room
+    -calculateTotal(price * numberOfNights)
+    -checkIn
+    -checkOut
+    -RoomStatus
