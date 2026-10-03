@@ -37,7 +37,7 @@ public class GuestRepository extends GenericRepository<Guest> {
         return guest;
     }
 
-    public ArrayList<Guest> getAllGuests() {
+    public ArrayList<Guest> getAll() {
         return new ArrayList<>(guests);
     }
 

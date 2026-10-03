@@ -1,0 +1,11 @@
+GuestService done
+    - registerGuest
+    - findGuest
+    - removeGuest
+    - getAllGuests
+------------------------------------
+RoomService
+    - registerRoom
+    - findRoom
+    - removeRoom
+    - getAllRooms
