@@ -7,7 +7,7 @@ public class Guest extends Person implements Displayable {
     private int nightsToStay;
     private int numberOfBookings;
 
-    public Guest(int id, String name, String email, String phone, int nightsToStay, int numberOfBookings) {
+    public Guest(int id, String name, String email, String phone, int nightsToStay) {
         super(id, name, email, phone);
         this.nightsToStay = nightsToStay;
         this.numberOfBookings = 0;
@@ -28,11 +28,13 @@ public class Guest extends Person implements Displayable {
     }
 
     public int incrementBooking() {
-        return this.numberOfBookings++;
+        this.numberOfBookings++;
+        return numberOfBookings;
     }
 
     public int decrementBooking() {
-        return this.numberOfBookings--;
+        this.numberOfBookings--;
+        return numberOfBookings;
     }
 
     public int getNightsToStay() {

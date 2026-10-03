@@ -1,6 +1,7 @@
 package org.simple_hop.hotel.model;
 
-import org.simple.hotel.model.RoomType;
+
+import org.simple_hop.hotel.enums.RoomType;
 import org.simple_hop.hotel.interfaces.Displayable;
 import org.simple_hop.hotel.interfaces.Searchable;
 

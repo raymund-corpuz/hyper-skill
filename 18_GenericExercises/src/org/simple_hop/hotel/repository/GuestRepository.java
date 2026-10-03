@@ -1,14 +1,15 @@
 package org.simple_hop.hotel.repository;
 
+import org.simple_hop.hotel.generic.GenericRepository;
 import org.simple_hop.hotel.model.Guest;
-import org.simple_solution.hotel.generic.GenericRepository;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-public class GuestRepository extends GenericRepository<Guest> {
+public class GuestRepository extends GenericRepository<Guest, Integer> {
     ArrayList<Guest> guests = new ArrayList<>();
     Map<Integer, Guest> guestMap = new HashMap<>();
     HashSet<String> uniqueEmails = new HashSet<>();
@@ -28,13 +29,14 @@ public class GuestRepository extends GenericRepository<Guest> {
     }
 
     public Guest get(int id) {
-        Guest guest = guestMap.get(id);
 
-        if (guest == null) {
-            System.out.println("Guest Not Found: " + id);
-            return null;
+        for (Guest guest : guests) {
+            if (guest.getId() == id) {
+                return guest;
+            }
         }
-        return guest;
+
+        return null;
     }
 
     public ArrayList<Guest> getAll() {
@@ -42,13 +44,7 @@ public class GuestRepository extends GenericRepository<Guest> {
     }
 
     public boolean emailExists(String email) {
-        for (Guest guest : guests) {
-            if (guest.getEmail().equalsIgnoreCase(email)) {
-                return true;
-            }
-        }
-
-        return false;
+        return uniqueEmails.contains(email);
     }
 
 }

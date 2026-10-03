@@ -15,18 +15,14 @@ public class BookingRepository extends GenericRepository<Booking, Integer> {
 
         bookings.add(booking);
         bookingMap.put(booking.getBookingId(), booking);
-
-        System.out.println("Booking Added.✅");
     }
 
     public Booking find(int bookingId) {
-
         for (Booking booking : bookings) {
             if (booking.getBookingId() == bookingId) {
                 return booking;
             }
         }
-
         return null;
     }
 

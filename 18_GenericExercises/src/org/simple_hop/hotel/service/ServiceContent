@@ -9,3 +9,17 @@ RoomService
     - findRoom
     - removeRoom
     - getAllRooms
+    - getAvailableRooms
+------------------------------------
+BookingService
+    - createBooking
+        - check if room is available
+        - increment bookingNumber
+        - call book()
+    - findBookingId
+        - check if booking id
+    - removeBooking
+        - check  if booking id
+        - call cancel()
+        - decrement booking
+

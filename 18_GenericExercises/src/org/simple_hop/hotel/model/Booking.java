@@ -1,9 +1,10 @@
 package org.simple_hop.hotel.model;
 
 import org.simple_hop.hotel.enums.BookingStatus;
+import org.simple_hop.hotel.interfaces.Bookable;
 import org.simple_hop.hotel.interfaces.Displayable;
 
-public class Booking implements Displayable {
+public class Booking implements Displayable, Bookable {
     private int bookingId;
     private Guest guest;
     private Room room;
@@ -21,6 +22,19 @@ public class Booking implements Displayable {
     }
 
     @Override
+    public void book() {
+        room.setAvailable(false);
+        guest.incrementBooking();
+    }
+
+    @Override
+    public void cancel() {
+        room.setAvailable(true);
+        guest.decrementBooking();
+    }
+
+
+    @Override
     public void displayInfo() {
         System.out.println();
         System.out.println("==== Booking Information ====");
@@ -34,7 +48,6 @@ public class Booking implements Displayable {
         System.out.println("------------------------------------------------");
     }
 
-
     public int getBookingId() {
         return bookingId;
     }
@@ -43,28 +56,12 @@ public class Booking implements Displayable {
         this.bookingId = bookingId;
     }
 
-    public Guest getGuest() {
-        return guest;
+    public BookingStatus getStatus() {
+        return status;
     }
 
-    public void setGuest(Guest guest) {
-        this.guest = guest;
-    }
-
-    public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
-    }
-
-    public String getCheckIn() {
-        return checkIn;
-    }
-
-    public void setCheckIn(String checkIn) {
-        this.checkIn = checkIn;
+    public void setStatus(BookingStatus status) {
+        this.status = status;
     }
 
     public String getCheckOut() {
@@ -75,11 +72,33 @@ public class Booking implements Displayable {
         this.checkOut = checkOut;
     }
 
-    public BookingStatus getStatus() {
-        return status;
+    public String getCheckIn() {
+        return checkIn;
     }
 
-    public void setStatus(BookingStatus status) {
-        this.status = status;
+    public void setCheckIn(String checkIn) {
+        this.checkIn = checkIn;
     }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public Guest getGuest() {
+        return guest;
+    }
+
+    public void setGuest(Guest guest) {
+        this.guest = guest;
+    }
+
+
 }
+
+
+
+
