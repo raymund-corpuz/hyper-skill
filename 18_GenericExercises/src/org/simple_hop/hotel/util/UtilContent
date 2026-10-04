@@ -1,0 +1,10 @@
+IdGenerator
+    - guestIdGenerator
+    - roomIdGenerator
+
+InputHelper
+    - Scanner
+    - readString
+    - readInt
+    - readDouble
+    - readBoolean

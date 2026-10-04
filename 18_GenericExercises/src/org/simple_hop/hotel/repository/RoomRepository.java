@@ -24,7 +24,7 @@ public class RoomRepository extends GenericRepository<Room, Integer> {
         roomMap.remove(room.getRoomNumber(), room);
     }
 
-    public Room find(int roomNumber) {
+    public Room get(int roomNumber) {
 
         for (Room room : rooms) {
             if (room.getRoomNumber() == roomNumber) {

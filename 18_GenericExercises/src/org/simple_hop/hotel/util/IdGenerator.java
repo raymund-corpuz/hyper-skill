@@ -8,11 +8,11 @@ public class IdGenerator {
         // empty code..
     }
 
-    public int guestIdGenerator() {
+    public static int guestIdGenerator() {
         return ++guestIdCounter;
     }
 
-    public int bookingIdGenerator() {
+    public static int bookingIdGenerator() {
         return ++bookingIdCounter;
     }
 }

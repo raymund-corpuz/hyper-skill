@@ -17,7 +17,7 @@ public class BookingRepository extends GenericRepository<Booking, Integer> {
         bookingMap.put(booking.getBookingId(), booking);
     }
 
-    public Booking find(int bookingId) {
+    public Booking get(int bookingId) {
         for (Booking booking : bookings) {
             if (booking.getBookingId() == bookingId) {
                 return booking;
@@ -35,4 +35,5 @@ public class BookingRepository extends GenericRepository<Booking, Integer> {
     public ArrayList<Booking> getAll() {
         return new ArrayList<>(bookings);
     }
+
 }
